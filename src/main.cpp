@@ -41,6 +41,8 @@ GLFWwindow* init_engine()
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     glClearColor(.25, .1, .65, 1);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 
     return window;
 }
@@ -54,7 +56,7 @@ int main()
 
 
     // Setting up object buffers
-    GLuint vao, vbo, ibo;
+    GLuint vao, vbo, cbo, ibo;
 
 	glCreateVertexArrays(1, &vao);
 
@@ -66,6 +68,14 @@ int main()
     glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(glm::vec3));
     glVertexArrayAttribBinding(vao, 0, 0);
 
+    glCreateBuffers(1, &cbo);
+    glNamedBufferData(cbo, colors.size() * sizeof(glm::vec3), &colors.front(), GL_STATIC_DRAW);
+
+    glEnableVertexArrayAttrib(vao, 1);
+    glVertexArrayAttribFormat(vao, 1, 3, GL_FLOAT, GL_FALSE, 0);
+    glVertexArrayVertexBuffer(vao, 1, cbo, 0, sizeof(glm::vec3));
+    glVertexArrayAttribBinding(vao, 1, 1);
+
     glCreateBuffers(1, &ibo);
     glNamedBufferData(ibo, indices.size() * sizeof(glm::uvec3), &(indices.front()), GL_STATIC_DRAW);
     glBindVertexArray(vao);
@@ -75,21 +85,24 @@ int main()
     // Graphic pipeline
     Pipeline pipeline = Pipeline("resources/vertex.glsl", "resources/fragment.glsl");
 
-    pipeline.set_uniform_float(pipeline.get_fragment_id(), "col", .5f);
 
     // Transformation matrices
-    glm::mat4 projection, view, model;
-    model = glm::mat4(1.0f);
-    view = glm::lookAt(glm::vec3(2, 1, 2), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
-    projection = glm::perspective(glm::radians(60.f), float(width) / float(height), .1f, 100.f);
+    glm::mat4 model = glm::mat4(1.0f),
+              view = glm::lookAt(glm::vec3(2, 1, 2), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)),
+              projection = glm::perspective(glm::radians(60.f), float(width) / float(height), .1f, 100.f);
 
-    pipeline.set_uniform_matrix(pipeline.get_vertex_id(), "mvp", glm::value_ptr(projection * view * model));
+    pipeline.set_uniform_matrix(pipeline.get_vertex_id(), "m", glm::value_ptr(model));
+    pipeline.set_uniform_matrix(pipeline.get_vertex_id(), "v", glm::value_ptr(view));
+    pipeline.set_uniform_matrix(pipeline.get_vertex_id(), "p", glm::value_ptr(projection));
 
 
 	while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        model = glm::rotate(glm::mat4(1.0f), 2 * glm::pi<float>() * (float)glfwGetTime() / 10.f, glm::vec3(0, 1, 0));
+        pipeline.set_uniform_matrix(pipeline.get_vertex_id(), "m", glm::value_ptr(model));
 
         glBindVertexArray(vao);
         pipeline.use_pipeline();
