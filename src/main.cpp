@@ -1,59 +1,101 @@
-// IMN504-Project.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <glad/glad.h>
 #include <glfw3.h>
+#include <glm.hpp>
+#include <gtc/type_ptr.hpp>
 
+#include "data.h"
+#include "pipeline.h"
+
+
+constexpr int width = 800;
+constexpr int height = 600;
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
 
-int main()
+GLFWwindow* init_engine()
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Solar System", NULL, NULL);
-    if (window == NULL)
+    GLFWwindow* window = glfwCreateWindow(width, height, "Solar System", NULL, NULL);
+    if (window == nullptr)
     {
         std::cerr << "Failed to create GFLW window.\n";
         glfwTerminate();
-        return -1;
+        return nullptr;
     }
     glfwMakeContextCurrent(window);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cerr << "Failed to initialize GLAD.\n";
-        return -1;
+        return nullptr;
     }
     glViewport(0, 0, 800, 600);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+    glClearColor(.25, .1, .65, 1);
 
-    while (!glfwWindowShouldClose(window))
+    return window;
+}
+
+int main()
+{
+    // Init
+	GLFWwindow* window = init_engine();
+    if (window == nullptr)
+        return -1;
+
+
+    // Setting up object buffers
+    GLuint vao, vbo, ibo;
+
+	glCreateVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    glCreateBuffers(1, &vbo);
+    glNamedBufferData(vbo, vertices.size() * sizeof(glm::vec3), &(vertices.front()), GL_STATIC_DRAW);
+
+	glEnableVertexArrayAttrib(vao, 0);
+    glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, GL_FALSE, 0);
+    glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(glm::vec3));
+    glVertexArrayAttribBinding(vao, 0, 0);
+
+
+    // Graphic pipeline
+    Pipeline pipeline = Pipeline("resources/vertex.glsl", "resources/fragment.glsl");
+
+    pipeline.set_uniform_float(pipeline.get_fragment_id(), "col", .5f);
+
+    // Transformation matrices
+    glm::mat4 projection, view, model;
+    model = glm::mat4(1.0f);
+    view = glm::lookAt(glm::vec3(2, 1, 2), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+    projection = glm::perspective(glm::radians(60.f), float(width) / float(height), .1f, 100.f);
+
+    pipeline.set_uniform_matrix(pipeline.get_vertex_id(), "mvp", glm::value_ptr(projection * view * model));
+
+
+	while (!glfwWindowShouldClose(window))
     {
-        glfwSwapBuffers(window);
         glfwPollEvents();
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glBindVertexArray(vao);
+        pipeline.use_pipeline();
+
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+
+        glfwSwapBuffers(window);
     }
 
     
     glfwTerminate();
     return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

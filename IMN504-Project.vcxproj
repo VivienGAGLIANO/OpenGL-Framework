@@ -147,7 +147,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\pipeline.cpp" />
     <ClCompile Include="third_party\glad\src\glad.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\data.h" />
+    <ClInclude Include="include\pipeline.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\fragment.glsl" />
+    <None Include="resources\vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

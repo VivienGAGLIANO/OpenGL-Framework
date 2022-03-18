@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{b73861a5-c117-417a-a14a-038c02f66507}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -21,5 +24,24 @@
     <ClCompile Include="third_party\glad\src\glad.c">
       <Filter>third_party</Filter>
     </ClCompile>
+    <ClCompile Include="src\pipeline.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\data.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pipeline.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\fragment.glsl">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="resources\vertex.glsl">
+      <Filter>resources</Filter>
+    </None>
   </ItemGroup>
 </Project>
