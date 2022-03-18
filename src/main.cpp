@@ -57,7 +57,6 @@ int main()
     GLuint vao, vbo, ibo;
 
 	glCreateVertexArrays(1, &vao);
-    glBindVertexArray(vao);
 
     glCreateBuffers(1, &vbo);
     glNamedBufferData(vbo, vertices.size() * sizeof(glm::vec3), &(vertices.front()), GL_STATIC_DRAW);
@@ -66,6 +65,11 @@ int main()
     glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, GL_FALSE, 0);
     glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(glm::vec3));
     glVertexArrayAttribBinding(vao, 0, 0);
+
+    glCreateBuffers(1, &ibo);
+    glNamedBufferData(ibo, indices.size() * sizeof(glm::uvec3), &(indices.front()), GL_STATIC_DRAW);
+    glBindVertexArray(vao);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
 
     // Graphic pipeline
@@ -90,7 +94,7 @@ int main()
         glBindVertexArray(vao);
         pipeline.use_pipeline();
 
-        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        glDrawElements(GL_TRIANGLES, 3 * indices.size(), GL_UNSIGNED_INT, 0);
 
         glfwSwapBuffers(window);
     }

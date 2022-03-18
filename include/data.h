@@ -5,12 +5,18 @@
 #include <vector>
 
 
-static std::vector<glm::vec3> vertices
+const std::vector<glm::vec3> vertices
 {
 	glm::vec3(-.5, -.5, 0),
 	glm::vec3(0, .5, 0),
 	glm::vec3(.5, -.5, 0)
 };
+
+const std::vector<glm::uvec3> indices
+{
+	glm::uvec3(0, 1, 2)
+};
+
 
 
 #endif
