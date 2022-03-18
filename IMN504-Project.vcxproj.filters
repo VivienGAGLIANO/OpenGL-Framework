@@ -27,12 +27,18 @@
     <ClCompile Include="src\pipeline.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\texture.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\data.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\pipeline.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\texture.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -43,5 +49,10 @@
     <None Include="resources\vertex.glsl">
       <Filter>resources</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\uvtemplate.bmp">
+      <Filter>resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

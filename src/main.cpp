@@ -6,6 +6,7 @@
 
 #include "data.h"
 #include "pipeline.h"
+#include "texture.h"
 
 
 constexpr int width = 800;
@@ -56,12 +57,12 @@ int main()
 
 
     // Setting up object buffers
-    GLuint vao, vbo, cbo, ibo;
+    GLuint vao, vbo, cbo, ibo, uvbo;
 
 	glCreateVertexArrays(1, &vao);
 
     glCreateBuffers(1, &vbo);
-    glNamedBufferData(vbo, vertices.size() * sizeof(glm::vec3), &(vertices.front()), GL_STATIC_DRAW);
+    glNamedBufferData(vbo, vertices.size() * sizeof(glm::vec3), &vertices.front(), GL_STATIC_DRAW);
 
 	glEnableVertexArrayAttrib(vao, 0);
     glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, GL_FALSE, 0);
@@ -76,6 +77,14 @@ int main()
     glVertexArrayVertexBuffer(vao, 1, cbo, 0, sizeof(glm::vec3));
     glVertexArrayAttribBinding(vao, 1, 1);
 
+    glCreateBuffers(1, &uvbo);
+    glNamedBufferData(uvbo, uv_coords.size() * sizeof(glm::vec2), &uv_coords.front(), GL_STATIC_DRAW);
+
+    glEnableVertexArrayAttrib(vao, 2);
+    glVertexArrayAttribFormat(vao, 2, 2, GL_FLOAT, GL_FALSE, 0);
+    glVertexArrayVertexBuffer(vao, 2, uvbo, 0, sizeof(glm::vec2));
+    glVertexArrayAttribBinding(vao, 2, 2);
+
     glCreateBuffers(1, &ibo);
     glNamedBufferData(ibo, indices.size() * sizeof(glm::uvec3), &(indices.front()), GL_STATIC_DRAW);
     glBindVertexArray(vao);
@@ -84,6 +93,10 @@ int main()
 
     // Graphic pipeline
     Pipeline pipeline = Pipeline("resources/vertex.glsl", "resources/fragment.glsl");
+
+
+    // Texture
+    Texture texture("resources/uvtemplate.bmp");
 
 
     // Transformation matrices
