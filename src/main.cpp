@@ -28,8 +28,8 @@ float verticalAngle = 0.0f;
 // Initial Field of View
 float initialFoV = 60.0f;
 
-float speed = 3.0f; // 3 units / second
-float mouseSpeed = 0.005f;
+float speed = 50.0f; // 3 units / second
+float mouseSpeed = 5.f;
 
 void control_camera(GLFWwindow *window, float delta_time)
 {
@@ -37,8 +37,8 @@ void control_camera(GLFWwindow *window, float delta_time)
     glfwGetCursorPos(window, &xpos, &ypos);
     glfwSetCursorPos(window, (double)width / 2.0, (double)height / 2.0);
 
-    horizontalAngle += mouseSpeed * delta_time * (float)width / 2.0f - xpos;
-    verticalAngle += mouseSpeed * delta_time * (float)height / 2.0f - ypos;
+    horizontalAngle += mouseSpeed * delta_time * ((float)width / 2.0f - xpos);
+    verticalAngle += mouseSpeed * delta_time * ((float)height / 2.0f - ypos);
 
     // Direction : Spherical coordinates to Cartesian coordinates conversion
     glm::vec3 direction(
@@ -111,6 +111,7 @@ GLFWwindow* init_engine()
     glClearColor(.25, .1, .65, 1);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
+    glEnable(GL_CULL_FACE);
 
     return window;
 }

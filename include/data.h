@@ -44,20 +44,20 @@ const std::vector<glm::vec2> uv_coords
 const std::vector<glm::uvec3> indices
 {
 	// Lateral faces
-	glm::uvec3(0, 1, 5),
-	glm::uvec3(0, 5, 4),
-	glm::uvec3(1, 2, 6),
-	glm::uvec3(1, 6, 5),
-	glm::uvec3(2, 3, 7),
-	glm::uvec3(2, 7, 6),
-	glm::uvec3(3, 0, 4),
-	glm::uvec3(3, 4, 7),
+	glm::uvec3(1, 0, 5),
+	glm::uvec3(5, 0, 4),
+	glm::uvec3(2, 1, 6),
+	glm::uvec3(6, 1, 5),
+	glm::uvec3(3, 2, 7),
+	glm::uvec3(7, 2, 6),
+	glm::uvec3(0, 3, 4),
+	glm::uvec3(4, 3, 7),
 
 	// Top & bottom
-	glm::uvec3(7, 4, 5),
-	glm::uvec3(7, 5, 6),
-	glm::uvec3(3, 1, 0),
-	glm::uvec3(3, 2, 1),
+	glm::uvec3(4, 7, 5),
+	glm::uvec3(5, 7, 6),
+	glm::uvec3(1, 3, 0),
+	glm::uvec3(2, 3, 1),
 };
 
 
