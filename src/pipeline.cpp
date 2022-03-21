@@ -42,6 +42,11 @@ void Pipeline::set_uniform_matrix(GLuint program, const GLchar* name, const GLfl
 	glProgramUniformMatrix4fv(program, glGetUniformLocation(program, name), 1, GL_FALSE, val);
 }
 
+void Pipeline::set_uniform_vec3(GLuint program, const GLchar* name, const GLfloat* val)
+{
+	glProgramUniform3fv(program, glGetUniformLocation(program, name), 3, val);
+}
+
 GLuint Pipeline::get_vertex_id() const
 {
 	return vertex;

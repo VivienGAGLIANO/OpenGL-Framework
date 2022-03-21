@@ -13,6 +13,7 @@ public:
 	void use_pipeline();
 	void set_uniform_float(GLuint program, const GLchar* name, const float &val);
 	void set_uniform_matrix(GLuint program, const GLchar *name, const GLfloat *val);
+	void set_uniform_vec3(GLuint program, const GLchar* name, const GLfloat* val);
 
 	GLuint get_vertex_id() const;
 	GLuint get_fragment_id() const;

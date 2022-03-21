@@ -15,6 +15,10 @@ constexpr bool obj = true;
 constexpr int width = 800;
 constexpr int height = 600;
 
+glm::vec3 light_pos(1, 0, 0);
+glm::vec3 light_col(.1, .65, .7);
+float light_speed = .1f; // in turn per second
+
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
     glViewport(0, 0, width, height);
@@ -129,15 +133,16 @@ int main()
 
     // Choose model source
     if (obj)
-        if (load_obj("resources/rocking-horse-with-wheels/source/Rocking_horse_with_wheels_SF/Rocking_horse_with_wheels_SF.obj", vertices, uv_coords, normals))
+        if (load_obj("resources/suzanne.obj", vertices, uv_coords, normals))
             std::cout << ".obj file loaded successfully.\n";
 
 
     // Setting up object buffers
-    GLuint vao, vbo, cbo, ibo, uvbo;
+    GLuint vao, vbo, cbo, nbo, uvbo, ibo;
 
 	glCreateVertexArrays(1, &vao);
 
+    // Position
     glCreateBuffers(1, &vbo);
     glNamedBufferData(vbo, vertices.size() * sizeof(glm::vec3), &vertices.front(), GL_STATIC_DRAW);
 
@@ -146,6 +151,7 @@ int main()
     glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(glm::vec3));
     glVertexArrayAttribBinding(vao, 0, 0);
 
+    // Color
     // glCreateBuffers(1, &cbo);
     // glNamedBufferData(cbo, colors.size() * sizeof(glm::vec3), &colors.front(), GL_STATIC_DRAW);
     // 
@@ -154,13 +160,23 @@ int main()
     // glVertexArrayVertexBuffer(vao, 1, cbo, 0, sizeof(glm::vec3));
     // glVertexArrayAttribBinding(vao, 1, 1);
 
+    // Normal
+    glCreateBuffers(1, &nbo);
+    glNamedBufferData(nbo, normals.size() * sizeof(glm::vec3), &normals.front(), GL_STATIC_DRAW);
+
+    glEnableVertexArrayAttrib(vao, 2);
+    glVertexArrayAttribFormat(vao, 2, 3, GL_FLOAT, GL_FALSE, 0);
+    glVertexArrayVertexBuffer(vao, 2, nbo, 0, sizeof(glm::vec3));
+    glVertexArrayAttribBinding(vao, 2, 2);
+
+    // UV coord
     glCreateBuffers(1, &uvbo);
     glNamedBufferData(uvbo, uv_coords.size() * sizeof(glm::vec2), &uv_coords.front(), GL_STATIC_DRAW);
 
-    glEnableVertexArrayAttrib(vao, 2);
-    glVertexArrayAttribFormat(vao, 2, 2, GL_FLOAT, GL_FALSE, 0);
-    glVertexArrayVertexBuffer(vao, 2, uvbo, 0, sizeof(glm::vec2));
-    glVertexArrayAttribBinding(vao, 2, 2);
+    glEnableVertexArrayAttrib(vao, 3);
+    glVertexArrayAttribFormat(vao, 3, 2, GL_FLOAT, GL_FALSE, 0);
+    glVertexArrayVertexBuffer(vao, 3, uvbo, 0, sizeof(glm::vec2));
+    glVertexArrayAttribBinding(vao, 3, 3);
 
     glCreateBuffers(1, &ibo);
     glNamedBufferData(ibo, indices.size() * sizeof(glm::uvec3), &(indices.front()), GL_STATIC_DRAW);
@@ -194,6 +210,10 @@ int main()
         pipeline.set_uniform_matrix(pipeline.get_vertex_id(), "m", glm::value_ptr(model));
 	    pipeline.set_uniform_matrix(pipeline.get_vertex_id(), "v", glm::value_ptr(view));
 	    pipeline.set_uniform_matrix(pipeline.get_vertex_id(), "p", glm::value_ptr(projection));
+
+        float angle = 2.f * glm::pi<float>() * glfwGetTime() * light_speed;
+        light_pos = glm::vec3(cos(angle), 2, sin(angle));
+        pipeline.set_uniform_vec3(pipeline.get_fragment_id(), "light_pos", glm::value_ptr(light_pos));
 
         glBindVertexArray(vao);
         pipeline.use_pipeline();

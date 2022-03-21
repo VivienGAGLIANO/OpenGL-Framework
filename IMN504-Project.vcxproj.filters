@@ -68,5 +68,8 @@
     <Object Include="resources\rocking-horse-with-wheels\source\Rocking_horse_with_wheels_SF\Rocking_horse_with_wheels_SF.obj">
       <Filter>resources</Filter>
     </Object>
+    <Object Include="resources\suzanne.obj">
+      <Filter>resources</Filter>
+    </Object>
   </ItemGroup>
 </Project>
