@@ -5,9 +5,9 @@
 #include <vector>
 
 
-const std::vector<glm::vec3> vertices
+std::vector<glm::vec3> vertices
 {
-	glm::vec3(-.5, -.5, .5),
+	glm::vec3(-.7, -.7, .7),
 	glm::vec3(-.5, -.5, -.5),
 	glm::vec3(.5, -.5, -.5),
 	glm::vec3(.5, -.5, .5),
@@ -17,7 +17,7 @@ const std::vector<glm::vec3> vertices
 	glm::vec3(.5, .5, .5),
 };
 
-const std::vector<glm::vec3> colors
+std::vector<glm::vec3> colors
 {
 	glm::vec3(0, 0, 0),
 	glm::vec3(0, 1, 0),
@@ -29,7 +29,7 @@ const std::vector<glm::vec3> colors
 	glm::vec3(1, 0, 1),
 };
 
-const std::vector<glm::vec2> uv_coords
+std::vector<glm::vec2> uv_coords
 {
 	glm::vec2(.25f, 2.f / 3.f),
 	glm::vec2(.25f, 1.f / 3.f),
@@ -41,7 +41,9 @@ const std::vector<glm::vec2> uv_coords
 	glm::vec2(.75f, 2.f / 3.f)
 };
 
-const std::vector<glm::uvec3> indices
+std::vector<glm::vec3> normals;
+
+std::vector<glm::uvec3> indices
 {
 	// Lateral faces
 	glm::uvec3(1, 0, 5),

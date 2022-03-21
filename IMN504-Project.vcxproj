@@ -118,7 +118,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\third_party\glad\include;$(ProjectDir)\third_party\glm;$(ProjectDir)\third_party\GLFW\include;$(ProjectDir)\include</AdditionalIncludeDirectories>
     </ClCompile>
@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\data.h" />
+    <ClInclude Include="include\obj_loader.h" />
     <ClInclude Include="include\pipeline.h" />
     <ClInclude Include="include\texture.h" />
   </ItemGroup>
@@ -162,6 +163,14 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\uvtemplate.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="resources\basic-bottle\source\Small Bottle\Small Bottle\Potion.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="resources\cube.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

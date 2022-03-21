@@ -5,9 +5,12 @@
 #include <gtc/type_ptr.hpp>
 
 #include "data.h"
+#include "obj_loader.h"
 #include "pipeline.h"
 #include "texture.h"
 
+
+constexpr bool obj = true;
 
 constexpr int width = 800;
 constexpr int height = 600;
@@ -124,6 +127,12 @@ int main()
         return -1;
 
 
+    // Choose model source
+    if (obj)
+        if (load_obj("resources/basic-bottle/source/Small Bottle/Small Bottle/Potion.obj", vertices, uv_coords, normals))
+            std::cout << ".obj file loaded successfully.\n";
+
+
     // Setting up object buffers
     GLuint vao, vbo, cbo, ibo, uvbo;
 
@@ -137,13 +146,13 @@ int main()
     glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(glm::vec3));
     glVertexArrayAttribBinding(vao, 0, 0);
 
-    glCreateBuffers(1, &cbo);
-    glNamedBufferData(cbo, colors.size() * sizeof(glm::vec3), &colors.front(), GL_STATIC_DRAW);
-
-    glEnableVertexArrayAttrib(vao, 1);
-    glVertexArrayAttribFormat(vao, 1, 3, GL_FLOAT, GL_FALSE, 0);
-    glVertexArrayVertexBuffer(vao, 1, cbo, 0, sizeof(glm::vec3));
-    glVertexArrayAttribBinding(vao, 1, 1);
+    // glCreateBuffers(1, &cbo);
+    // glNamedBufferData(cbo, colors.size() * sizeof(glm::vec3), &colors.front(), GL_STATIC_DRAW);
+    // 
+    // glEnableVertexArrayAttrib(vao, 1);
+    // glVertexArrayAttribFormat(vao, 1, 3, GL_FLOAT, GL_FALSE, 0);
+    // glVertexArrayVertexBuffer(vao, 1, cbo, 0, sizeof(glm::vec3));
+    // glVertexArrayAttribBinding(vao, 1, 1);
 
     glCreateBuffers(1, &uvbo);
     glNamedBufferData(uvbo, uv_coords.size() * sizeof(glm::vec2), &uv_coords.front(), GL_STATIC_DRAW);
@@ -178,7 +187,7 @@ int main()
 	while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-        control_camera(window, glfwGetTime() - time);
+        // control_camera(window, glfwGetTime() - time);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         model = glm::rotate(glm::mat4(1.0f), 2 * glm::pi<float>() * (float)glfwGetTime() / 10.f, glm::vec3(0, 1, 0));
@@ -189,7 +198,10 @@ int main()
         glBindVertexArray(vao);
         pipeline.use_pipeline();
 
-        glDrawElements(GL_TRIANGLES, 3 * indices.size(), GL_UNSIGNED_INT, 0);
+        if (obj)
+            glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        else
+			glDrawElements(GL_TRIANGLES, 3 * indices.size(), GL_UNSIGNED_INT, 0);
 
         time = glfwGetTime();
         glfwSwapBuffers(window);

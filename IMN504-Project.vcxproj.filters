@@ -41,6 +41,9 @@
     <ClInclude Include="include\texture.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\obj_loader.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\fragment.glsl">
@@ -54,5 +57,13 @@
     <Image Include="resources\uvtemplate.bmp">
       <Filter>resources</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="resources\cube.obj">
+      <Filter>resources</Filter>
+    </Object>
+    <Object Include="resources\basic-bottle\source\Small Bottle\Small Bottle\Potion.obj">
+      <Filter>resources</Filter>
+    </Object>
   </ItemGroup>
 </Project>
