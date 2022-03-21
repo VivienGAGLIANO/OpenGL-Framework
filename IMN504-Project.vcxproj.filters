@@ -65,5 +65,8 @@
     <Object Include="resources\basic-bottle\source\Small Bottle\Small Bottle\Potion.obj">
       <Filter>resources</Filter>
     </Object>
+    <Object Include="resources\rocking-horse-with-wheels\source\Rocking_horse_with_wheels_SF\Rocking_horse_with_wheels_SF.obj">
+      <Filter>resources</Filter>
+    </Object>
   </ItemGroup>
 </Project>

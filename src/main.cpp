@@ -129,7 +129,7 @@ int main()
 
     // Choose model source
     if (obj)
-        if (load_obj("resources/basic-bottle/source/Small Bottle/Small Bottle/Potion.obj", vertices, uv_coords, normals))
+        if (load_obj("resources/rocking-horse-with-wheels/source/Rocking_horse_with_wheels_SF/Rocking_horse_with_wheels_SF.obj", vertices, uv_coords, normals))
             std::cout << ".obj file loaded successfully.\n";
 
 
@@ -187,7 +187,7 @@ int main()
 	while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-        // control_camera(window, glfwGetTime() - time);
+        control_camera(window, glfwGetTime() - time);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         model = glm::rotate(glm::mat4(1.0f), 2 * glm::pi<float>() * (float)glfwGetTime() / 10.f, glm::vec3(0, 1, 0));
