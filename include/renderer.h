@@ -8,8 +8,8 @@ class Renderer
 {
 public:
 	Renderer();
-	init();
-	render(const Object& obj);
+	void init();
+	void render(const Object& obj);
 
 private:
 	GLFWwindow *window;

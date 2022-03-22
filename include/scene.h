@@ -3,17 +3,23 @@
 
 #include <vector>
 
+#include "object.h"
+#include "renderer.h"
+
+struct Light {};
+struct Camera {};
+
 
 class Scene
 {
 public:
 	Scene();
-	render(Renderer& engine);
+	void render(Renderer& engine);
 
 private:
 	Light light;
 	Camera camera;
-	vector<Object> objects;
+	std::vector<Object> objects;
 };
 
 #endif

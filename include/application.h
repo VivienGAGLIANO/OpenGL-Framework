@@ -1,6 +1,9 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include "scene.h"
+
+
 class Application
 {
 public:
