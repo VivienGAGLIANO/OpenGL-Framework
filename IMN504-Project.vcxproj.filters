@@ -30,6 +30,24 @@
     <ClCompile Include="src\texture.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\application.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\material.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\object.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\data.h">
@@ -42,6 +60,24 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\obj_loader.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\application.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\material.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\model.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\scene.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

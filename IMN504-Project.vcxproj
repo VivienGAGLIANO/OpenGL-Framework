@@ -146,15 +146,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\material.cpp" />
+    <ClCompile Include="src\model.cpp" />
+    <ClCompile Include="src\object.cpp" />
     <ClCompile Include="src\pipeline.cpp" />
+    <ClCompile Include="src\renderer.cpp" />
+    <ClCompile Include="src\scene.cpp" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="third_party\glad\src\glad.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\application.h" />
     <ClInclude Include="include\data.h" />
+    <ClInclude Include="include\material.h" />
+    <ClInclude Include="include\model.h" />
+    <ClInclude Include="include\object.h" />
     <ClInclude Include="include\obj_loader.h" />
     <ClInclude Include="include\pipeline.h" />
+    <ClInclude Include="include\renderer.h" />
+    <ClInclude Include="include\scene.h" />
     <ClInclude Include="include\texture.h" />
   </ItemGroup>
   <ItemGroup>
