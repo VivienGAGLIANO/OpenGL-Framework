@@ -15,8 +15,8 @@ private:
 	void terminate();
 	void update_camera(Camera &camera);
 
-	Renderer engine;
-	Scene scene;
+	Renderer *engine;
+	Scene *scene;
 };
 
 #endif
