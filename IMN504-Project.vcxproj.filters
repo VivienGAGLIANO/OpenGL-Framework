@@ -16,6 +16,12 @@
     <Filter Include="resources">
       <UniqueIdentifier>{b73861a5-c117-417a-a14a-038c02f66507}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resources\shader">
+      <UniqueIdentifier>{b41bffd8-eb4d-4a69-b509-8f66b1d9d39e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\model">
+      <UniqueIdentifier>{f3007730-e237-4b5f-8620-253a212dfcc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -82,30 +88,30 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\fragment.glsl">
-      <Filter>resources</Filter>
-    </None>
-    <None Include="resources\vertex.glsl">
-      <Filter>resources</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="resources\uvtemplate.bmp">
       <Filter>resources</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
+    <Object Include="resources\model\rocking-horse-with-wheels\source\Rocking_horse_with_wheels_SF\Rocking_horse_with_wheels_SF.obj">
+      <Filter>resources\model</Filter>
+    </Object>
+    <Object Include="resources\model\basic-bottle\source\Small Bottle\Small Bottle\Potion.obj">
+      <Filter>resources\model</Filter>
+    </Object>
     <Object Include="resources\cube.obj">
-      <Filter>resources</Filter>
-    </Object>
-    <Object Include="resources\basic-bottle\source\Small Bottle\Small Bottle\Potion.obj">
-      <Filter>resources</Filter>
-    </Object>
-    <Object Include="resources\rocking-horse-with-wheels\source\Rocking_horse_with_wheels_SF\Rocking_horse_with_wheels_SF.obj">
-      <Filter>resources</Filter>
+      <Filter>resources\model</Filter>
     </Object>
     <Object Include="resources\suzanne.obj">
-      <Filter>resources</Filter>
+      <Filter>resources\model</Filter>
     </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\shader\fragment.glsl">
+      <Filter>resources\shader</Filter>
+    </None>
+    <None Include="resources\shader\vertex.glsl">
+      <Filter>resources\shader</Filter>
+    </None>
   </ItemGroup>
 </Project>
