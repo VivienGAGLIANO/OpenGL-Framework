@@ -126,10 +126,10 @@ GLFWwindow* init_engine()
 
 int main()
 {
-    Application *app = new Application();
+   /* Application *app = new Application();
     app->start();
 
-    return 0;
+    return 0;*/
 
     // Init
 	GLFWwindow* window = init_engine();

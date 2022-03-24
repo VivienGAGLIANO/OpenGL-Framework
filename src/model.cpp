@@ -9,3 +9,8 @@ void Model::prepare() const
 {
 	glBindVertexArray(vao);
 }
+
+void Model::set_buffer_objects()
+{
+
+}

@@ -6,8 +6,8 @@
 #include "object.h"
 #include "renderer.h"
 
-struct Light {};
-struct Camera {};
+struct Light{};
+struct Camera{};
 
 
 class Scene

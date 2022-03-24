@@ -1,8 +1,8 @@
 #ifndef PIPELINE_H
 #define PIPELINE_H
 
-#include <fwd.hpp>
 #include <glad/glad.h>
+#include <string>
 
 
 class Pipeline

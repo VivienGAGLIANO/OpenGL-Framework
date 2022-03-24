@@ -3,7 +3,8 @@
 
 #include <glm.hpp>
 #include <vector>
-#include <glad/glad.h>
+#include <glfw3.h>
+//#include <glad/glad.h>
 
 
 class Model
@@ -15,6 +16,8 @@ public:
 
 
 private:
+	void set_buffer_objects();
+
 	std::vector<glm::uvec3> indices;
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
