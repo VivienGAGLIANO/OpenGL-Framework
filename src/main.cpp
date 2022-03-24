@@ -4,6 +4,7 @@
 #include <glm.hpp>
 #include <gtc/type_ptr.hpp>
 
+#include "application.h"
 #include "data.h"
 #include "obj_loader.h"
 #include "pipeline.h"
@@ -125,6 +126,11 @@ GLFWwindow* init_engine()
 
 int main()
 {
+    Application *app = new Application();
+    app->start();
+
+    return 0;
+
     // Init
 	GLFWwindow* window = init_engine();
     if (window == nullptr)

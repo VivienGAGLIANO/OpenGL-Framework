@@ -14,7 +14,8 @@ class Scene
 {
 public:
 	Scene();
-	void render(Renderer& engine);
+	void update(const double& delta_time);
+	void render(Renderer* engine);
 
 private:
 	Light light;

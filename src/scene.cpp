@@ -1,1 +1,17 @@
 #include "scene.h"
+
+void Scene::update(const double& delta_time)
+{
+	for (auto object : objects)
+	{
+		object.update(delta_time);
+	}
+}
+
+void Scene::render(Renderer* engine)
+{
+	for (const auto & object : objects)
+	{
+		engine->render(camera, object);
+	}
+}
