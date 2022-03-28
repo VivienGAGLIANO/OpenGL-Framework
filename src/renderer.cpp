@@ -14,7 +14,7 @@ void Renderer::init()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(width, height, "Solar System", NULL, NULL);
+    window = glfwCreateWindow(width, height, "Solar System", NULL, NULL);
     if (window == nullptr)
     {
         std::cerr << "Failed to create GFLW window.\n";
