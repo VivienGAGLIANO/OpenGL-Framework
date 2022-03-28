@@ -118,7 +118,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\third_party;$(ProjectDir)\third_party\assimp\include;$(ProjectDir)\third_party\glad\include;$(ProjectDir)\third_party\glm;$(ProjectDir)\third_party\GLFW\include;$(ProjectDir)\include</AdditionalIncludeDirectories>
     </ClCompile>
@@ -173,10 +173,18 @@
     <Image Include="resources\uvtemplate.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="resources\cube.obj" />
-    <Object Include="resources\model\basic-bottle\source\Small Bottle\Small Bottle\Potion.obj" />
-    <Object Include="resources\model\rocking-horse-with-wheels\source\Rocking_horse_with_wheels_SF\Rocking_horse_with_wheels_SF.obj" />
-    <Object Include="resources\suzanne.obj" />
+    <Object Include="resources\model\basic-bottle\source\Small Bottle\Small Bottle\Potion.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="resources\model\cube.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="resources\model\rocking-horse-with-wheels\source\Rocking_horse_with_wheels_SF\Rocking_horse_with_wheels_SF.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="resources\model\suzanne.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shader\fragment.glsl" />

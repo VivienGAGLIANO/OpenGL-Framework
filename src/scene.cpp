@@ -1,5 +1,10 @@
 #include "scene.h"
 
+
+Scene::Scene()
+{
+}
+
 void Scene::update(const double& delta_time)
 {
 	for (auto object : objects)

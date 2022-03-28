@@ -139,7 +139,7 @@ int main()
 
     // Choose model source
     if (obj)
-        if (load_obj("resources/suzanne.obj", vertices, uv_coords, normals))
+        if (load_obj("resources/model/suzanne.obj", vertices, uv_coords, normals))
             std::cout << ".obj file loaded successfully.\n";
 
 
@@ -191,7 +191,7 @@ int main()
 
 
     // Graphic pipeline
-    Pipeline pipeline = Pipeline("resources/vertex.glsl", "resources/fragment.glsl");
+    Pipeline pipeline = Pipeline("resources/shader/vertex.glsl", "resources/shader/fragment.glsl");
 
 
     // Texture

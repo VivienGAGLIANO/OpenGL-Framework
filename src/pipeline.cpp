@@ -4,7 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include <gtc/type_ptr.inl>
+//#include <gtc/type_ptr.inl>
 
 
 Pipeline::Pipeline(const std::string &vertex_path, const std::string &fragment_path)

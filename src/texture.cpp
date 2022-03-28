@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+
 Texture::Texture(const char* image_path) : id(load_bmp(image_path))
 {
 	// Poor filtering, or ...

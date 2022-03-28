@@ -99,10 +99,10 @@
     <Object Include="resources\model\basic-bottle\source\Small Bottle\Small Bottle\Potion.obj">
       <Filter>resources\model</Filter>
     </Object>
-    <Object Include="resources\cube.obj">
+    <Object Include="resources\model\cube.obj">
       <Filter>resources\model</Filter>
     </Object>
-    <Object Include="resources\suzanne.obj">
+    <Object Include="resources\model\suzanne.obj">
       <Filter>resources\model</Filter>
     </Object>
   </ItemGroup>

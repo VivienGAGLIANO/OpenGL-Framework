@@ -28,3 +28,15 @@ void Application::start()
 
 	terminate();
 }
+
+void Application::init()
+{
+}
+
+void Application::terminate()
+{
+}
+
+void Application::update_camera(Camera& camera)
+{
+}

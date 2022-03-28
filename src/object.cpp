@@ -1,5 +1,10 @@
 #include "object.h"
 
+
+void Object::update(const double& delta_time)
+{
+}
+
 void Object::prepare_for_render() const
 {
 	model.prepare();

@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+
 Renderer::Renderer(const int width, const int height) : width(width), height(height)
 {
 }

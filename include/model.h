@@ -3,8 +3,7 @@
 
 #include <glm.hpp>
 #include <vector>
-#include <glfw3.h>
-//#include <glad/glad.h>
+#include <glad/glad.h>
 
 
 class Model

@@ -9,6 +9,7 @@
 struct Light{};
 struct Camera{};
 
+class Renderer;
 
 class Scene
 {

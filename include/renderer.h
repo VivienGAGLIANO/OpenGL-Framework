@@ -6,7 +6,9 @@
 #include "object.h"
 #include "scene.h"
 
+
 struct Camera;
+
 
 class Renderer
 {

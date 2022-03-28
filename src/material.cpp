@@ -1,5 +1,6 @@
 #include "material.h"
 
+
 Material::Material(const Texture* texture) : Material()
 {
 	*this->texture = *texture;
