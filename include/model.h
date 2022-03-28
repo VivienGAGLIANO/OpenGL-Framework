@@ -4,30 +4,33 @@
 #include <glad/glad.h>
 #include <glm.hpp>
 #include <vector>
+#include <assimp/scene.h>
 
-
-struct Vertex
-{
-	glm::vec3 position;
-	glm::vec3 normal;
-	glm::vec2 uv;
-};
+#include "mesh.h"
 
 
 class Model
 {
 public:
-	Model();
-	long n_elements() const;
-	void prepare() const;
+	explicit Model(const char *path);
+	// long n_elements() const;
+	// void prepare() const;
 
 
 private:
-	void set_buffer_objects();
+	std::vector<Texture> load_material_textures(aiMaterial* mat, aiTextureType type, const char *typeName);
+	void load_model(const char* path);
+	Mesh process_mesh(aiMesh* mesh, const aiScene* scene);
+	void process_node(aiNode* node, const aiScene* scene);
 
-	std::vector<glm::uvec3> indices;
-	std::vector<Vertex> vertices;
-	GLuint vao, ibo, vbo, ubo, nbo;
+	std::vector<Mesh> meshes;
+
+
+	// void set_buffer_objects();
+
+	// std::vector<glm::uvec3> indices;
+	// std::vector<Vertex> vertices;
+	// GLuint vao, ibo, vbo, ubo, nbo;
 };
 
 #endif
