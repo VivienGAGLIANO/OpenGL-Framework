@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-Application::Application() : engine(new Renderer), scene(new Scene)
+Application::Application() : engine(new Engine), scene(new Scene)
 {
 	engine->init();
 }
@@ -13,7 +13,7 @@ void Application::start()
 	std::cout << "Starting application\n";
 
 	double time = glfwGetTime();
-	while (engine->should_render())
+	while (engine->should_render()) // TODO move this to engine class perhaps ?
 	{
 		glfwPollEvents();
 		// camera control

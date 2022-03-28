@@ -1,9 +1,17 @@
 #ifndef MODEL_H
 #define MODEL_H
 
+#include <glad/glad.h>
 #include <glm.hpp>
 #include <vector>
-#include <glad/glad.h>
+
+
+struct Vertex
+{
+	glm::vec3 position;
+	glm::vec3 normal;
+	glm::vec2 uv;
+};
 
 
 class Model
@@ -18,9 +26,7 @@ private:
 	void set_buffer_objects();
 
 	std::vector<glm::uvec3> indices;
-	std::vector<glm::vec3> vertices;
-	std::vector<glm::vec2> uvs;
-	std::vector<glm::vec3> normals;
+	std::vector<Vertex> vertices;
 	GLuint vao, ibo, vbo, ubo, nbo;
 };
 

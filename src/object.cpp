@@ -1,6 +1,5 @@
 #include "object.h"
 
-
 void Object::update(const double& delta_time)
 {
 }

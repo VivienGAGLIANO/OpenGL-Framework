@@ -1,0 +1,1 @@
+Object loader library : Open Asset Importer Library (https://github.com/assimp/assimp)

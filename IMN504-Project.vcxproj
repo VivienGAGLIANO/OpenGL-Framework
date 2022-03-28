@@ -152,7 +152,7 @@
     <ClCompile Include="src\model.cpp" />
     <ClCompile Include="src\object.cpp" />
     <ClCompile Include="src\pipeline.cpp" />
-    <ClCompile Include="src\renderer.cpp" />
+    <ClCompile Include="src\engine.cpp" />
     <ClCompile Include="src\scene.cpp" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="third_party\glad\src\glad.c" />
@@ -165,7 +165,7 @@
     <ClInclude Include="include\object.h" />
     <ClInclude Include="include\obj_loader.h" />
     <ClInclude Include="include\pipeline.h" />
-    <ClInclude Include="include\renderer.h" />
+    <ClInclude Include="include\engine.h" />
     <ClInclude Include="include\scene.h" />
     <ClInclude Include="include\texture.h" />
   </ItemGroup>
@@ -189,6 +189,9 @@
   <ItemGroup>
     <None Include="resources\shader\fragment.glsl" />
     <None Include="resources\shader\vertex.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="notes.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

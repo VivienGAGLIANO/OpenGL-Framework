@@ -13,7 +13,7 @@ void Scene::update(const double& delta_time)
 	}
 }
 
-void Scene::render(Renderer* engine)
+void Scene::render(Engine* engine)
 {
 	for (const auto & object : objects)
 	{

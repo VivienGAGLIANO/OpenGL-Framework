@@ -1,13 +1,13 @@
-#include "renderer.h"
+#include "engine.h"
 
 #include <iostream>
 
 
-Renderer::Renderer(const int width, const int height) : width(width), height(height)
+Engine::Engine(const int width, const int height) : width(width), height(height)
 {
 }
 
-void Renderer::init()
+void Engine::init()
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -30,6 +30,7 @@ void Renderer::init()
     }
     glViewport(0, 0, width, height);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetKeyCallback(window, key_callback);
 
     glClearColor(.25, .1, .65, 1);
     glEnable(GL_DEPTH_TEST);
@@ -37,7 +38,7 @@ void Renderer::init()
     glEnable(GL_CULL_FACE);
 }
 
-void Renderer::render(const Camera& camera, const Object& obj)
+void Engine::render(const Camera& camera, const Object& obj)
 {
     //glBindVertexArray(obj.vao);
     //obj.use_pipeline();
@@ -46,14 +47,20 @@ void Renderer::render(const Camera& camera, const Object& obj)
     glDrawElements(GL_TRIANGLES, obj.n_elements(), GL_UNSIGNED_INT, 0);
 }
 
-bool Renderer::should_render() const
+bool Engine::should_render() const
 {
     return !glfwWindowShouldClose(window);
 }
 
-void Renderer::framebuffer_size_callback(GLFWwindow* window, int width, int height)
+void Engine::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     // this->width = width;
     // this->height = height;
     glViewport(0, 0, width, height);
+}
+
+void Engine::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
 }

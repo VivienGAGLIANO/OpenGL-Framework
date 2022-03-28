@@ -4,19 +4,19 @@
 #include <vector>
 
 #include "object.h"
-#include "renderer.h"
+#include "engine.h"
 
 struct Light{};
 struct Camera{};
 
-class Renderer;
+class Engine;
 
 class Scene
 {
 public:
 	Scene();
 	void update(const double& delta_time);
-	void render(Renderer* engine);
+	void render(Engine* engine);
 
 private:
 	Light light;

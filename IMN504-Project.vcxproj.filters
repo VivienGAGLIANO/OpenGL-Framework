@@ -48,7 +48,7 @@
     <ClCompile Include="src\object.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer.cpp">
+    <ClCompile Include="src\engine.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\scene.cpp">
@@ -80,7 +80,7 @@
     <ClInclude Include="include\object.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\renderer.h">
+    <ClInclude Include="include\engine.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\scene.h">
@@ -113,5 +113,8 @@
     <None Include="resources\shader\vertex.glsl">
       <Filter>resources\shader</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="notes.txt" />
   </ItemGroup>
 </Project>

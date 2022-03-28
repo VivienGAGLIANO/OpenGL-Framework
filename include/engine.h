@@ -10,10 +10,10 @@
 struct Camera;
 
 
-class Renderer
+class Engine
 {
 public:
-	Renderer(const int width = 800, const int height = 600);
+	Engine(const int width = 800, const int height = 600);
 	void init();
 	void render(const Camera& camera, const Object& obj);
 	bool should_render() const;
@@ -23,6 +23,7 @@ public:
 
 private:
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 };
 
 #endif
