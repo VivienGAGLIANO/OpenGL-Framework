@@ -120,6 +120,9 @@
     <Object Include="resources\model\suzanne.obj">
       <Filter>resources\model</Filter>
     </Object>
+    <Object Include="resources\model\backpack\backpack.obj">
+      <Filter>resources\model</Filter>
+    </Object>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shader\fragment.glsl">

@@ -42,9 +42,9 @@ void Engine::render(const Camera& camera, const Object& obj)
 {
     //glBindVertexArray(obj.vao);
     //obj.use_pipeline();
-    obj.prepare_for_render();
+    obj.prepare_material();
 
-    glDrawElements(GL_TRIANGLES, obj.n_elements(), GL_UNSIGNED_INT, 0);
+    // obj.render();
 }
 
 bool Engine::should_render() const

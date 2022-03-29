@@ -13,6 +13,8 @@ class Model
 {
 public:
 	explicit Model(const char *path);
+	std::vector<Mesh> get_meshes() const;
+
 	// long n_elements() const;
 	// void prepare() const;
 

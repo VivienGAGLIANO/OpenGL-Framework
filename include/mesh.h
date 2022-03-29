@@ -28,13 +28,14 @@ class Mesh
 {
 public:
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
+	void prepare_for_render(Pipeline pipeline);
 
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 	std::vector<Texture> textures;
+	inline static std::vector<Texture> loaded_textures = std::vector<Texture>();
 
 private:
-	void prepare_for_render(Pipeline &pipeline);
 	void set_buffer_objects();
 
 	GLuint vao, vbo, ebo;

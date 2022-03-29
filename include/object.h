@@ -12,8 +12,9 @@ class Object
 public:
 	Object();
 	void update(const double& delta_time);
-	void prepare_for_render() const;
-	long n_elements() const;
+	void prepare_material() const;
+	void render();
+	// long n_elements() const;
 
 private:
 	glm::mat4 model_matrix;

@@ -179,6 +179,9 @@
     <Image Include="resources\uvtemplate.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Object Include="resources\model\backpack\backpack.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
     <Object Include="resources\model\basic-bottle\source\Small Bottle\Small Bottle\Potion.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </Object>

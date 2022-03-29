@@ -11,6 +11,11 @@ Model::Model(const char* path)
 	load_model(path);
 }
 
+std::vector<Mesh> Model::get_meshes() const
+{
+	return meshes;
+}
+
 std::vector<Texture> Model::load_material_textures(aiMaterial* mat, aiTextureType type, const char* type_name)
 {
 	std::vector<Texture> textures;

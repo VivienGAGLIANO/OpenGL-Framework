@@ -6,7 +6,7 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned> indices, std::vec
 	set_buffer_objects();
 }
 
-void Mesh::prepare_for_render(Pipeline& pipeline)
+void Mesh::prepare_for_render(Pipeline pipeline)
 {
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;

@@ -3,6 +3,7 @@
 
 Scene::Scene()
 {
+	// objects.push_back()
 }
 
 void Scene::update(const double& delta_time)
@@ -15,8 +16,11 @@ void Scene::update(const double& delta_time)
 
 void Scene::render(Engine* engine)
 {
-	for (const auto & object : objects)
+	for (auto & obj : objects)
 	{
-		engine->render(camera, object);
+		obj.prepare_material();
+
+		obj.render();
+		// engine->render(camera, object);
 	}
 }
