@@ -3,9 +3,11 @@
 #include <iostream>
 
 
-Application::Application() : engine(new Engine), scene(new Scene)
+Application::Application() /*: engine(new Engine), scene(new Scene)*/
 {
+	engine = new Engine();
 	engine->init();
+	scene = new Scene();
 }
 
 void Application::start()

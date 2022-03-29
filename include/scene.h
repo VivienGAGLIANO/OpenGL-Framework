@@ -21,7 +21,7 @@ public:
 private:
 	Light light;
 	Camera camera;
-	std::vector<Object> objects;
+	std::vector<Object*> objects;
 };
 
 #endif

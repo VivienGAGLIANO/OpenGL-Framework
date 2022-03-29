@@ -1,7 +1,12 @@
 #include "object.h"
 
+#include <iostream>
+
+Object::Object(const std::string &name, Material mat, Model model) : name(name), model_matrix(glm::mat4(1.0)), material(mat), model(model) {}
+
 void Object::update(const double& delta_time)
 {
+	// Pass MVP matrices to shader
 }
 
 void Object::prepare_material() const

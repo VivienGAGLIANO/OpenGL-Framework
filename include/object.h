@@ -10,11 +10,13 @@
 class Object
 {
 public:
-	Object();
-	void update(const double& delta_time);
+	Object(const std::string &name, Material mat, Model model);
+	virtual void update(const double& delta_time);
 	void prepare_material() const;
 	void render();
 	// long n_elements() const;
+
+	std::string name;
 
 private:
 	glm::mat4 model_matrix;

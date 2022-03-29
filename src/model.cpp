@@ -66,6 +66,8 @@ void Model::load_model(const std::string &path)
 		return;
 	}
 	directory = path.substr(0, path.find_last_of('/'));
+
+	process_node(scene->mRootNode, scene);
 }
 
 Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)

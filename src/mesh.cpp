@@ -25,6 +25,8 @@ void Mesh::prepare_for_render(Pipeline pipeline)
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
     glActiveTexture(GL_TEXTURE0);
+
+    glBindVertexArray(vao);
 }
 
 void Mesh::set_buffer_objects()
