@@ -1,9 +1,9 @@
-#include "texture.h"
+#include "TextureOld.h"
 
 #include <iostream>
 
 
-Texture::Texture(const char* image_path) : id(load_bmp(image_path))
+TextureOld::TextureOld(const char* image_path) : id(load_bmp(image_path))
 {
 	// Poor filtering, or ...
 	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -18,7 +18,7 @@ Texture::Texture(const char* image_path) : id(load_bmp(image_path))
 	glGenerateMipmap(GL_TEXTURE_2D);
 }
 
-GLuint Texture::load_bmp(const char* image_path)
+GLuint TextureOld::load_bmp(const char* image_path)
 {
 	std::cout << "Reading image " <<  image_path << std::endl;
 

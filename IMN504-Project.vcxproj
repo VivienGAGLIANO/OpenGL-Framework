@@ -121,11 +121,12 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\third_party;$(ProjectDir)\third_party\assimp\include;$(ProjectDir)\third_party\glad\include;$(ProjectDir)\third_party\glm;$(ProjectDir)\third_party\GLFW\include;$(ProjectDir)\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)\third_party\assimp\lib;$(ProjectDir)\third_party\GLFW\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -155,7 +156,8 @@
     <ClCompile Include="src\pipeline.cpp" />
     <ClCompile Include="src\engine.cpp" />
     <ClCompile Include="src\scene.cpp" />
-    <ClCompile Include="src\texture.cpp" />
+    <ClCompile Include="src\stb_image.cpp" />
+    <ClCompile Include="src\TextureOld.cpp" />
     <ClCompile Include="third_party\glad\src\glad.c" />
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +171,9 @@
     <ClInclude Include="include\pipeline.h" />
     <ClInclude Include="include\engine.h" />
     <ClInclude Include="include\scene.h" />
-    <ClInclude Include="include\texture.h" />
+    <ClInclude Include="include\stb_image.h" />
+    <ClInclude Include="include\TextureOld.h" />
+    <ClInclude Include="third_party\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\uvtemplate.bmp" />

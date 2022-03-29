@@ -1,7 +1,7 @@
 #include "material.h"
 
 
-Material::Material(const Texture* texture) : Material()
+Material::Material(const TextureOld* texture) : Material()
 {
 	*this->texture = *texture;
 }
@@ -14,7 +14,7 @@ Material::Material(const char* vertex_path, const char* fragment_path) : pipelin
 {
 }
 
-Material::Material(const Texture* texture, const char* vertex_path, const char* fragment_path) : pipeline(Pipeline(vertex_path, fragment_path))
+Material::Material(const TextureOld* texture, const char* vertex_path, const char* fragment_path) : pipeline(Pipeline(vertex_path, fragment_path))
 {
 	pipeline.use_pipeline();
 	*this->texture = *texture;

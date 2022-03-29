@@ -8,7 +8,7 @@
 #include "data.h"
 #include "obj_loader.h"
 #include "pipeline.h"
-#include "texture.h"
+#include "TextureOld.h"
 
 
 constexpr bool obj = true;
@@ -126,10 +126,10 @@ GLFWwindow* init_engine()
 
 int main()
 {
-   /* Application *app = new Application();
+    Application *app = new Application();
     app->start();
 
-    return 0;*/
+    return 0;
 
     // Init
 	GLFWwindow* window = init_engine();
@@ -194,8 +194,8 @@ int main()
     Pipeline pipeline = Pipeline("resources/shader/vertex.glsl", "resources/shader/fragment.glsl");
 
 
-    // Texture
-    Texture texture("resources/uvtemplate.bmp");
+    // TextureOld
+    // TextureOld texture("resources/uvtemplate.bmp");
 
 
     // Transformation matrices

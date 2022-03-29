@@ -33,7 +33,7 @@
     <ClCompile Include="src\pipeline.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\texture.cpp">
+    <ClCompile Include="src\TextureOld.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\application.cpp">
@@ -57,6 +57,9 @@
     <ClCompile Include="src\mesh.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\stb_image.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\data.h">
@@ -65,7 +68,7 @@
     <ClInclude Include="include\pipeline.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\texture.h">
+    <ClInclude Include="include\TextureOld.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\obj_loader.h">
@@ -90,6 +93,12 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\mesh.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\stb_image\stb_image.h">
+      <Filter>third_party</Filter>
+    </ClInclude>
+    <ClInclude Include="include\stb_image.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

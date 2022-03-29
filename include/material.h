@@ -2,23 +2,23 @@
 #define MATERIAL_H
 
 #include "pipeline.h"
-#include "texture.h"
+#include "TextureOld.h"
 
 
 class Material
 {
 public:
-	explicit Material(const Texture* texture);
+	explicit Material(const TextureOld* texture);
 	explicit Material(const Pipeline& pipeline);
 	explicit Material(const char *vertex_path = "resources/shader/vertex.glsl", const char* fragment_path = "resources/shader/fragment.glsl");
-	explicit Material(const Texture* texture, const char* vertex_path = "resources/shader/vertex.glsl",
+	explicit Material(const TextureOld* texture, const char* vertex_path = "resources/shader/vertex.glsl",
 	                  const char* fragment_path = "resources/shader/fragment.glsl");
 	void prepare() const;
 
 
 private:
 	Pipeline pipeline;
-	Texture *texture = nullptr;
+	TextureOld *texture = nullptr;
 };
 
 #endif

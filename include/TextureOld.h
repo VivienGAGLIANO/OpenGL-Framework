@@ -4,10 +4,10 @@
 #include <glad/glad.h>
 
 
-class Texture
+class TextureOld
 {
 public:
-	explicit Texture(const char* image_path);
+	explicit TextureOld(const char* image_path);
 
 private:
 	GLuint id;
