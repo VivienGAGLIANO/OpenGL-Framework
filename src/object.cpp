@@ -4,6 +4,8 @@
 #include <iostream>
 #include <glm/ext.hpp>
 
+#include "scene.h"
+
 
 Object::Object(const std::string &name) : name(name), model_matrix(glm::mat4(1.0)) {}
 
@@ -28,7 +30,8 @@ void Object::update(const double& delta_time)
 	// Pass MVP matrices to shader
 	// THIS IS TEST AND SHOULD BE RE-ORGANIZED WITH CAMERA CLASS
 	glm::mat4 mod = glm::mat4(1.0f);
-	glm::mat4 view = glm::lookAt(glm::vec3(2, 1, 2), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	//glm::mat4 view = glm::lookAt(glm::vec3(2, 1, 2), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	glm::mat4 view = Scene::get_instance()->get_camera()->get_view();
 	glm::mat4 projection = glm::perspective(glm::radians(60.f), float(800) / float(600), .1f, 100.f);
 
 	auto pip = material->get_pipeline();

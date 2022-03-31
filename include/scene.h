@@ -16,6 +16,7 @@ class Scene
 {
 public:
 	~Scene();
+	Camera* get_camera() const;
 	void update(const double& delta_time);
 	void render(Engine* engine);
 	static Scene* get_instance();
@@ -25,7 +26,7 @@ private:
 
 	static Scene *instance;
 	// Light light;
-	Camera camera;
+	Camera* camera;
 	std::vector<Object*> objects;
 };
 

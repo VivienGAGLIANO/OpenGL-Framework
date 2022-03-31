@@ -3,7 +3,7 @@
 
 Scene* Scene::instance;
 
-Scene::Scene()
+Scene::Scene() : camera(new Camera)
 {
 	auto backpack = new Object("backpack");
 	backpack->set_material(new Material);
@@ -13,10 +13,14 @@ Scene::Scene()
 
 Scene::~Scene()
 {
+	delete camera;
 	for (Object* obj : objects)
-	{
 		delete obj;
-	}
+}
+
+Camera* Scene::get_camera() const
+{
+	return camera;
 }
 
 void Scene::update(const double& delta_time)

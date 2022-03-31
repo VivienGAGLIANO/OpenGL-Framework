@@ -63,4 +63,8 @@ void Engine::key_callback(GLFWwindow* window, int key, int scancode, int action,
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+
+    std::vector move = { GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_D, GLFW_KEY_A };
+    if (std::find(move.cbegin(), move.cend(), key) != move.cend() && action == GLFW_PRESS)
+        Scene::get_instance()->get_camera()->process_keyboard(key);
 }
