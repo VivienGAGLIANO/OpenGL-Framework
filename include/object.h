@@ -10,7 +10,9 @@
 class Object
 {
 public:
-	Object(const std::string &name, Material mat, Model model);
+	Object(const std::string &name);
+	void set_material(Material* mat);
+	void set_model(Model* model);
 	virtual void update(const double& delta_time);
 	void prepare_material() const;
 	void render();
@@ -20,8 +22,8 @@ public:
 
 private:
 	glm::mat4 model_matrix;
-	Material material;
-	Model model;
+	Material *material = nullptr;
+	Model *model = nullptr;
 };
 
 #endif

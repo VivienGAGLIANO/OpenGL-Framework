@@ -3,10 +3,10 @@
 
 Scene::Scene()
 {
-	// objects.push_back()
-	Material mat = Material();
-	Model model("resources/model/suzanne.obj");
-	objects.emplace_back(new Object("backpack", mat, model));
+	auto backpack = new Object("backpack");
+	backpack->set_material(new Material);
+	backpack->set_model(new Model("resources/model/backpack/backpack.obj"));
+	objects.push_back(backpack);
 }
 
 void Scene::update(const double& delta_time)

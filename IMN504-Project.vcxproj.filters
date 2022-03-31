@@ -60,6 +60,9 @@
     <ClCompile Include="src\stb_image.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\camera.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\data.h">
@@ -99,6 +102,9 @@
       <Filter>third_party</Filter>
     </ClInclude>
     <ClInclude Include="include\stb_image.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\camera.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

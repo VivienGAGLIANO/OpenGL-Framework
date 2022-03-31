@@ -8,7 +8,8 @@ in VTF
 	vec3 world_pos;
 };
 
-uniform sampler2D tex;
+uniform sampler2D texture_diffuse1;
+uniform sampler2D texture_specular1;
 uniform vec3 light_pos;
 
 layout (location = 0) out vec4 color;
@@ -18,5 +19,5 @@ layout (location = 0) out vec4 color;
 
 void main()
 {
-	color = texture(tex, v_coord); // vec4(v_color, 1.);
+	color = texture(texture_diffuse1, v_coord); // vec4(v_color, 1.);
 }

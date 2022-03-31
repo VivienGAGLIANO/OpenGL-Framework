@@ -3,11 +3,12 @@
 
 #include <vector>
 
-#include "object.h"
+#include "camera.h"
 #include "engine.h"
+#include "object.h"
 
 struct Light{};
-struct Camera{};
+// struct Camera{};
 
 class Engine;
 

@@ -5,7 +5,17 @@
 #include <glm/ext.hpp>
 
 
-Object::Object(const std::string &name, Material mat, Model model) : name(name), model_matrix(glm::mat4(1.0)), material(mat), model(model) {}
+Object::Object(const std::string &name) : name(name) {}
+
+void Object::set_material(Material* mat)
+{
+	this->material = mat;
+}
+
+void Object::set_model(Model* model)
+{
+	this->model = model;
+}
 
 void Object::update(const double& delta_time)
 {
@@ -15,7 +25,7 @@ void Object::update(const double& delta_time)
 	glm::mat4 view = glm::lookAt(glm::vec3(2, 1, 2), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	glm::mat4 projection = glm::perspective(glm::radians(60.f), float(800) / float(600), .1f, 100.f);
 
-	auto pip = material.get_pipeline();
+	auto pip = material->get_pipeline();
 
 	mod = glm::rotate(glm::mat4(1.0f), 2 * glm::pi<float>() * (float)glfwGetTime() / 10.f, glm::vec3(0, 1, 0));
 
@@ -26,17 +36,16 @@ void Object::update(const double& delta_time)
 
 void Object::prepare_material() const
 {
-	// model.prepare();
-	material.prepare();
+	material->prepare();
 }
 
 void Object::render()
 {
 	prepare_material();
 
-	for (auto mesh : model.get_meshes())
+	for (auto mesh : model->get_meshes())
 	{
-		mesh.prepare_for_render(material.get_pipeline());
+		mesh.prepare_for_render(material->get_pipeline());
 
 		glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
 	}
