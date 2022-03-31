@@ -20,7 +20,7 @@ public:
 
 	std::string name;
 
-private:
+protected:
 	glm::mat4 model_matrix;
 	Material *material = nullptr;
 	Model *model = nullptr;
