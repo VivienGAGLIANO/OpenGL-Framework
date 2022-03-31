@@ -7,6 +7,12 @@
 
 Object::Object(const std::string &name) : name(name), model_matrix(glm::mat4(1.0)) {}
 
+Object::~Object()
+{
+	delete material;
+	delete model;
+}
+
 void Object::set_material(Material* mat)
 {
 	this->material = mat;

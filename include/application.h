@@ -8,6 +8,7 @@ class Application
 {
 public:
 	Application();
+	~Application();
 	void start();
 
 private:

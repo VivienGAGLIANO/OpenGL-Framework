@@ -7,7 +7,13 @@ Application::Application() /*: engine(new Engine), scene(new Scene)*/
 {
 	engine = new Engine();
 	engine->init();
-	scene = new Scene();
+	scene = Scene::get_instance();
+}
+
+Application::~Application()
+{
+	delete engine;
+	delete scene;
 }
 
 void Application::start()

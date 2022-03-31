@@ -11,6 +11,7 @@ class Object
 {
 public:
 	Object(const std::string &name);
+	~Object();
 	void set_material(Material* mat);
 	void set_model(Model* model);
 	virtual void update(const double& delta_time);

@@ -20,6 +20,11 @@ Material::Material(const TextureOld* texture, const char* vertex_path, const cha
 	*this->texture = *texture;
 }
 
+Material::~Material()
+{
+	delete texture;
+}
+
 Pipeline Material::get_pipeline()
 {
 	return pipeline;

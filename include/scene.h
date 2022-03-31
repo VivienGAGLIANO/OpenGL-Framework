@@ -15,12 +15,16 @@ class Engine;
 class Scene
 {
 public:
-	Scene();
+	~Scene();
 	void update(const double& delta_time);
 	void render(Engine* engine);
+	static Scene* get_instance();
 
 private:
-	Light light;
+	Scene();
+
+	static Scene *instance;
+	// Light light;
 	Camera camera;
 	std::vector<Object*> objects;
 };
