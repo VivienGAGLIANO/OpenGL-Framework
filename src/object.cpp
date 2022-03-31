@@ -5,7 +5,7 @@
 #include <glm/ext.hpp>
 
 
-Object::Object(const std::string &name) : name(name) {}
+Object::Object(const std::string &name) : name(name), model_matrix(glm::mat4(1.0)) {}
 
 void Object::set_material(Material* mat)
 {
@@ -49,6 +49,16 @@ void Object::render()
 
 		glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
 	}
+}
+
+void Object::translate(const glm::vec3& t)
+{
+	model_matrix = glm::translate(model_matrix, t);
+}
+
+void Object::rotate(const glm::vec3& axis, const float& angle)
+{
+	model_matrix = glm::rotate(model_matrix, angle, axis);
 }
 
 //long Object::n_elements() const

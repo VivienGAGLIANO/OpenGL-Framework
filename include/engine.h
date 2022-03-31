@@ -7,9 +7,6 @@
 #include "scene.h"
 
 
-struct Camera;
-
-
 class Engine
 {
 public:

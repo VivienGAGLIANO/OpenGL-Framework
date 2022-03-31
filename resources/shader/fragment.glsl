@@ -19,5 +19,6 @@ layout (location = 0) out vec4 color;
 
 void main()
 {
-	color = texture(texture_diffuse1, v_coord); // vec4(v_color, 1.);
+	color = texture(texture_diffuse1, v_coord);
+	// color = vec4(v_color, 1.);
 }
