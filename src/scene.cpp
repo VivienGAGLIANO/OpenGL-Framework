@@ -25,6 +25,8 @@ Camera* Scene::get_camera() const
 
 void Scene::update(const double& delta_time)
 {
+	camera->update(delta_time);
+
 	for (auto object : objects)
 	{
 		object->update(delta_time);

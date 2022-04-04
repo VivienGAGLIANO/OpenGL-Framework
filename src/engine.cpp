@@ -31,6 +31,7 @@ void Engine::init()
     glViewport(0, 0, width, height);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetKeyCallback(window, key_callback);
+    glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
 
     glClearColor(.25, .1, .65, 1);
     glEnable(GL_DEPTH_TEST);
@@ -64,7 +65,9 @@ void Engine::key_callback(GLFWwindow* window, int key, int scancode, int action,
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
-    std::vector move = { GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_D, GLFW_KEY_A };
-    if (std::find(move.cbegin(), move.cend(), key) != move.cend() && action == GLFW_PRESS)
-        Scene::get_instance()->get_camera()->process_keyboard(key);
+    std::vector move = { GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_D, GLFW_KEY_A, GLFW_KEY_SPACE, GLFW_KEY_LEFT_CONTROL };
+    if (std::find(move.cbegin(), move.cend(), key) != move.cend())
+        Scene::get_instance()->get_camera()->process_keyboard(key, action);
+
+    // TODO : smoothen camera movement with a) flag for key press or b) glfwGetKey at each update
 }
