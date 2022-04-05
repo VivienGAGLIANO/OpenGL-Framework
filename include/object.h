@@ -19,6 +19,7 @@ public:
 	void render();
 	void translate(const glm::vec3& v);
 	void rotate(const glm::vec3& axis, const float& angle);
+	void scale(const glm::vec3& factor);
 
 	std::string name;
 

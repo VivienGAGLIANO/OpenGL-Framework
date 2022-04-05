@@ -62,6 +62,11 @@ void Object::rotate(const glm::vec3& axis, const float& angle)
 	model_matrix = glm::rotate(model_matrix, angle, axis);
 }
 
+void Object::scale(const glm::vec3& factor)
+{
+	model_matrix = glm::scale(model_matrix, factor);
+}
+
 //long Object::n_elements() const
 //{
 //	// return model.n_elements();

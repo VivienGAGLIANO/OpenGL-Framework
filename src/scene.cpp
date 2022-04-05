@@ -21,6 +21,13 @@ void Scene::populate()
 	backpack->set_model(new Model("resources/model/backpack/backpack.obj"));
 	objects.push_back(backpack);
 
+	auto horse = new Template("horse");
+	horse->set_material(new Material);
+	horse->set_model(new Model("resources/model/rocking-horse-with-wheels/source/Rocking_horse_with_wheels_SF/Rocking_horse_with_wheels_SF.obj"));
+	horse->translate(glm::vec3(-3, 0, 0));
+	horse->scale(glm::vec3(.3, .3, .3));
+	objects.push_back(horse);
+
 	auto suzanne = new Template("suzanne");
 	suzanne->set_material(new Material);
 	suzanne->set_model(new Model("resources/model/suzanne.obj"));
