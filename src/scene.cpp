@@ -1,14 +1,31 @@
 #include "scene.h"
 
+#include "template.h"
+
 
 Scene* Scene::instance;
 
-Scene::Scene() : camera(new Camera)
+Scene::Scene()
 {
-	auto backpack = new Object("backpack");
+	populate_scene();
+}
+
+void Scene::populate_scene()
+{
+	// Perspective or orthogonal camera are available
+	camera = new PerspectiveCamera(glm::radians(60.f), float(800) / float(600), .1f, 100.f);
+
+	// Scene objects
+	auto backpack = new Template("backpack");
 	backpack->set_material(new Material);
 	backpack->set_model(new Model("resources/model/backpack/backpack.obj"));
 	objects.push_back(backpack);
+
+	auto suzanne = new Template("suzanne");
+	suzanne->set_material(new Material);
+	suzanne->set_model(new Model("resources/model/suzenne.obj"));
+	suzanne->translate(glm::vec3(1.5, 0, 0));
+	objects.push_back(suzanne);
 }
 
 Scene::~Scene()
