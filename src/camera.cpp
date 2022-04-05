@@ -57,7 +57,7 @@ glm::mat4 Camera::get_view() const
 
 void Camera::move_camera(const double& delta_time)
 {
-	float speed = camera_speed/* * (float)delta_time*/; // TODO : find why using dt makes movement irregular
+	float speed = camera_speed * (float)delta_time;
 
 	glm::vec3 dir(0);
 	if (move_forw)

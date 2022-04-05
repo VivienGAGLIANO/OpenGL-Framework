@@ -23,7 +23,7 @@ private:
 		 move_left = false, 
 		 move_up = false, 
 		 move_down = false;
-	float camera_speed = .2f/*150.0f*/;
+	float camera_speed = 25.0f;
 
 
 };
