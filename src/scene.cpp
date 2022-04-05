@@ -7,10 +7,10 @@ Scene* Scene::instance;
 
 Scene::Scene()
 {
-	populate_scene();
+	populate();
 }
 
-void Scene::populate_scene()
+void Scene::populate()
 {
 	// Perspective or orthogonal camera are available
 	camera = new PerspectiveCamera(glm::radians(60.f), float(800) / float(600), .1f, 100.f);
@@ -23,8 +23,8 @@ void Scene::populate_scene()
 
 	auto suzanne = new Template("suzanne");
 	suzanne->set_material(new Material);
-	suzanne->set_model(new Model("resources/model/suzenne.obj"));
-	suzanne->translate(glm::vec3(1.5, 0, 0));
+	suzanne->set_model(new Model("resources/model/suzanne.obj"));
+	suzanne->translate(glm::vec3(3, 0, 0));
 	objects.push_back(suzanne);
 }
 

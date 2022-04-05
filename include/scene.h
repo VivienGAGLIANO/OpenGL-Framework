@@ -23,7 +23,7 @@ public:
 
 private:
 	Scene();
-	void populate_scene();
+	void populate();
 
 	static Scene *instance;
 	// Light light;
