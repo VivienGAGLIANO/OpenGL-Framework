@@ -17,14 +17,12 @@ public:
 	virtual void update(const double& delta_time);
 	void prepare_material() const;
 	void render();
-	// long n_elements() const;
+	void translate(const glm::vec3& v);
+	void rotate(const glm::vec3& axis, const float& angle);
 
 	std::string name;
 
 protected:
-	void translate(const glm::vec3& v);
-	void rotate(const glm::vec3& axis, const float& angle);
-
 	glm::mat4 model_matrix;
 	Material *material = nullptr;
 	Model *model = nullptr;

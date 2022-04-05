@@ -2,10 +2,11 @@
 
 #include <glfw3.h>
 #include <iostream>
+#include <ext.hpp>
 
-Camera::Camera() : Object("Camera")
-{
-}
+/*********************************** Camera ***********************************/
+
+Camera::Camera(const glm::mat4& proj) : Object("Camera"), proj_matrix(proj) {}
 
 void Camera::update(const double& delta_time)
 {
@@ -55,6 +56,11 @@ glm::mat4 Camera::get_view() const
 	return glm::inverse(model_matrix);
 }
 
+glm::mat4 Camera::get_proj() const
+{
+	return proj_matrix;
+}
+
 void Camera::move_camera(const double& delta_time)
 {
 	float speed = camera_speed * (float)delta_time;
@@ -80,3 +86,15 @@ void Camera::move_camera(const double& delta_time)
 
 	translate(speed * dir);
 }
+
+
+/*********************************** Perspective Camera ***********************************/
+
+PerspectiveCamera::PerspectiveCamera(const float& fov, const float& aspect, const float& near, const float& far) :
+	Camera(glm::perspective(fov, aspect, near, far)) {}
+
+
+/*********************************** Orthogonal Camera ***********************************/
+
+OrthogonalCamera::OrthogonalCamera(const float& xmin, const float& xmax, const float& ymin, const float& ymax) :
+	Camera::Camera(glm::ortho(xmin, xmax, ymin, ymax)) {}
