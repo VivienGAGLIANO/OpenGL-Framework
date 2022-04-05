@@ -15,35 +15,36 @@ void Camera::update(const double& delta_time)
 
 void Camera::process_keyboard(int key, int action)
 {
-	
+	const bool press = action == GLFW_PRESS || action == GLFW_REPEAT;
 	switch (key)
 	{
 		case GLFW_KEY_W :
-			move_forw = action == GLFW_PRESS;
+			move_forw = press;
 			break;
 
 		case GLFW_KEY_S :
-			move_back = action == GLFW_PRESS;
+			move_back = press;
 			break;
 
 		case GLFW_KEY_D :
-			move_right = action == GLFW_PRESS;
+			move_right = press;
 			break;
 
 		case GLFW_KEY_A:
-			move_left = action == GLFW_PRESS;
+			move_left = press;
 			break;
 
 		case GLFW_KEY_SPACE:
-			move_up = action == GLFW_PRESS;
+			move_up = press;
 			break;
 
 		case GLFW_KEY_LEFT_CONTROL:
-			move_down = action == GLFW_PRESS;
+			move_down = press;
 			break;
 
 		default:
 			break;
+
 	}
 
 	should_move = move_forw || move_back || move_right || move_left || move_up || move_down;
