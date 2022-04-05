@@ -63,6 +63,9 @@
     <ClCompile Include="src\camera.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\template.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\data.h">
@@ -105,6 +108,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\camera.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\template.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
