@@ -12,6 +12,9 @@ void Camera::update(const double& delta_time)
 {
 	if (should_move)
 		move_camera(delta_time);
+
+	if (should_rotate)
+		rotate_camera(delta_time);
 }
 
 void Camera::process_keyboard(int key, int action)
@@ -51,9 +54,29 @@ void Camera::process_keyboard(int key, int action)
 	should_move = move_forw || move_back || move_right || move_left || move_up || move_down;
 }
 
+void Camera::process_mouse(double xpos, double ypos)
+{
+	if (first_frame)
+	{
+		o_xpos = xpos;
+		o_ypos = ypos;
+		first_frame = false;
+	}
+
+	double x_off = sensitivity * (xpos - o_xpos),
+		   y_off = sensitivity * (o_ypos - ypos);
+	o_xpos = xpos;
+	o_ypos = ypos;
+
+	pitch = glm::clamp(pitch + y_off, -89.0, 89.0);
+	yaw += x_off;
+
+	should_rotate = true;
+}
+
 glm::mat4 Camera::get_view() const
 {
-	return glm::inverse(model_matrix);
+	return glm::lookAt(position, position + front, up);
 }
 
 glm::mat4 Camera::get_proj() const
@@ -84,7 +107,22 @@ void Camera::move_camera(const double& delta_time)
 	if (move_down)
 		dir += glm::vec3(0,-1,0);
 
-	translate(speed * dir);
+	position += speed * dir;
+}
+
+void Camera::rotate_camera(const double& delta_time)
+{
+	auto r_pitch = glm::radians(pitch),
+		 r_yaw = glm::radians(yaw);
+
+	front = glm::normalize(glm::vec3(cos(r_pitch) * cos(r_yaw), 
+									   sin(r_pitch), 
+									   cos(r_pitch) * sin(r_yaw)));
+
+	right = glm::normalize(glm::cross(up, front));
+	// up = glm::cross(front, right);
+
+	should_rotate = false;
 }
 
 

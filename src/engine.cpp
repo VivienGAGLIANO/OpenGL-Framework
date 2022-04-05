@@ -31,7 +31,8 @@ void Engine::init()
     glViewport(0, 0, width, height);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetKeyCallback(window, key_callback);
-    glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetCursorPosCallback(window, mouse_callback);
 
     glClearColor(.25, .1, .65, 1);
     glEnable(GL_DEPTH_TEST);
@@ -68,4 +69,9 @@ void Engine::key_callback(GLFWwindow* window, int key, int scancode, int action,
     std::vector move = { GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_D, GLFW_KEY_A, GLFW_KEY_SPACE, GLFW_KEY_LEFT_CONTROL };
     if (std::find(move.cbegin(), move.cend(), key) != move.cend())
         Scene::get_instance()->get_camera()->process_keyboard(key, action);
+}
+
+void Engine::mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+    Scene::get_instance()->get_camera()->process_mouse(xpos, ypos);
 }
