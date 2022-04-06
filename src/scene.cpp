@@ -37,6 +37,7 @@ void Scene::populate()
 	auto planet = new Template("planet");
 	planet->set_material(new Material);
 	planet->set_model(new Model("resources/model/planet/scene.gltf"));
+	planet->scale(.01f * glm::vec3(1));
 	objects.push_back(planet);
 }
 

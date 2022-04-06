@@ -1,10 +1,18 @@
 #include "model.h"
 
 #include <iostream>
+#include <assimp/DefaultLogger.hpp>
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <stb_image.h>
 
+
+
+std::string file_name(const std::string& path)
+{
+	auto file = path.substr(path.find_last_of("/\\") + 1);
+	return file.substr(0, file.find_last_of('.'));
+}
 
 Model::Model(const char* path)
 {
@@ -17,7 +25,7 @@ std::vector<Mesh> Model::get_meshes() const
 }
 
 std::vector<Texture> Model::load_material_textures(aiMaterial* mat, aiTextureType type, const char* type_name)
-{
+{	
 	std::vector<Texture> textures;
 	for (int i = 0; i < mat->GetTextureCount(type); ++i)
 	{
@@ -58,7 +66,9 @@ std::vector<Texture> Model::load_material_textures(aiMaterial* mat, aiTextureTyp
 void Model::load_model(const std::string &path)
 {
 	Assimp::Importer importer;
-	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs); // other model processing options if needed, computing normals for example
+	auto logger = Assimp::DefaultLogger::create((std::string ("log/assimp/") + file_name(path) + std::string("Log.txt")).c_str(), Assimp::Logger::VERBOSE);
+	const aiScene* scene = importer.ReadFile(path, 
+		aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals | aiProcess_PreTransformVertices | aiProcess_ValidateDataStructure | aiProcess_OptimizeMeshes /*| aiProcess_OptimizeGraph | aiProcess_EmbedTextures*/); // other model processing options if needed, computing normals for example
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
@@ -111,7 +121,7 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)
 		for (int j = 0; j < face.mNumIndices; ++j)
 			indices.push_back(face.mIndices[j]);
 	}
-
+	aiString fs;
 	if (mesh->mMaterialIndex >= 0) // > 0 ??
 	{
 		// TODO : handle all texture types
@@ -122,6 +132,9 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)
 		textures.insert(textures.end(), specular_maps.cbegin(), specular_maps.cend());
 		std::vector<Texture> normal_maps = load_material_textures(mat, aiTextureType_NORMALS, "texture_normals");
 		textures.insert(textures.end(), normal_maps.cbegin(), normal_maps.cend());
+
+		//if (AI_SUCCESS == mat->Get(AI_MATKEY_SHADER_FRAGMENT, fs))
+		//	std::cout << "kboom\n";
 	}
 
 	return Mesh(vertices, indices, textures);
@@ -180,9 +193,3 @@ unsigned Model::texture_from_file(const char* path, const std::string& directory
 
 	return textureID;
 }
-
-
-//void Model::set_buffer_objects()
-//{
-//
-//}
