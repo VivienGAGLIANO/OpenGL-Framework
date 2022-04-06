@@ -114,11 +114,14 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)
 
 	if (mesh->mMaterialIndex >= 0) // > 0 ??
 	{
+		// TODO : handle all texture types
 		aiMaterial* mat = scene->mMaterials[mesh->mMaterialIndex];
 		std::vector<Texture> diffuse_maps = load_material_textures(mat, aiTextureType_DIFFUSE, "texture_diffuse");
 		textures.insert(textures.end(), diffuse_maps.cbegin(), diffuse_maps.cend());
 		std::vector<Texture> specular_maps = load_material_textures(mat, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specular_maps.cbegin(), specular_maps.cend());
+		std::vector<Texture> normal_maps = load_material_textures(mat, aiTextureType_NORMALS, "texture_normals");
+		textures.insert(textures.end(), normal_maps.cbegin(), normal_maps.cend());
 	}
 
 	return Mesh(vertices, indices, textures);

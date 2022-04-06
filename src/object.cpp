@@ -42,8 +42,6 @@ void Object::prepare_material() const
 
 void Object::render()
 {
-	prepare_material();
-
 	for (auto mesh : model->get_meshes())
 	{
 		mesh.prepare_for_render(material->get_pipeline());
