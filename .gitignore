@@ -36,3 +36,8 @@
 x64
 
 *.pdf
+
+resources/model/lowilds-planet
+resources/model/planet
+
+log

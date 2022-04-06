@@ -1,10 +1,18 @@
 #include "model.h"
 
 #include <iostream>
+#include <assimp/DefaultLogger.hpp>
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <stb_image.h>
 
+
+
+std::string file_name(const std::string& path)
+{
+	auto file = path.substr(path.find_last_of("/\\") + 1);
+	return file.substr(0, file.find_last_of('.'));
+}
 
 Model::Model(const char* path)
 {
@@ -58,6 +66,7 @@ std::vector<Texture> Model::load_material_textures(aiMaterial* mat, aiTextureTyp
 void Model::load_model(const std::string &path)
 {
 	Assimp::Importer importer;
+	auto logger = Assimp::DefaultLogger::create((std::string ("log/assimp/") + file_name(path) + std::string("Log.txt")).c_str(), Assimp::Logger::VERBOSE);
 	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs); // other model processing options if needed, computing normals for example
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
@@ -180,9 +189,3 @@ unsigned Model::texture_from_file(const char* path, const std::string& directory
 
 	return textureID;
 }
-
-
-//void Model::set_buffer_objects()
-//{
-//
-//}
