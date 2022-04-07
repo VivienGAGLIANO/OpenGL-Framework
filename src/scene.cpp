@@ -16,10 +16,10 @@ void Scene::populate()
 	camera = new PerspectiveCamera(glm::radians(60.f), float(800) / float(600), .1f, 100.f);
 
 	// Scene objects
-	auto backpack = new Template("backpack");
-	backpack->set_material(new Material);
-	backpack->set_model(new Model("resources/model/backpack/backpack.obj"));
-	objects.push_back(backpack);
+	// auto backpack = new Template("backpack");
+	// backpack->set_material(new Material);
+	// backpack->set_model(new Model("resources/model/backpack/backpack.obj"));
+	// objects.push_back(backpack);
 
 	// auto horse = new Template("horse");
 	// horse->set_material(new Material);
@@ -28,11 +28,16 @@ void Scene::populate()
 	// horse->scale(glm::vec3(.3, .3, .3));
 	// objects.push_back(horse);
 
-	auto suzanne = new Template("suzanne");
-	suzanne->set_material(new Material);
-	suzanne->set_model(new Model("resources/model/suzanne.obj"));
-	suzanne->translate(glm::vec3(3, 0, 0));
-	objects.push_back(suzanne);
+	// auto suzanne = new Template("suzanne");
+	// suzanne->set_material(new Material);
+	// suzanne->set_model(new Model("resources/model/suzanne.obj"));
+	// suzanne->translate(glm::vec3(3, 0, 0));
+	// objects.push_back(suzanne);
+
+	auto planet = new Template("planet");
+	planet->set_material(new Material);
+	planet->set_model(new Model("resources/model/planet/scene.gltf"));
+	objects.push_back(planet);
 }
 
 Scene::~Scene()
