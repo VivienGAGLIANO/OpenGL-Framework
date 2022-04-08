@@ -1,6 +1,7 @@
-#include "engine.h"
-
 #include <iostream>
+
+#include "engine.h"
+#include "stb_image.h"
 
 
 Engine::Engine(const int width, const int height) : width(width), height(height)
@@ -38,15 +39,13 @@ void Engine::init()
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glEnable(GL_CULL_FACE);
+
+    skybox = load_skybox("resources/skybox/");
 }
 
-void Engine::render(const Camera& camera, const Object& obj)
+void Engine::render_skybox()
 {
-    //glBindVertexArray(obj.vao);
-    //obj.use_pipeline();
-    obj.prepare_material();
 
-    // obj.render();
 }
 
 bool Engine::should_render() const
@@ -74,4 +73,31 @@ void Engine::key_callback(GLFWwindow* window, int key, int scancode, int action,
 void Engine::mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
     Scene::get_instance()->get_camera()->process_mouse(xpos, ypos);
+}
+
+GLuint Engine::load_skybox(const std::string& path)
+{
+    GLuint tex;
+    glGenTextures(1, &tex);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, tex);
+
+    int width, height, n_chan;
+    for (int i = 0; i < skybox_faces.size(); ++i)
+    {
+        unsigned char* data = stbi_load((path + skybox_faces[i]).c_str(), &width, &height, &n_chan, 0);
+        if (data)
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        else
+            std::cerr << "Skybox face " << path << skybox_faces[i] << " couldn't be loaded.\n";
+
+    	stbi_image_free(data);
+    }
+
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    return tex;
 }
