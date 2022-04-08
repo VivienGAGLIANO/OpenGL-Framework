@@ -90,22 +90,22 @@ void Camera::move_camera(const double& delta_time)
 
 	glm::vec3 dir(0);
 	if (move_forw)
-		dir += glm::vec3(0,0,-1);
+		dir += front;
 
 	if (move_back)
-		dir += glm::vec3(0,0,1);
+		dir -= front;
 
 	if (move_right)
-		dir += glm::vec3(1,0,0);
+		dir -= right;
 
 	if (move_left)
-		dir += glm::vec3(-1,0,0);
+		dir += right;
 
 	if (move_up)
-		dir += glm::vec3(0,1,0);
+		dir += up;
 
 	if (move_down)
-		dir += glm::vec3(0,-1,0);
+		dir -= up;
 
 	position += speed * dir;
 }
