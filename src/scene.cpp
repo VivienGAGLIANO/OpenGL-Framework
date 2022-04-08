@@ -34,10 +34,24 @@ void Scene::populate()
 	// suzanne->translate(glm::vec3(3, 0, 0));
 	// objects.push_back(suzanne);
 
-	auto planet = new Template("planet");
-	planet->set_material(new Material);
-	planet->set_model(new Model("resources/model/planet/scene.gltf"));
-	objects.push_back(planet);
+	auto sun = new Template("planet");
+	sun->set_material(new Material);
+	sun->set_model(new Model("resources/model/planet/scene.gltf"));
+	objects.push_back(sun);
+	
+	auto planet1 = new Template("planet");
+	planet1->set_material(new Material);
+	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
+	planet1->translate(glm::vec3(0, 0, -5));
+	planet1->scale(glm::vec3(.4, .4, .4));
+	objects.push_back(planet1);
+	
+	auto planet2= new Template("planet");
+	planet2->set_material(new Material);
+	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
+	planet2->translate(glm::vec3(8, 0, 0));
+	planet2->scale(glm::vec3(.5, .5, .5));
+	objects.push_back(planet2);
 }
 
 Scene::~Scene()
