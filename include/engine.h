@@ -22,9 +22,10 @@ private:
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-	GLuint load_skybox(const std::string& path);
+	void init_skybox(const std::string& path);
+	GLuint load_skybox_texture(const std::string& path);
 
-	GLuint skybox;
+	GLuint skybox_texture, vao_sky, vbo_sky, ebo_sky;
 };
 
 inline std::vector<std::string> skybox_faces
@@ -35,6 +36,12 @@ inline std::vector<std::string> skybox_faces
 	"bottom.jpg",
 	"front.jpg",
 	"back.jpg"
+};
+
+inline std::vector<glm::vec3> vertices_sky
+{
+	//glm::vec3()
+	// TODO : I was here, fill this out
 };
 
 #endif

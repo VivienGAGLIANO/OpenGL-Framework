@@ -1,3 +1,4 @@
+#include <gtc/type_ptr.hpp>
 #include <iostream>
 
 #include "engine.h"
@@ -40,7 +41,7 @@ void Engine::init()
     glDepthFunc(GL_LESS);
     glEnable(GL_CULL_FACE);
 
-    skybox = load_skybox("resources/skybox/");
+    init_skybox("resources/skybox/");
 }
 
 void Engine::render_skybox()
@@ -75,7 +76,18 @@ void Engine::mouse_callback(GLFWwindow* window, double xpos, double ypos)
     Scene::get_instance()->get_camera()->process_mouse(xpos, ypos);
 }
 
-GLuint Engine::load_skybox(const std::string& path)
+void Engine::init_skybox(const std::string& path)
+{
+    skybox_texture = load_skybox_texture(path);
+
+    glCreateVertexArrays(1, &vao_sky);
+
+    glCreateBuffers(1, &vbo_sky);
+    glNamedBufferData(vbo_sky, vertices_sky.size() * sizeof(glm::vec3), glm::value_ptr(vertices_sky.front()), GL_STATIC_DRAW);
+
+}
+
+GLuint Engine::load_skybox_texture(const std::string& path)
 {
     GLuint tex;
     glGenTextures(1, &tex);
