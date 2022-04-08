@@ -21,7 +21,7 @@ void Mesh::prepare_for_render(Pipeline pipeline)
         else if (name == "texture_specular")
             number = std::to_string(specularNr++);
 
-        pipeline.set_uniform_float(pipeline.get_fragment_id(), ("material." + name + number).c_str(), i);
+        pipeline.set_uniform_float(pipeline.get_fragment_id(), (name + number).c_str(), i);
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
     glActiveTexture(GL_TEXTURE0);
