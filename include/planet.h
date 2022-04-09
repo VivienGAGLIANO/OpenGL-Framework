@@ -12,6 +12,7 @@ class Planet : public CelestBody
 		virtual void update(const double& delta_time) override;
 
 	private:
+		glm::vec3 force;
 		glm::vec3 acceleration;
 		glm::vec3 velocity;
 		glm::vec3 position;

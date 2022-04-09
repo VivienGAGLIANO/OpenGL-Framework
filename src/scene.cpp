@@ -66,9 +66,24 @@ Camera* Scene::get_camera() const
 void Scene::update(const double& delta_time)
 {
 	camera->update(delta_time);
-
 	for (auto object : objects)
 	{
+		// if object is type CelestBody
+		if (dynamic_cast<CelestBody*>(object))
+		{
+			// update the gravitational forces for every object i in the scene
+			for (auto object2 : objects)
+			{
+				if (object2 != object)
+				{
+					// calculate the gravitational force between object i and object2
+					glm::vec3 force = ((CelestBody*)object)->G * ((CelestBody*)object)->getMass() * ((CelestBody*)object2)->getMass() / (((Planet*)object)->getPosition() - ((Planet*)object2)->getPosition());
+					((CelestBody*)object)->apply_force(force);
+					
+				}
+			}
+		}
+
 		object->update(delta_time);
 	}
 }

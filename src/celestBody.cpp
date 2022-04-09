@@ -21,3 +21,7 @@ void CelestBody::makeRotation(const double& delta_time)
 	this->gradRotated += delta_time * 90;
 	rotate(glm::vec3(0, 1, 0), glm::radians(this->gradRotated));
 }
+
+float CelestBody::getMass(){
+	return this->mass;
+}
