@@ -38,13 +38,13 @@ void Scene::populate()
 	sun->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(sun);
 	
-	auto planet1 = new Planet("Planet_one", 1.f, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, -5), 1.f);
+	auto planet1 = new Planet("Planet_one", 1000000.f, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, -5), 1.f);
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
 	planet1->scale(glm::vec3(.4, .4, .4));
 	objects.push_back(planet1);
 	
-	auto planet2= new Planet("Planet_two", 1.f, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(8, 0, 0), 1.f);
+	auto planet2= new Planet("Planet_two", 100000.f, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(8, 0, 0), 1.f);
 	planet2->set_material(new Material);
 	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
 	planet2->scale(glm::vec3(.5, .5, .5));

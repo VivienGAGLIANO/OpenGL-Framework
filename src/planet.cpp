@@ -31,3 +31,30 @@ void Planet::update(const double& delta_time)
 	translate(delta);
 	this->makeRotation(delta_time);
 }
+
+// every getter and setter for force, acceleration, velocity and position
+glm::vec3 Planet::getForce(){
+	return this->force;
+}
+glm::vec3 Planet::getAcceleration(){
+	return this->acceleration;
+}
+glm::vec3 Planet::getVelocity(){
+	return this->velocity;
+}
+glm::vec3 Planet::getPosition(){
+	return this->position;
+}
+
+void Planet::apply_force(glm::vec3 f){
+	this->force = f;
+}
+void Planet::setAcceleration(glm::vec3 a){
+	this->acceleration = a;
+}
+void Planet::setVelocity(glm::vec3 v){
+	this->velocity = v;
+}
+void Planet::setPosition(glm::vec3 p){
+	this->position = p;
+}
