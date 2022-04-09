@@ -78,7 +78,7 @@ void Scene::update(const double& delta_time)
 				{
 					// calculate the gravitational force between object i and object2
 					glm::vec3 force = ((CelestBody*)object)->G * ((CelestBody*)object)->getMass() * ((CelestBody*)object2)->getMass() / (((Planet*)object)->getPosition() - ((Planet*)object2)->getPosition());
-					((CelestBody*)object)->apply_force(force);
+					((Planet*)object)->apply_force(force * (float)delta_time);
 					
 				}
 			}
