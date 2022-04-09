@@ -1,6 +1,5 @@
 #include "scene.h"
-
-#include "template.h"
+#include "planet.h"
 
 
 Scene* Scene::instance;
@@ -34,22 +33,20 @@ void Scene::populate()
 	// suzanne->translate(glm::vec3(3, 0, 0));
 	// objects.push_back(suzanne);
 
-	auto sun = new Template("planet");
+	auto sun = new CelestBody("Sun", 1.f, 1.f);
 	sun->set_material(new Material);
 	sun->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(sun);
 	
-	auto planet1 = new Template("planet");
+	auto planet1 = new Planet("Planet_one", 1.f, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, -5), 1.f);
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
-	planet1->translate(glm::vec3(0, 0, -5));
 	planet1->scale(glm::vec3(.4, .4, .4));
 	objects.push_back(planet1);
 	
-	auto planet2= new Template("planet");
+	auto planet2= new Planet("Planet_two", 1.f, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(8, 0, 0), 1.f);
 	planet2->set_material(new Material);
 	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
-	planet2->translate(glm::vec3(8, 0, 0));
 	planet2->scale(glm::vec3(.5, .5, .5));
 	objects.push_back(planet2);
 }
