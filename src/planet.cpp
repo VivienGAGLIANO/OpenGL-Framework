@@ -13,7 +13,7 @@ void Planet::update(const double& delta_time)
 	glm::vec3 oldPos = this->position;
 
 	// update the caracteristics of the planet
-	this->acceleration = this->force / this->mass;
+	this->acceleration += this->force / this->mass;
 	
 	this->velocity.x += this->acceleration.x * delta_time;
 	this->velocity.y += this->acceleration.y * delta_time;
@@ -32,14 +32,6 @@ void Planet::update(const double& delta_time)
 	this->makeRotation(delta_time);
 }
 
-float Planet::computeDistance(const glm::vec3& p)
-{
-	float x = p.x - this->position.x;
-	float y = p.y - this->position.y;
-	float z = p.z - this->position.z;
-	return sqrt(x*x + y*y + z*z);
-}
-
 // every getter and setter for force, acceleration, velocity and position
 glm::vec3 Planet::getForce(){
 	return this->force;
@@ -54,7 +46,7 @@ glm::vec3 Planet::getPosition(){
 	return this->position;
 }
 
-void Planet::apply_force(double force, glm::vec3 dir){
+void Planet::apply_force(float force, glm::vec3 dir){
 	glm::vec3 suplement = x_double(dir, force);
 	this->force.x += suplement.x;
 	this->force.y += suplement.y;

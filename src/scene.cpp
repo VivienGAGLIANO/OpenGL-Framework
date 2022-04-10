@@ -36,23 +36,30 @@ void Scene::populate()
 	// suzanne->translate(glm::vec3(3, 0, 0));
 	// objects.push_back(suzanne);
 
-	auto sun = new Planet("Sun", 1000, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.f);
-	sun->set_material(new Material);
-	sun->set_model(new Model("resources/model/planet/scene.gltf"));
-	objects.push_back(sun);
+	auto ref = new CelestBody("reference", 1, 1.f);
+	ref->set_material(new Material);
+	ref->set_model(new Model("resources/model/planet/scene.gltf"));
+	ref->scale(glm::vec3(.2, .2, .2));
+	objects.push_back(ref);
 	nbObjects++;
+
+	// auto sun = new Planet("Sun", 99999, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.f);
+	// sun->set_material(new Material);
+	// sun->set_model(new Model("resources/model/planet/scene.gltf"));
+	// objects.push_back(sun);
+	// nbObjects++;
 	
-	auto planet1 = new Planet("Planet_one", 10, glm::vec3(0, 0, 0), glm::vec3(5, 0, 0), glm::vec3(0, 0, -5), 1.f);
+	auto planet1 = new Planet("Planet_one", 10, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, 2), 1.f);
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
-	planet1->scale(glm::vec3(.4, .4, .4));
+	planet1->scale(glm::vec3(.5, .5, .5));
 	objects.push_back(planet1);
 	nbObjects++;
 	
-	auto planet2= new Planet("Planet_two", 1, glm::vec3(0, 0, 0), glm::vec3(0, 0, -8), glm::vec3(8, 0, 0), 1.f);
+	auto planet2= new Planet("Planet_two", 1, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, -2), 1.f);
 	planet2->set_material(new Material);
 	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
-	planet2->scale(glm::vec3(.5, .5, .5));
+	planet2->scale(glm::vec3(.3, .3, .3));
 	objects.push_back(planet2);
 	nbObjects++;
 }
@@ -84,21 +91,30 @@ void Scene::update(const double& delta_time)
 				Object* object2 = objects[j];
 				// appliying force on object2
 				// calculate the gravitational force between object object and object2
-				float distance = ((Planet*)object)->computeDistance(((Planet*)object2)->getPosition());
+				float distance = computeDistance(((Planet*)object)->getPosition(),((Planet*)object2)->getPosition());
 				float masses = ((Planet*)object)->getMass() * ((Planet*)object2)->getMass();
-				double force = masses / (distance*distance);
-				force *= ((CelestBody*)object)->G;
+				//double force = ((CelestBody*)object)->G * ((Planet*)object)->getMass() / (distance*sqrt(distance));
+				float force = ((CelestBody*)object)->G * masses / (distance*distance);
 				// compute the direction of the force
-				glm::vec3 direction = glm::normalize(((Planet*)object2)->getPosition() - ((Planet*)object)->getPosition());
-				((Planet*)object)->apply_force(force, direction);
+				glm::vec3 direction = normalize(computeDirection(((Planet*)object)->getPosition(),((Planet*)object2)->getPosition()));
+				((Planet*)object)->apply_force(force, direction); 
 				((Planet*)object2)->apply_force(force, -direction);
 
+				// if name == Planet_one print force
+				if (object->name == "Planet_one"){
+					printf("-------------------------------------------------------\n");
+					printf("%s force on %s: %f\n", object->name.c_str(), object2->name.c_str(), force);
+					printf("\twith dir: (%f,%f,%f)\n",direction.x, direction.y, direction.z);
+					printf("\tdistance: %f\n", distance);
+					printf("\tposition: (%f,%f,%f)\n", ((Planet*)object)->getPosition().x, ((Planet*)object)->getPosition().y, ((Planet*)object)->getPosition().z);
+					printf("\tposition: (%f,%f,%f)\n", ((Planet*)object2)->getPosition().x, ((Planet*)object2)->getPosition().y, ((Planet*)object2)->getPosition().z);
+				}
+					
 			}
-			printf("%s: old position=(%f,%f,%f) --> ",object->name.c_str(),((Planet*)object)->getPosition().x, ((Planet*)object)->getPosition().y, ((Planet*)object)->getPosition().z);
-			object->update(delta_time);
-			printf("new position=(%f,%f,%f)\n",((Planet*)object)->getPosition().x, ((Planet*)object)->getPosition().y, ((Planet*)object)->getPosition().z);
-			
 		}
+		//printf("%s: old position=(%f,%f,%f) --> ",object->name.c_str(),((Planet*)object)->getPosition().x, ((Planet*)object)->getPosition().y, ((Planet*)object)->getPosition().z);
+		object->update(delta_time);
+		//printf("new position=(%f,%f,%f)\n",((Planet*)object)->getPosition().x, ((Planet*)object)->getPosition().y, ((Planet*)object)->getPosition().z);	
 	}
 }
 
