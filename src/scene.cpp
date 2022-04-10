@@ -36,20 +36,20 @@ void Scene::populate()
 	// suzanne->translate(glm::vec3(3, 0, 0));
 	// objects.push_back(suzanne);
 
-	auto sun = new CelestBody("Sun", 1.f, 1.f);
+	auto sun = new Planet("Sun", 1000, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.f);
 	sun->set_material(new Material);
 	sun->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(sun);
 	nbObjects++;
 	
-	auto planet1 = new Planet("Planet_one", 1000000.f, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, -5), 1.f);
+	auto planet1 = new Planet("Planet_one", 10, glm::vec3(0, 0, 0), glm::vec3(5, 0, 0), glm::vec3(0, 0, -5), 1.f);
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
 	planet1->scale(glm::vec3(.4, .4, .4));
 	objects.push_back(planet1);
 	nbObjects++;
 	
-	auto planet2= new Planet("Planet_two", 100000.f, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(8, 0, 0), 1.f);
+	auto planet2= new Planet("Planet_two", 1, glm::vec3(0, 0, 0), glm::vec3(0, 0, -8), glm::vec3(8, 0, 0), 1.f);
 	planet2->set_material(new Material);
 	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
 	planet2->scale(glm::vec3(.5, .5, .5));

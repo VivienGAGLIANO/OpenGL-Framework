@@ -1,7 +1,7 @@
 #include "planet.h"
 
 
-Planet::Planet(const std::string& name, const float m, glm::vec3  a, glm::vec3  v, glm::vec3  p, const float r)
+Planet::Planet(const std::string& name, const int m, glm::vec3  a, glm::vec3  v, glm::vec3  p, const float r)
 	: CelestBody(name, m, r), acceleration(a), velocity(v), position(p), force(glm::vec3(0.0f))
 {
 	translate(p);

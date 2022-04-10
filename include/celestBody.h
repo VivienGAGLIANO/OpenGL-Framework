@@ -13,7 +13,7 @@ class CelestBody : public Object
 		virtual void makeRotation(const double& delta_time);
 		virtual float getMass();
 
-		float G = 0.0000000000667408f;
+		double G = 0.00066741;
 
 	protected:
 		float mass;
