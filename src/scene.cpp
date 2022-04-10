@@ -1,8 +1,11 @@
 #include "scene.h"
 #include "planet.h"
+#include "Utils.h"
+#include <stdio.h>
 
 
 Scene* Scene::instance;
+int nbObjects = 0;
 
 Scene::Scene()
 {
@@ -37,18 +40,21 @@ void Scene::populate()
 	sun->set_material(new Material);
 	sun->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(sun);
+	nbObjects++;
 	
 	auto planet1 = new Planet("Planet_one", 1000000.f, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, -5), 1.f);
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
 	planet1->scale(glm::vec3(.4, .4, .4));
 	objects.push_back(planet1);
+	nbObjects++;
 	
 	auto planet2= new Planet("Planet_two", 100000.f, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(8, 0, 0), 1.f);
 	planet2->set_material(new Material);
 	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
 	planet2->scale(glm::vec3(.5, .5, .5));
 	objects.push_back(planet2);
+	nbObjects++;
 }
 
 Scene::~Scene()
@@ -66,25 +72,33 @@ Camera* Scene::get_camera() const
 void Scene::update(const double& delta_time)
 {
 	camera->update(delta_time);
-	for (auto object : objects)
+	printf("\n");
+	for (int i=0; i < nbObjects; i++)
 	{
-		// if object is type CelestBody
-		if (dynamic_cast<CelestBody*>(object))
+		Object* object = objects[i];
+		if (dynamic_cast<Planet*>(object))
 		{
 			// update the gravitational forces for every object i in the scene
-			for (auto object2 : objects)
+			for (int j=i+1; j < nbObjects; j++)
 			{
-				if (object2 != object)
-				{
-					// calculate the gravitational force between object i and object2
-					glm::vec3 force = ((CelestBody*)object)->G * ((CelestBody*)object)->getMass() * ((CelestBody*)object2)->getMass() / (((Planet*)object)->getPosition() - ((Planet*)object2)->getPosition());
-					((Planet*)object)->apply_force(force * (float)delta_time);
-					
-				}
-			}
-		}
+				Object* object2 = objects[j];
+				// appliying force on object2
+				// calculate the gravitational force between object object and object2
+				float distance = ((Planet*)object)->computeDistance(((Planet*)object2)->getPosition());
+				float masses = ((Planet*)object)->getMass() * ((Planet*)object2)->getMass();
+				double force = masses / (distance*distance);
+				force *= ((CelestBody*)object)->G;
+				// compute the direction of the force
+				glm::vec3 direction = glm::normalize(((Planet*)object2)->getPosition() - ((Planet*)object)->getPosition());
+				((Planet*)object)->apply_force(force, direction);
+				((Planet*)object2)->apply_force(force, -direction);
 
-		object->update(delta_time);
+			}
+			printf("%s: old position=(%f,%f,%f) --> ",object->name.c_str(),((Planet*)object)->getPosition().x, ((Planet*)object)->getPosition().y, ((Planet*)object)->getPosition().z);
+			object->update(delta_time);
+			printf("new position=(%f,%f,%f)\n",((Planet*)object)->getPosition().x, ((Planet*)object)->getPosition().y, ((Planet*)object)->getPosition().z);
+			
+		}
 	}
 }
 
