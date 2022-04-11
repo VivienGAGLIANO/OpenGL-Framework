@@ -12,9 +12,7 @@ class CelestBody : public Object
 		virtual void resetRotation();
 		virtual void makeRotation(const double& delta_time);
 		virtual float getMass();
-
-		double G = 0.00066741;
-
+		
 	protected:
 		float mass;
 		float radius;
