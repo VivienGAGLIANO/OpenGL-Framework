@@ -9,24 +9,11 @@ Planet::Planet(const std::string& name, const int m, glm::vec3  v, glm::vec3  p,
 
 void Planet::update(const double& delta_time)
 {
-	CelestBody::update(delta_time); // call parent class update to handle graphic pipeline actions
-	glm::vec3 oldPos = this->position;
-
-	// update the caracteristics of the planet	
-	this->velocity.x += this->force.x * delta_time;
-	this->velocity.y += this->force.y * delta_time;
-	this->velocity.z += this->force.z * delta_time;
-
-	this->position.x += this->velocity.x * delta_time;
-	this->position.y += this->velocity.y * delta_time;
-	this->position.z += this->velocity.z * delta_time;
-	
-	glm::vec3 delta = this->position - oldPos;
-
 	// This method gets called every frame
+	CelestBody::update(delta_time); // call parent class update to handle graphic pipeline actions
 	// on inverse la rotation pour translate correctement sinon on se retrouve à faire n'importe quoi
 	this->resetRotation();
-	translate(delta);
+	translate(this->position - this->prevPosition);
 	this->makeRotation(delta_time);
 }
 
@@ -44,13 +31,18 @@ void Planet::resetForce(){
 	this->force = glm::vec3(0.0f, 0.0f, 0.0f);
 }
 void Planet::setForce(glm::vec3 f) {
-	this->force.x += f.x / this->mass;
+ 	this->force.x += f.x / this->mass;
 	this->force.y += f.y / this->mass;
 	this->force.z += f.z / this->mass;
 }
-void Planet::setVelocity(glm::vec3 v){
-	this->velocity = v;
+void Planet::setVelocity(const double& delta_time){
+	this->velocity.x += this->force.x * delta_time;
+	this->velocity.y += this->force.y * delta_time;
+	this->velocity.z += this->force.z * delta_time;
 }
-void Planet::setPosition(glm::vec3 p){
-	this->position = p;
+void Planet::setPosition(const double& delta_time){
+	this->prevPosition = this->position;
+	this->position.x += this->velocity.x * delta_time;
+	this->position.y += this->velocity.y * delta_time;
+	this->position.z += this->velocity.z * delta_time;
 }

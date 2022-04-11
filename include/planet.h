@@ -17,13 +17,14 @@ class Planet : public CelestBody
 		glm::vec3 getPosition();
 		void resetForce();
 		void setForce(glm::vec3 f);
-		void setVelocity(glm::vec3 v);
-		void setPosition(glm::vec3 p);
+		void setVelocity(const double& delta_time);
+		void setPosition(const double& delta_time);
 
 	private:
 		glm::vec3 force;
 		glm::vec3 velocity;
 		glm::vec3 position;
+		glm::vec3 prevPosition;
 };
 
 #endif

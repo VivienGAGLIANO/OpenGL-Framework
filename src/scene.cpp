@@ -7,7 +7,7 @@ using namespace std;
 
 Scene* Scene::instance;
 int nbObjects = 0;
-float G = 1;//0.066741;
+float G = 0.66741;
 
 Scene::Scene()
 {
@@ -38,20 +38,13 @@ void Scene::populate()
 	// suzanne->translate(glm::vec3(3, 0, 0));
 	// objects.push_back(suzanne);
 
-	auto ref = new CelestBody("reference", 1, 1.f);
-	ref->set_material(new Material);
-	ref->set_model(new Model("resources/model/planet/scene.gltf"));
-	ref->scale(glm::vec3(.2, .2, .2));
-	objects.push_back(ref);
-	nbObjects++;
-
-	auto sun = new Planet("Sun", 1000, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.f);
+	auto sun = new Planet("Sun", 100000, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.f);
 	sun->set_material(new Material);
 	sun->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(sun);
 	nbObjects++;
 	
-	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0, 0, 10), glm::vec3(5, 0, 0), 1.f);
+	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0, 0, 50), glm::vec3(5, 0, 0), 1.f);
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
 	planet1->scale(glm::vec3(.2, .2, .2));
@@ -91,12 +84,10 @@ void resetForces(std::vector<Object*> objects)
 
 glm::vec3 attraction(Planet* o1, Planet* o2)
 {
-	// appliying force on object2
 	// calculate the gravitational force between object object and object2
 	float dist = magnitude(o2->getPosition() - o1->getPosition());
 	glm::vec3 forceDir = normalize(o2->getPosition() - o1->getPosition()); // direction
 	float M1M2 = o1->getMass() * o2->getMass();
-
 	glm::vec3 forceVec = forceDir * (G * M1M2) / (dist * dist);
 
 	//if (o1->name == "Sun") {
@@ -111,31 +102,49 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 	return forceVec;
 }
 
-void Scene::update(const double& delta_time)
+// It is said on the web that actualise the velocity and the position not at the same time increase the stability of the system
+// https://youtu.be/7axImc1sxa0?t=84
+void Scene::updateVelocity(const double& delta_time)
 {
-	camera->update(delta_time);
-
-	resetForces(objects);
-
-	//printf("\n");
-	for (int i=0; i < nbObjects; i++)
+	for (int i = 0; i < nbObjects; i++)
 	{
 		Object* object = objects[i];
 		if (dynamic_cast<Planet*>(object))
 		{
 			// update the gravitational forces for every object i in the scene
-			for (int j=i+1; j < nbObjects; j++)
+			for (int j = i + 1; j < nbObjects; j++)
 			{
 				Object* object2 = objects[j];
 				glm::vec3 force = attraction((Planet*)object, (Planet*)object2);
 				((Planet*)object)->setForce(force);
-				((Planet*)object2)->setForce(-force);					
+				((Planet*)object2)->setForce(-force);
 			}
+			((Planet*)object)->setVelocity(delta_time);
 		}
-		//printf("%s: old position=(%f,%f,%f) --> ",object->name.c_str(),((Planet*)object)->getPosition().x, ((Planet*)object)->getPosition().y, ((Planet*)object)->getPosition().z);
-		object->update(delta_time);
-		//printf("new position=(%f,%f,%f)\n",((Planet*)object)->getPosition().x, ((Planet*)object)->getPosition().y, ((Planet*)object)->getPosition().z);	
 	}
+}
+
+void Scene::updatePosition(const double& delta_time)
+{
+	for (int i = 0; i < nbObjects; i++)
+	{
+		Object* object = objects[i];
+		if (dynamic_cast<Planet*>(object))
+		{
+			((Planet*)object)->setPosition(delta_time);
+		}
+		object->update(delta_time);
+	}
+}
+
+void Scene::update(const double& delta_time)
+{
+	camera->update(delta_time);
+
+	resetForces(objects);
+	updateVelocity(delta_time);
+	updatePosition(delta_time);
+	//printf("\n");
 }
 
 void Scene::render(Engine* engine)
