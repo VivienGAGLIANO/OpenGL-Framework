@@ -24,29 +24,6 @@ glm::vec3 computeDirection(glm::vec3 p1, glm::vec3 p2)
     return glm::vec3(x,y,z);
 }
 
-glm::vec3 normalize(glm::vec3 v)
-{
-    float a, b, c;
-    if (v.x >= 0)
-        a = v.x;
-    else
-        a = -v.x;
-    if (v.y >= 0)
-        b = v.y;
-    else
-        b = -v.y;
-    if (v.z >= 0)
-        c = v.z;
-    else
-        c = -v.z;
-
-    float total = a+b+c;
-    float x = v.x / total;
-    float y = v.y / total;
-    float z = v.z / total;
-    return glm::vec3(x,y,z);
-}
-
 float magnitude(glm::vec3 v)
 {
     return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);

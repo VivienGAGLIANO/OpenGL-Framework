@@ -86,12 +86,18 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 {
 	// calculate the gravitational force between object object and object2
 	float dist = magnitude(o2->getPosition() - o1->getPosition());
-	if (dist <= 0.1) // pour �viter l'explosion du systeme
+	float magn = glm::length(o2->getPosition() - o1->getPosition());
+
+	if (dist != magn)
+		printf("MAGNITUDE\n");
+
+	if (dist <= 1) // pour �viter l'explosion du systeme
 		return glm::vec3(0.0f, 0.0f, 0.0f);
 
-	glm::vec3 forceDir = normalize(o2->getPosition() - o1->getPosition()); // direction
+	glm::vec3 forceDir = glm::normalize(o2->getPosition() - o1->getPosition()); // direction
 	float M1M2 = o1->getMass() * o2->getMass();
-	glm::vec3 forceVec = forceDir * (G * M1M2) / (dist * dist);
+	float forceMag = (G * M1M2) / (dist * dist);
+	glm::vec3 forceVec = forceDir * forceMag;
 
 	//if (o1->name == "Sun") {
 	//	printf("-------------------------------------------------------\n");
