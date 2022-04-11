@@ -1,10 +1,18 @@
 #include "Utils.h"
 
-glm::vec3 x_double(glm::vec3 vector, float d)
+glm::vec3 operator_multiply(glm::vec3 vector, float n)
 {
-    double X = vector.x * d;
-    double Y = vector.y * d;
-    double Z = vector.z * d;
+    float X = vector.x * n;
+    float Y = vector.y * n;
+    float Z = vector.z * n;
+    return glm::vec3(X,Y,Z);
+}
+
+glm::vec3 operator_divide(glm::vec3 vector, float n)
+{
+    float X = vector.x / n;
+    float Y = vector.y / n;
+    float Z = vector.z / n;
     return glm::vec3(X,Y,Z);
 }
 
@@ -18,29 +26,30 @@ glm::vec3 computeDirection(glm::vec3 p1, glm::vec3 p2)
 
 glm::vec3 normalize(glm::vec3 v)
 {
-    // apparamment la sqrt est plus longue a calculer que les if 
-    float a,b,c;
-
-    if (v.x < 0)
-        a = -v.x;
-    else
+    float a, b, c;
+    if (v.x >= 0)
         a = v.x;
-
-    if (v.y < 0)
-        b = -v.y;
     else
+        a = -v.x;
+    if (v.y >= 0)
         b = v.y;
-    
-    if (v.z < 0)
-        c = -v.z;
     else
+        b = -v.y;
+    if (v.z >= 0)
         c = v.z;
+    else
+        c = -v.z;
 
-    float total = a + b + c;
+    float total = a+b+c;
     float x = v.x / total;
     float y = v.y / total;
     float z = v.z / total;
     return glm::vec3(x,y,z);
+}
+
+float magnitude(glm::vec3 v)
+{
+    return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
 float computeDistance(glm::vec3 p1, glm::vec3 p2)
