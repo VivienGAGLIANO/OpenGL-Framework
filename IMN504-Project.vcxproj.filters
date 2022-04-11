@@ -63,7 +63,13 @@
     <ClCompile Include="src\camera.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\template.cpp">
+    <ClCompile Include="src\planet.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\celestBody.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,7 +116,13 @@
     <ClInclude Include="include\camera.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\template.h">
+    <ClInclude Include="include\planet.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\celestBody.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
