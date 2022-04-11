@@ -9,14 +9,14 @@
 class Planet : public CelestBody
 {
 	public:
-		Planet(const std::string& name, const int m, glm::vec3 v, glm::vec3 p, const float r);
+		Planet(const std::string& name, const float m, glm::vec3 v, glm::vec3 p, const float r);
 		virtual void update(const double& delta_time) override;
 
 		glm::vec3 getForce();
 		glm::vec3 getVelocity();
 		glm::vec3 getPosition();
 		void resetForce();
-		void setForce(glm::vec3 f);
+		void addForce(glm::vec3 f);
 		void setVelocity(const double& delta_time);
 		void setPosition(const double& delta_time);
 

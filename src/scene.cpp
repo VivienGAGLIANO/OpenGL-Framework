@@ -7,7 +7,7 @@ using namespace std;
 
 Scene* Scene::instance;
 int nbObjects = 0;
-float G = 0.66741;
+float G = 0.0066741;
 
 Scene::Scene()
 {
@@ -38,16 +38,16 @@ void Scene::populate()
 	// suzanne->translate(glm::vec3(3, 0, 0));
 	// objects.push_back(suzanne);
 
-	auto sun = new Planet("Sun", 100000, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.f);
+	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f);
 	sun->set_material(new Material);
 	sun->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(sun);
 	nbObjects++;
 	
-	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0, 0, 50), glm::vec3(5, 0, 0), 1.f);
+	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 20.0f), glm::vec3(5.0f, 0.0f, 0.0f), 1.f);
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
-	planet1->scale(glm::vec3(.2, .2, .2));
+	planet1->scale(glm::vec3(.2f, .2f, .2f));
 	objects.push_back(planet1);
 	nbObjects++;
 	
@@ -71,7 +71,7 @@ Camera* Scene::get_camera() const
 	return camera;
 }
 
-void resetForces(std::vector<Object*> objects)
+void Scene::resetForces()
 {
 	for (Object* obj : objects)
 	{
@@ -86,6 +86,9 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 {
 	// calculate the gravitational force between object object and object2
 	float dist = magnitude(o2->getPosition() - o1->getPosition());
+	if (dist <= 0.1) // pour �viter l'explosion du systeme
+		return glm::vec3(0.0f, 0.0f, 0.0f);
+
 	glm::vec3 forceDir = normalize(o2->getPosition() - o1->getPosition()); // direction
 	float M1M2 = o1->getMass() * o2->getMass();
 	glm::vec3 forceVec = forceDir * (G * M1M2) / (dist * dist);
@@ -116,8 +119,8 @@ void Scene::updateVelocity(const double& delta_time)
 			{
 				Object* object2 = objects[j];
 				glm::vec3 force = attraction((Planet*)object, (Planet*)object2);
-				((Planet*)object)->setForce(force);
-				((Planet*)object2)->setForce(-force);
+				((Planet*)object)->addForce(force);
+				((Planet*)object2)->addForce(-force);
 			}
 			((Planet*)object)->setVelocity(delta_time);
 		}
@@ -141,7 +144,7 @@ void Scene::update(const double& delta_time)
 {
 	camera->update(delta_time);
 
-	resetForces(objects);
+	resetForces();
 	updateVelocity(delta_time);
 	updatePosition(delta_time);
 	//printf("\n");

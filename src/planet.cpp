@@ -1,7 +1,7 @@
 #include "planet.h"
 
 
-Planet::Planet(const std::string& name, const int m, glm::vec3  v, glm::vec3  p, const float r)
+Planet::Planet(const std::string& name, const float m, glm::vec3  v, glm::vec3  p, const float r)
 	: CelestBody(name, m, r), velocity(v), position(p), force(glm::vec3(0.0f))
 {
 	translate(p);
@@ -30,7 +30,7 @@ glm::vec3 Planet::getPosition(){
 void Planet::resetForce(){
 	this->force = glm::vec3(0.0f, 0.0f, 0.0f);
 }
-void Planet::setForce(glm::vec3 f) {
+void Planet::addForce(glm::vec3 f) {
  	this->force.x += f.x / this->mass;
 	this->force.y += f.y / this->mass;
 	this->force.z += f.z / this->mass;
