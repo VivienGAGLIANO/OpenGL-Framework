@@ -13,7 +13,14 @@ void Planet::update(const double& delta_time)
 	CelestBody::update(delta_time); // call parent class update to handle graphic pipeline actions
 	// on inverse la rotation pour translate correctement sinon on se retrouve à faire n'importe quoi
 	this->resetRotation();
-	translate(this->position - this->prevPosition);
+	glm::vec3 delta;
+	delta.x = this->position.x - this->prevPosition.x;
+	delta.y = this->position.y - this->prevPosition.y;
+	delta.z = this->position.z - this->prevPosition.z;
+	if (this->name == "Planet_one")
+		printf("\tdPos2 t+1 : (%f,%f,%f)\n", delta.x, delta.y, delta.z);
+
+	translate(operator_divide((this->position - this->prevPosition),1));
 	this->makeRotation(delta_time);
 }
 
