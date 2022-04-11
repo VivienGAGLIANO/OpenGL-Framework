@@ -4,7 +4,6 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-//#include <gtc/type_ptr.inl>
 
 
 Pipeline::Pipeline(const std::string &vertex_path, const std::string &fragment_path)
@@ -21,7 +20,9 @@ Pipeline::Pipeline(const std::string &vertex_path, const std::string &fragment_p
 	glValidateProgramPipeline(pipeline);
 	print_pipeline_error(pipeline);
 
-	if (glGetError() != GL_NO_ERROR) {
+	auto err = glGetError();
+
+	if (err != GL_NO_ERROR) {
 		std::cerr << "OpenGL error" << std::endl;
 		pipeline = NULL;
 	}

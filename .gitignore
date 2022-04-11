@@ -39,8 +39,6 @@ x64
 *.pdf
 log
 
-resources/skybox
-
 resources/model/lowilds-planet
 resources/model/planet
 resources/model/ringed_gas_giant_planet

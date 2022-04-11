@@ -25,12 +25,12 @@ private:
 
 inline std::vector<std::string> skybox_faces
 {
-	"right.jpg",
-	"left.jpg",
-	"top.jpg",
-	"bottom.jpg",
-	"front.jpg",
-	"back.jpg"
+	"right_milk.jpg",
+	"left_milk.jpg",
+	"top_milk.jpg",
+	"bottom_milk.jpg",
+	"front_milk.jpg",
+	"back_milk.jpg"
 };
 
 inline std::vector<glm::vec3> skybox_vertices
