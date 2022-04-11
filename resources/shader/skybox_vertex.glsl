@@ -19,5 +19,6 @@ out gl_PerVertex
 void main()
 {
 	v_coord = position;
-	gl_Position = p * v * vec4(position, 1.0);
+	vec4 pos = p * v * vec4(position, 1.0);
+	gl_Position = pos.xyww;
 }

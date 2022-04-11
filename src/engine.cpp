@@ -38,7 +38,7 @@ void Engine::init()
 
     glClearColor(.25, .1, .65, 1);
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
+    glDepthFunc(GL_LEQUAL);
     glEnable(GL_CULL_FACE);
 
     skybox = new Skybox("resources/skybox/");
