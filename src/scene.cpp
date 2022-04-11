@@ -7,7 +7,7 @@ using namespace std;
 
 Scene* Scene::instance;
 int nbObjects = 0;
-double G = 0.0066741;
+float G = 1;//0.066741;
 
 Scene::Scene()
 {
@@ -45,21 +45,13 @@ void Scene::populate()
 	objects.push_back(ref);
 	nbObjects++;
 
-	auto ref2 = new CelestBody("reference2", 1, 1.f);
-	ref2->set_material(new Material);
-	ref2->translate(glm::vec3(2.5, 0, 0));
-	ref2->set_model(new Model("resources/model/planet/scene.gltf"));
-	ref2->scale(glm::vec3(.1, .1, .1));
-	objects.push_back(ref2);
-	nbObjects++;
-
 	auto sun = new Planet("Sun", 1000, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 1.f);
 	sun->set_material(new Material);
 	sun->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(sun);
 	nbObjects++;
 	
-	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0, 0, 0), glm::vec3(5, 0, 0), 1.f);
+	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0, 0, 10), glm::vec3(5, 0, 0), 1.f);
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
 	planet1->scale(glm::vec3(.2, .2, .2));
@@ -92,7 +84,7 @@ void resetForces(std::vector<Object*> objects)
 	{
 		if (dynamic_cast<Planet*>(obj))
 		{
-			((Planet*)obj)->setForce(glm::vec3(0, 0, 0));
+			((Planet*)obj)->resetForce();
 		}
 	}
 }
@@ -101,24 +93,22 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 {
 	// appliying force on object2
 	// calculate the gravitational force between object object and object2
-	glm::vec3 r_vec = o1->getPosition() - o2->getPosition(); // difference
-	double r_mag = magnitude(r_vec); // distance
-	glm::vec3 r_hat = operator_divide(r_vec, r_mag); // direction
+	float dist = magnitude(o2->getPosition() - o1->getPosition());
+	glm::vec3 forceDir = normalize(o2->getPosition() - o1->getPosition()); // direction
 	float M1M2 = o1->getMass() * o2->getMass();
 
- 	float force_mag = (double)(G * M1M2) / (r_mag * r_mag);
-	glm::vec3 force_vec = -force_mag * r_hat;
+	glm::vec3 forceVec = forceDir * (G * M1M2) / (dist * dist);
 
-	if (o1->name == "Sun") {
-		printf("-------------------------------------------------------\n");
-		printf("%s --> %s : \t Force: %f\n", o2->name.c_str(), o1->name.c_str(), force_mag);
-		printf("\tDirection: (%f,%f,%f)", r_hat.x, r_hat.y, r_hat.z);
-		printf("\tDistance: %f\n", r_mag);
-		printf("\tposition: (%f,%f,%f)\n", ((Planet*)o1)->getPosition().x, ((Planet*)o1)->getPosition().y, ((Planet*)o1)->getPosition().z);
-		printf("\tposition: (%f,%f,%f)\n", ((Planet*)o2)->getPosition().x, ((Planet*)o2)->getPosition().y, ((Planet*)o2)->getPosition().z);
-	}
+	//if (o1->name == "Sun") {
+	//	printf("-------------------------------------------------------\n");
+	//	printf("%s --> %s : \t Force: %f\n", o2->name.c_str(), o1->name.c_str(), force_mag);
+	//	printf("\tDirection: (%f,%f,%f)", r_hat.x, r_hat.y, r_hat.z);
+	//	printf("\tDistance: %f\n", r_mag);
+	//	printf("%f,", ((Planet*)o2)->getPosition().x);
+	//	printf("\tposition: (%f,%f,%f)\n", ((Planet*)o2)->getPosition().x, ((Planet*)o2)->getPosition().y, ((Planet*)o2)->getPosition().z);
+	//}
 
-	return force_vec;
+	return forceVec;
 }
 
 void Scene::update(const double& delta_time)

@@ -17,9 +17,9 @@ void Planet::update(const double& delta_time)
 	this->velocity.y += this->force.y * delta_time;
 	this->velocity.z += this->force.z * delta_time;
 
-	this->position.x += this->velocity.x/this->mass * delta_time;
-	this->position.y += this->velocity.y/this->mass * delta_time;
-	this->position.z += this->velocity.z/this->mass * delta_time;
+	this->position.x += this->velocity.x * delta_time;
+	this->position.y += this->velocity.y * delta_time;
+	this->position.z += this->velocity.z * delta_time;
 	
 	glm::vec3 delta = this->position - oldPos;
 
@@ -44,9 +44,9 @@ void Planet::resetForce(){
 	this->force = glm::vec3(0.0f, 0.0f, 0.0f);
 }
 void Planet::setForce(glm::vec3 f) {
-	this->force.x += f.x;
-	this->force.y += f.y;
-	this->force.z += f.z;
+	this->force.x += f.x / this->mass;
+	this->force.y += f.y / this->mass;
+	this->force.z += f.z / this->mass;
 }
 void Planet::setVelocity(glm::vec3 v){
 	this->velocity = v;
