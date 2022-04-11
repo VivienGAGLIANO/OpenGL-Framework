@@ -15,6 +15,7 @@ class Planet : public CelestBody
 		glm::vec3 getForce();
 		glm::vec3 getVelocity();
 		glm::vec3 getPosition();
+		void resetForce();
 		void setForce(glm::vec3 f);
 		void setVelocity(glm::vec3 v);
 		void setPosition(glm::vec3 p);

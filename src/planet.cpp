@@ -40,7 +40,9 @@ glm::vec3 Planet::getVelocity(){
 glm::vec3 Planet::getPosition(){
 	return this->position;
 }
-
+void Planet::resetForce(){
+	this->force = glm::vec3(0.0f, 0.0f, 0.0f);
+}
 void Planet::setForce(glm::vec3 f) {
 	this->force.x += f.x;
 	this->force.y += f.y;
