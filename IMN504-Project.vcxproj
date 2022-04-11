@@ -162,6 +162,7 @@
     <ClCompile Include="src\pipeline.cpp" />
     <ClCompile Include="src\engine.cpp" />
     <ClCompile Include="src\scene.cpp" />
+    <ClCompile Include="src\skybox.cpp" />
     <ClCompile Include="src\stb_image.cpp" />
     <ClCompile Include="src\template.cpp" />
     <ClCompile Include="src\TextureOld.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="include\pipeline.h" />
     <ClInclude Include="include\engine.h" />
     <ClInclude Include="include\scene.h" />
+    <ClInclude Include="include\skybox.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\template.h" />
     <ClInclude Include="include\TextureOld.h" />
@@ -211,6 +213,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shader\fragment.glsl" />
+    <None Include="resources\shader\skybox_fragment.glsl" />
+    <None Include="resources\shader\skybox_vertex.glsl" />
     <None Include="resources\shader\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>

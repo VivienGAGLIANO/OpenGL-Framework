@@ -41,12 +41,13 @@ void Engine::init()
     glDepthFunc(GL_LESS);
     glEnable(GL_CULL_FACE);
 
-    init_skybox("resources/skybox/");
+    skybox = new Skybox("resources/skybox/");
+    skybox->init();
 }
 
 void Engine::render_skybox()
 {
-
+    skybox->render();
 }
 
 bool Engine::should_render() const
@@ -76,40 +77,3 @@ void Engine::mouse_callback(GLFWwindow* window, double xpos, double ypos)
     Scene::get_instance()->get_camera()->process_mouse(xpos, ypos);
 }
 
-void Engine::init_skybox(const std::string& path)
-{
-    skybox_texture = load_skybox_texture(path);
-
-    glCreateVertexArrays(1, &vao_sky);
-
-    glCreateBuffers(1, &vbo_sky);
-    glNamedBufferData(vbo_sky, vertices_sky.size() * sizeof(glm::vec3), glm::value_ptr(vertices_sky.front()), GL_STATIC_DRAW);
-
-}
-
-GLuint Engine::load_skybox_texture(const std::string& path)
-{
-    GLuint tex;
-    glGenTextures(1, &tex);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, tex);
-
-    int width, height, n_chan;
-    for (int i = 0; i < skybox_faces.size(); ++i)
-    {
-        unsigned char* data = stbi_load((path + skybox_faces[i]).c_str(), &width, &height, &n_chan, 0);
-        if (data)
-            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-        else
-            std::cerr << "Skybox face " << path << skybox_faces[i] << " couldn't be loaded.\n";
-
-    	stbi_image_free(data);
-    }
-
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-
-    return tex;
-}

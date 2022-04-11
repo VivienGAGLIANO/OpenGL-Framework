@@ -65,12 +65,13 @@ void Scene::update(const double& delta_time)
 
 void Scene::render(Engine* engine)
 {
+	engine->render_skybox();
+
 	for (Object *obj : objects)
 	{
 		obj->prepare_material();
 
 		obj->render();
-		// engine->render(camera, object);
 	}
 }
 

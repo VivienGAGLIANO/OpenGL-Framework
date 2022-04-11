@@ -5,7 +5,7 @@
 #include <vector>
 
 
-std::vector<glm::vec3> vertices
+std::vector<glm::vec3> vertices_old
 {
 	glm::vec3(-.7, -.7, .7),
 	glm::vec3(-.5, -.5, -.5),
