@@ -57,13 +57,13 @@ void Scene::populate()
 	objects.push_back(sun);
 	nbObjects++;
 	
-	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 78.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.5f));
+	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 71.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.5f));
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet1);
 	nbObjects++;
 
-	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, 150.0f), glm::vec3(30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.3f));
+	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, -58.0f), glm::vec3(-30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.3f));
 	planet2->set_material(new Material);
 	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet2);
@@ -113,7 +113,7 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 	float M1M2 = o1->getMass() * o2->getMass();
 	float forceMag = (G * M1M2) / (dist * dist);
 	glm::vec3 forceVec = forceDir * forceMag;
-	if (o2->name == "Planet_one")
+	if (o2->name == "Planet_one" && o1->name == "Sun")
 		myfile2 << dist << "\n";
 
 	if (print) {
