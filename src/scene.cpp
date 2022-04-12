@@ -15,11 +15,11 @@ ofstream myfile1, myfile2, myfile3, myfile4, myfile5;
 
 Scene::Scene()
 {
-	myfile1.open("log/orbit/orbit1.txt");
-	myfile2.open("log/orbit/orbit2.txt");
-	myfile3.open("log/orbit/orbit3.txt");
-	myfile4.open("log/orbit/orbit4.txt");
-	myfile5.open("log/orbit/orbit5.txt");
+	myfile1.open("log/orbit1.txt");
+	myfile2.open("log/orbit2.txt");
+	myfile3.open("log/orbit3.txt");
+	myfile4.open("log/orbit4.txt");
+	myfile5.open("log/orbit5.txt");
 	populate();
 }
 
@@ -55,37 +55,37 @@ void Scene::populate()
 	//objects.push_back(ref);
 	//nbObjects++;
 
-	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(2));
+	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.05f));
 	sun->set_material(new Material);
 	sun->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(sun);
 	nbObjects++;
 	
-	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 71.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.5f));
+	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 71.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.01f));
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet1);
 	nbObjects++;
 
-	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, 58.0f), glm::vec3(30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.3f));
+	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, 58.0f), glm::vec3(30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.005f));
 	planet2->set_material(new Material);
 	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet2);
 	nbObjects++;
 
-	auto planet3 = new Planet("Planet_three", 1, glm::vec3(0.0f, 0.0f, 44.8f), glm::vec3(50.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
+	auto planet3 = new Planet("Planet_three", 1, glm::vec3(0.0f, 0.0f, 44.8f), glm::vec3(50.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.008f));
 	planet3->set_material(new Material);
 	planet3->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet3);
 	nbObjects++;
 
-	auto planet4 = new Planet("Planet_four", 100, glm::vec3(0.0f, 0.0f, 31.61f), glm::vec3(100.0f, 0.0f, 0.0f), 1.f);
+	auto planet4 = new Planet("Planet_four", 100, glm::vec3(0.0f, 0.0f, 31.61f), glm::vec3(100.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.02f));
 	planet4->set_material(new Material);
 	planet4->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet4);
 	nbObjects++;
 
-	auto planet5 = new Planet("Planet_five", 0.001, glm::vec3(0.0f, 0.0f, 38.7f), glm::vec3(102.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.1f));
+	auto planet5 = new Planet("Planet_five", 0.001, glm::vec3(0.0f, 0.0f, 33.992265f), glm::vec3(107.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.008f));
 	planet5->set_material(new Material);
 	planet5->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet5);
