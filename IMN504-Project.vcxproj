@@ -152,8 +152,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Utils.cpp" />
     <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\camera.cpp" />
+    <ClCompile Include="src\celestBody.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\material.cpp" />
     <ClCompile Include="src\mesh.cpp" />
@@ -161,17 +163,19 @@
     <ClCompile Include="src\object.cpp" />
     <ClCompile Include="src\pipeline.cpp" />
     <ClCompile Include="src\engine.cpp" />
+    <ClCompile Include="src\planet.cpp" />
     <ClCompile Include="src\scene.cpp" />
     <ClCompile Include="src\skybox.cpp" />
     <ClCompile Include="src\stb_image.cpp" />
-    <ClCompile Include="src\template.cpp" />
     <ClCompile Include="src\TextureOld.cpp" />
     <ClCompile Include="third_party\glad\src\glad.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\application.h" />
     <ClInclude Include="include\camera.h" />
+    <ClInclude Include="include\celestBody.h" />
     <ClInclude Include="include\data.h" />
+    <ClInclude Include="include\Utils.h" />
     <ClInclude Include="include\material.h" />
     <ClInclude Include="include\mesh.h" />
     <ClInclude Include="include\model.h" />
@@ -179,10 +183,10 @@
     <ClInclude Include="include\obj_loader.h" />
     <ClInclude Include="include\pipeline.h" />
     <ClInclude Include="include\engine.h" />
+    <ClInclude Include="include\planet.h" />
     <ClInclude Include="include\scene.h" />
     <ClInclude Include="include\skybox.h" />
     <ClInclude Include="include\stb_image.h" />
-    <ClInclude Include="include\template.h" />
     <ClInclude Include="include\TextureOld.h" />
     <ClInclude Include="third_party\stb_image\stb_image.h" />
   </ItemGroup>

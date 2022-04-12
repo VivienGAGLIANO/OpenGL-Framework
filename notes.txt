@@ -1,1 +1,6 @@
 Object loader library : Open Asset Importer Library (https://github.com/assimp/assimp)
+
+Stabilisation of the system : 
+	https://youtu.be/7axImc1sxa0?t=84
+	https://css-tricks.com/creating-your-own-gravity-and-space-simulator/
+
