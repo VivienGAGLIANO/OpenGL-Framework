@@ -194,6 +194,9 @@ void Scene::update(const double& delta_time)
 
 void Scene::render(Engine* engine)
 {
+
+	// first pass
+	engine->to_render_target();
 	for (Object *obj : objects)
 	{
 		obj->prepare_material();

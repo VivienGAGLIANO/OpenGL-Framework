@@ -1,12 +1,17 @@
-#include <gtc/type_ptr.hpp>
 #include <iostream>
 
 #include "engine.h"
-#include "stb_image.h"
+#include "scene.h"
 
 
 Engine::Engine(const int width, const int height) : width(width), height(height)
 {
+}
+
+Engine::~Engine()
+{
+    delete skybox;
+    glDeleteFramebuffers(1, &fbo);
 }
 
 void Engine::init()
@@ -41,6 +46,8 @@ void Engine::init()
     glDepthFunc(GL_LEQUAL);
     glEnable(GL_CULL_FACE);
 
+    fbo = init_framebuffer();
+
     skybox = new Skybox("resources/skybox/");
     skybox->init();
 }
@@ -53,6 +60,14 @@ void Engine::render_skybox()
 bool Engine::should_render() const
 {
     return !glfwWindowShouldClose(window);
+}
+
+void Engine::to_render_target()
+{
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    glClearColor(.1f, .1f, .1f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST);
 }
 
 void Engine::framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -75,5 +90,55 @@ void Engine::key_callback(GLFWwindow* window, int key, int scancode, int action,
 void Engine::mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
     Scene::get_instance()->get_camera()->process_mouse(xpos, ypos);
+}
+
+GLuint Engine::init_framebuffer()
+{
+    // Create fb
+    GLuint fbo;
+    glGenFramebuffers(1, &fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
+
+    // Allocate space for attachment
+    GLuint col; // color
+    glGenTextures(1, &col);
+    glBindTexture(GL_TEXTURE_2D, col);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    GLuint depth_stencil; // depth + stencil at the same time
+    glGenTextures(1, &depth_stencil);
+    glBindTexture(GL_TEXTURE_2D, depth_stencil);
+
+    glBindTexture(GL_TEXTURE_2D, depth_stencil);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, width, height, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+
+    // Attach texture to fb
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, col, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, depth_stencil, 0);
+
+
+    // Check for completeness
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+    {
+        std::cerr << "Incomplete framebuffer.\n";
+        glDeleteFramebuffers(1, &fbo);
+        return 0;
+    }
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	return fbo;
 }
 
