@@ -1,8 +1,12 @@
 #include "planet.h"
 
 
-Planet::Planet(const std::string& name, const int m, glm::vec3  v, glm::vec3  p, const float r)
-	: CelestBody(name, m, r), velocity(v), position(p), force(glm::vec3(0.0f))
+Planet::Planet(const std::string& name, const float m, glm::vec3  v, glm::vec3  p, const float r)
+	: Planet(name, m, v, p, r, glm::vec3(1.0f)) {}
+
+Planet::Planet(const std::string& name, const float& m, const glm::vec3& v, const glm::vec3& p, const float& r,
+	const glm::vec3& scale)
+	: CelestBody(name, m, r, scale), velocity(v), position(p), force(glm::vec3(0.0f))
 {
 	translate(p);
 }
@@ -10,11 +14,16 @@ Planet::Planet(const std::string& name, const int m, glm::vec3  v, glm::vec3  p,
 void Planet::update(const double& delta_time)
 {
 	// This method gets called every frame
-	CelestBody::update(delta_time); // call parent class update to handle graphic pipeline actions
 	// on inverse la rotation pour translate correctement sinon on se retrouve à faire n'importe quoi
 	this->resetRotation();
-	translate(this->position - this->prevPosition);
+	glm::vec3 delta = this->position - this->prevPosition;
+	//if (this->name == "Planet_one")
+	//	printf("\tdPos2 t+1 : (%f,%f,%f)\n", delta.x, delta.y, delta.z);
+
+	translate(delta);
 	this->makeRotation(delta_time);
+
+	CelestBody::update(delta_time); // call parent class update to handle graphic pipeline actions
 }
 
 // every getter and setter for force, acceleration, velocity and position
@@ -30,7 +39,7 @@ glm::vec3 Planet::getPosition(){
 void Planet::resetForce(){
 	this->force = glm::vec3(0.0f, 0.0f, 0.0f);
 }
-void Planet::setForce(glm::vec3 f) {
+void Planet::addForce(glm::vec3 f) {
  	this->force.x += f.x / this->mass;
 	this->force.y += f.y / this->mass;
 	this->force.z += f.z / this->mass;

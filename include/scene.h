@@ -20,6 +20,7 @@ public:
 	void update(const double& delta_time);
 	void updateVelocity(const double& delta_time);
 	void updatePosition(const double& delta_time);
+	void resetForces();
 	void render(Engine* engine);
 	static Scene* get_instance();
 
