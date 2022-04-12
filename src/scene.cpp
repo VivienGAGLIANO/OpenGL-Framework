@@ -4,13 +4,18 @@
 #include <stdio.h>
 using namespace std;
 
+#include <iostream>
+#include <fstream>
 
 Scene* Scene::instance;
 int nbObjects = 0;
-float G = 0.066741;
+float G = 1;//0.66741;
+bool print = true;
+ofstream myfile2;
 
 Scene::Scene()
 {
+	myfile2.open("OUTPUT.txt");
 	populate();
 }
 
@@ -37,13 +42,14 @@ void Scene::populate()
 	// suzanne->set_model(new Model("resources/model/suzanne.obj"));
 	// suzanne->translate(glm::vec3(3, 0, 0));
 	// objects.push_back(suzanne);
-	auto ref = new CelestBody("reference", 1, 1.f);
-	ref->set_material(new Material);
-	ref->set_model(new Model("resources/model/planet/scene.gltf"));
-	ref->translate(glm::vec3(2, 0, -2));
-	ref->scale(glm::vec3(.2, .2, .2));
-	objects.push_back(ref);
-	nbObjects++;
+
+	//auto ref = new CelestBody("reference", 1, 1.f);
+	//ref->set_material(new Material);
+	//ref->set_model(new Model("resources/model/planet/scene.gltf"));
+	//ref->translate(glm::vec3(2, 0, -2));
+	//ref->scale(glm::vec3(.2, .2, .2));
+	//objects.push_back(ref);
+	//nbObjects++;
 
 	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f);
 	sun->set_material(new Material);
@@ -51,10 +57,16 @@ void Scene::populate()
 	objects.push_back(sun);
 	nbObjects++;
 	
-	auto planet1 = new Planet("Planet_one", 1, glm::vec3(15.0f, 0.0f, 15.0f), glm::vec3(10.0f, 0.0f, 0.0f), 1.f, glm::vec3(.2f));
+	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.5f));
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet1);
+	nbObjects++;
+
+	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.3f));
+	planet2->set_material(new Material);
+	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
+	objects.push_back(planet2);
 	nbObjects++;
 	
 	//auto planet2= new Planet("Planet_two", 1, glm::vec3(0, 0, 0), glm::vec3(10, 0, 0), glm::vec3(0, 0, -5), 1.f);
@@ -67,6 +79,7 @@ void Scene::populate()
 
 Scene::~Scene()
 {
+	myfile2.close();
 	delete camera;
 	for (Object* obj : objects)
 		delete obj;
@@ -91,11 +104,7 @@ void Scene::resetForces()
 glm::vec3 attraction(Planet* o1, Planet* o2)
 {
 	// calculate the gravitational force between object object and object2
-	float dist = magnitude(o2->getPosition() - o1->getPosition());
-	float magn = glm::length(o2->getPosition() - o1->getPosition());
-
-	if (dist != magn)
-		printf("MAGNITUDE\n");
+	float dist = glm::length(o2->getPosition() - o1->getPosition());
 
 	if (dist <= 1) // pour éviter l'explosion du systeme
 		return glm::vec3(0.0f, 0.0f, 0.0f);
@@ -105,16 +114,14 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 	float forceMag = (G * M1M2) / (dist * dist);
 	glm::vec3 forceVec = forceDir * forceMag;
 
-	// if (o1->name == "Sun") {
-	// 	printf("-------------------------------------------------------\n");
-	// 	printf("%s --> %s : \t Force: %f\n", o2->name.c_str(), o1->name.c_str(), forceMag);
-	// 	printf("\tDirection: (%f,%f,%f)\n", forceDir.x, forceDir.y, forceDir.z);
-	// 	printf("\tVecteur force: (%f,%f,%f)\n", forceVec.x, forceVec.y, forceVec.z);
-	// 	printf("\tDistance: %f\n", dist);
-	// 	printf("\tposition 1: (%f,%f,%f)\n", ((Planet*)o1)->getPosition().x, ((Planet*)o1)->getPosition().y, ((Planet*)o1)->getPosition().z);
-	// 	printf("\tposition 2: (%f,%f,%f)\n", ((Planet*)o2)->getPosition().x, ((Planet*)o2)->getPosition().y, ((Planet*)o2)->getPosition().z);
-	// }
+	if (print) {
+		myfile2 << o2->name.c_str() <<  " ----{" << dist << "}---> " << o1->name.c_str() << " : \t Force : " << forceMag << "\n";
+		myfile2 << "\tDirection: (" << forceDir.x << ", " << forceDir.y << ", " << forceDir.z << ")\n";
+		myfile2 << "\tVecteur force: (" << forceVec.x << ", " << forceVec.y << "," << forceVec.z << ")\n";
+		myfile2 << "\t" << o1->name.c_str() << " (" << ((Planet*)o1)->getPosition().x << ", " << ((Planet*)o1)->getPosition().y << ", " << ((Planet*)o1)->getPosition().z << ")\n";
+		myfile2 << "\t" << o2->name.c_str() << " (" << ((Planet*)o2)->getPosition().x << ", " << ((Planet*)o2)->getPosition().y << ", " << ((Planet*)o2)->getPosition().z << ")\n";
 
+	}
 	return forceVec;
 }
 
@@ -122,6 +129,8 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 // https://youtu.be/7axImc1sxa0?t=84
 void Scene::updateVelocity(const double& delta_time)
 {
+	if (print)
+		myfile2 << "-------------------------------------------------------\n";
 	for (int i = 0; i < nbObjects; i++)
 	{
 		Object* object = objects[i];
@@ -148,12 +157,8 @@ void Scene::updatePosition(const double& delta_time)
 		if (dynamic_cast<Planet*>(object))
 		{
 			((Planet*)object)->setPosition(delta_time);
-			((Planet*)object)->update(delta_time);
 		}
-		else
-		{
-			object->update(delta_time);
-		}
+		object->update(delta_time);
 	}
 }
 

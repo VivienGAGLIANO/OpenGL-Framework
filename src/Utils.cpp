@@ -24,11 +24,6 @@ glm::vec3 computeDirection(glm::vec3 p1, glm::vec3 p2)
     return glm::vec3(x,y,z);
 }
 
-float magnitude(glm::vec3 v)
-{
-    return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
-}
-
 float computeDistance(glm::vec3 p1, glm::vec3 p2)
 {
 	float x = p2.x - p1.x;

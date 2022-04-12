@@ -17,8 +17,8 @@ void Planet::update(const double& delta_time)
 	// on inverse la rotation pour translate correctement sinon on se retrouve à faire n'importe quoi
 	this->resetRotation();
 	glm::vec3 delta = this->position - this->prevPosition;
-	if (this->name == "Planet_one")
-		printf("\tdPos2 t+1 : (%f,%f,%f)\n", delta.x, delta.y, delta.z);
+	//if (this->name == "Planet_one")
+	//	printf("\tdPos2 t+1 : (%f,%f,%f)\n", delta.x, delta.y, delta.z);
 
 	translate(delta);
 	this->makeRotation(delta_time);
