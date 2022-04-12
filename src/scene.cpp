@@ -1,9 +1,13 @@
 #include "scene.h"
-
-#include "template.h"
+#include "planet.h"
+#include "Utils.h"
+#include <stdio.h>
+using namespace std;
 
 
 Scene* Scene::instance;
+int nbObjects = 0;
+float G = 0.066741;
 
 Scene::Scene()
 {
@@ -33,25 +37,33 @@ void Scene::populate()
 	// suzanne->set_model(new Model("resources/model/suzanne.obj"));
 	// suzanne->translate(glm::vec3(3, 0, 0));
 	// objects.push_back(suzanne);
+	auto ref = new CelestBody("reference", 1, 1.f);
+	ref->set_material(new Material);
+	ref->set_model(new Model("resources/model/planet/scene.gltf"));
+	ref->translate(glm::vec3(2, 0, -2));
+	ref->scale(glm::vec3(.2, .2, .2));
+	objects.push_back(ref);
+	nbObjects++;
 
-	auto sun = new Template("planet");
+	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f);
 	sun->set_material(new Material);
 	sun->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(sun);
+	nbObjects++;
 	
-	auto planet1 = new Template("planet");
+	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(10.0f, 0.0f, 0.0f), 1.f);
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
-	planet1->translate(glm::vec3(0, 0, -5));
-	planet1->scale(glm::vec3(.4, .4, .4));
+	planet1->scale(glm::vec3(.2f, .2f, .2f));
 	objects.push_back(planet1);
+	nbObjects++;
 	
-	auto planet2= new Template("planet");
-	planet2->set_material(new Material);
-	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
-	planet2->translate(glm::vec3(8, 0, 0));
-	planet2->scale(glm::vec3(.5, .5, .5));
-	objects.push_back(planet2);
+	//auto planet2= new Planet("Planet_two", 1, glm::vec3(0, 0, 0), glm::vec3(10, 0, 0), glm::vec3(0, 0, -5), 1.f);
+	//planet2->set_material(new Material);
+	//planet2->set_model(new Model("resources/model/planet/scene.gltf"));
+	//planet2->scale(glm::vec3(.3, .3, .3));
+	//objects.push_back(planet2);
+	//nbObjects++;
 }
 
 Scene::~Scene()
@@ -66,14 +78,90 @@ Camera* Scene::get_camera() const
 	return camera;
 }
 
+void Scene::resetForces()
+{
+	for (Object* obj : objects)
+	{
+		if (dynamic_cast<Planet*>(obj))
+		{
+			((Planet*)obj)->resetForce();
+		}
+	}
+}
+
+glm::vec3 attraction(Planet* o1, Planet* o2)
+{
+	// calculate the gravitational force between object object and object2
+	float dist = magnitude(o2->getPosition() - o1->getPosition());
+	float magn = glm::length(o2->getPosition() - o1->getPosition());
+
+	if (dist != magn)
+		printf("MAGNITUDE\n");
+
+	if (dist <= 1) // pour �viter l'explosion du systeme
+		return glm::vec3(0.0f, 0.0f, 0.0f);
+
+	glm::vec3 forceDir = glm::normalize(o2->getPosition() - o1->getPosition()); // direction
+	float M1M2 = o1->getMass() * o2->getMass();
+	float forceMag = (G * M1M2) / (dist * dist);
+	glm::vec3 forceVec = forceDir * forceMag;
+
+	if (o1->name == "Sun") {
+		printf("-------------------------------------------------------\n");
+		printf("%s --> %s : \t Force: %f\n", o2->name.c_str(), o1->name.c_str(), forceMag);
+		printf("\tDirection: (%f,%f,%f)\n", forceDir.x, forceDir.y, forceDir.z);
+		printf("\tVecteur force: (%f,%f,%f)\n", forceVec.x, forceVec.y, forceVec.z);
+		printf("\tDistance: %f\n", dist);
+		printf("\tposition 1: (%f,%f,%f)\n", ((Planet*)o1)->getPosition().x, ((Planet*)o1)->getPosition().y, ((Planet*)o1)->getPosition().z);
+		printf("\tposition 2: (%f,%f,%f)\n", ((Planet*)o2)->getPosition().x, ((Planet*)o2)->getPosition().y, ((Planet*)o2)->getPosition().z);
+	}
+
+	return forceVec;
+}
+
+// It is said on the web that actualise the velocity and the position not at the same time increase the stability of the system
+// https://youtu.be/7axImc1sxa0?t=84
+void Scene::updateVelocity(const double& delta_time)
+{
+	for (int i = 0; i < nbObjects; i++)
+	{
+		Object* object = objects[i];
+		if (dynamic_cast<Planet*>(object))
+		{
+			// update the gravitational forces for every object i in the scene
+			for (int j = i + 1; j < nbObjects; j++)
+			{
+				Object* object2 = objects[j];
+				glm::vec3 force = attraction((Planet*)object, (Planet*)object2);
+				((Planet*)object)->addForce(force);
+				((Planet*)object2)->addForce(-force);
+			}
+			((Planet*)object)->setVelocity(delta_time);
+		}
+	}
+}
+
+void Scene::updatePosition(const double& delta_time)
+{
+	for (int i = 0; i < nbObjects; i++)
+	{
+		Object* object = objects[i];
+		if (dynamic_cast<Planet*>(object))
+		{
+			((Planet*)object)->setPosition(delta_time);
+		}
+		object->update(delta_time);
+	}
+}
+
 void Scene::update(const double& delta_time)
 {
 	camera->update(delta_time);
 
-	for (auto object : objects)
-	{
-		object->update(delta_time);
-	}
+	resetForces();
+	updateVelocity(delta_time);
+	updatePosition(delta_time);
+	//printf("\n");
 }
 
 void Scene::render(Engine* engine)
@@ -81,7 +169,6 @@ void Scene::render(Engine* engine)
 	for (Object *obj : objects)
 	{
 		obj->prepare_material();
-
 		obj->render();
 		// engine->render(camera, object);
 	}
