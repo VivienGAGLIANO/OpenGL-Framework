@@ -8,7 +8,6 @@ using namespace std;
 #include <fstream>
 
 Scene* Scene::instance;
-int nbObjects = 0;
 float G = 1;//0.66741;
 bool print = false;
 ofstream myfile1, myfile2, myfile3, myfile4;
@@ -54,35 +53,30 @@ void Scene::populate()
 	//objects.push_back(ref);
 	//nbObjects++;
 
-	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f);
-	sun->set_material(new Material);
-	sun->set_model(new Model("resources/model/planet/scene.gltf"));
-	objects.push_back(sun);
-	nbObjects++;
+	// auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f);
+	// sun->set_material(new Material);
+	// sun->set_model(new Model("resources/model/ringed_gas_giant_planet/scene.gltf"));
+	// objects.push_back(sun);
 	
-	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 71.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.5f));
+	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 71.0f), glm::vec3(100.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.1f));
 	planet1->set_material(new Material);
-	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
+	planet1->set_model(new Model("resources/model/ringed_gas_giant_planet/scene.gltf"));
 	objects.push_back(planet1);
-	nbObjects++;
 
-	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, -58.0f), glm::vec3(-30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.3f));
-	planet2->set_material(new Material);
-	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
-	objects.push_back(planet2);
-	nbObjects++;
-
-	auto planet3 = new Planet("Planet_three", 1, glm::vec3(-44.8f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 50.0f), 1.f, glm::vec3(0.2f));
-	planet3->set_material(new Material);
-	planet3->set_model(new Model("resources/model/planet/scene.gltf"));
-	objects.push_back(planet3);
-	nbObjects++;
-
-	auto planet4 = new Planet("Planet_four", 10, glm::vec3(28.85f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -120.0f), 1.f, glm::vec3(0.5f));
-	planet4->set_material(new Material);
-	planet4->set_model(new Model("resources/model/planet/scene.gltf"));
-	objects.push_back(planet4);
-	nbObjects++;
+	// auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, -58.0f), glm::vec3(-30.0f,/ 0.0f, 0.0f), 1.f, / glm::vec3(0.3f));
+	// planet2->set_material(new Material);
+	// planet2->set_model(new Model("resources/model/ringed_gas_giant_planet/scene.gltf"));
+	// objects.push_back(planet2);
+	// 
+	// auto planet3 = new Planet("Planet_three", 1, glm::vec3(-44.8f, 0.0f, 0.0f), glm::vec3(0.0f,/ 0.0f, 50.0f), 1.f, / glm::vec3(0.2f));
+	// planet3->set_material(new Material);
+	// planet3->set_model(new Model("resources/model/ringed_gas_giant_planet/scene.gltf"));
+	// objects.push_back(planet3);
+	// 
+	// auto planet4 = new Planet("Planet_four", 10, glm::vec3(28.85f, 0.0f, 0.0f), glm::vec3(0.0f,/ 0.0f, -120.0f),  1.f, /glm::vec3(0.5f));
+	// planet4->set_material(new Material);
+	// planet4->set_model(new Model("resources/model/ringed_gas_giant_planet/scene.gltf"));
+	// objects.push_back(planet4);
 	
 	//auto planet2= new Planet("Planet_two", 1, glm::vec3(0, 0, 0), glm::vec3(10, 0, 0), glm::vec3(0, 0, -5), 1.f);
 	//planet2->set_material(new Material);
@@ -157,13 +151,13 @@ void Scene::updateVelocity(const double& delta_time)
 {
 	if (print)
 		myfile2 << "-------------------------------------------------------\n";
-	for (int i = 0; i < nbObjects; i++)
+	for (int i = 0; i < objects.size(); i++)
 	{
 		Object* object = objects[i];
 		if (dynamic_cast<Planet*>(object))
 		{
 			// update the gravitational forces for every object i in the scene
-			for (int j = i + 1; j < nbObjects; j++)
+			for (int j = i + 1; j < objects.size(); j++)
 			{
 				Object* object2 = objects[j];
 				glm::vec3 force = attraction((Planet*)object, (Planet*)object2);
@@ -177,7 +171,7 @@ void Scene::updateVelocity(const double& delta_time)
 
 void Scene::updatePosition(const double& delta_time)
 {
-	for (int i = 0; i < nbObjects; i++)
+	for (int i = 0; i < objects.size(); i++)
 	{
 		Object* object = objects[i];
 		if (dynamic_cast<Planet*>(object))
