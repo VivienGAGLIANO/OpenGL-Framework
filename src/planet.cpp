@@ -20,7 +20,7 @@ void Planet::update(const double& delta_time)
 	if (this->name == "Planet_one")
 		printf("\tdPos2 t+1 : (%f,%f,%f)\n", delta.x, delta.y, delta.z);
 
-	translate(operator_divide((this->position - this->prevPosition),1));
+	translate(delta);
 	this->makeRotation(delta_time);
 }
 
