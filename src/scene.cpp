@@ -37,7 +37,7 @@ void Scene::populate()
 	// horse->set_material(new Material);
 	// horse->set_model(new Model("resources/model/rocking-horse-with-wheels/source/Rocking_horse_with_wheels_SF/Rocking_horse_with_wheels_SF.obj"));
 	// horse->translate(glm::vec3(-3, 0, 0));
-	// horse->scale(glm::vec3(.3, .3, .3));
+	// horse->set_scale(glm::vec3(.3, .3, .3));
 	// objects.push_back(horse);
 
 	// auto suzanne = new Template("suzanne");
@@ -50,7 +50,7 @@ void Scene::populate()
 	//ref->set_material(new Material);
 	//ref->set_model(new Model("resources/model/planet/scene.gltf"));
 	//ref->translate(glm::vec3(2, 0, -2));
-	//ref->scale(glm::vec3(.2, .2, .2));
+	//ref->set_scale(glm::vec3(.2, .2, .2));
 	//objects.push_back(ref);
 	//nbObjects++;
 
@@ -87,7 +87,7 @@ void Scene::populate()
 	//auto planet2= new Planet("Planet_two", 1, glm::vec3(0, 0, 0), glm::vec3(10, 0, 0), glm::vec3(0, 0, -5), 1.f);
 	//planet2->set_material(new Material);
 	//planet2->set_model(new Model("resources/model/planet/scene.gltf"));
-	//planet2->scale(glm::vec3(.3, .3, .3));
+	//planet2->set_scale(glm::vec3(.3, .3, .3));
 	//objects.push_back(planet2);
 	//nbObjects++;
 }

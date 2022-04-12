@@ -9,7 +9,7 @@
 
 Object::Object(const std::string& name, const glm::vec3& scale) : name(name), model_matrix(glm::mat4(1.0f))
 {
-	this->scale(scale);
+	this->set_scale(scale);
 }
 
 Object::Object(const std::string &name) : Object(name, glm::vec3(1.0)) {}
@@ -35,9 +35,9 @@ void Object::update(const double& delta_time)
 	// Pass MVP matrices to shader
 	auto pip = material->get_pipeline();
 
-	pip.set_uniform_matrix(pip.get_vertex_id(), "m", glm::value_ptr(model_matrix));
+	pip.set_uniform_matrix(pip.get_vertex_id(), "m", glm::value_ptr(glm::scale(model_matrix, scale)));
 	pip.set_uniform_matrix(pip.get_vertex_id(), "v", glm::value_ptr(Scene::get_instance()->get_camera()->get_view()));
-	pip.set_uniform_matrix(pip.get_vertex_id(), "p", glm::value_ptr(Scene::get_instance()->get_camera()->get_proj()));
+ 	pip.set_uniform_matrix(pip.get_vertex_id(), "p", glm::value_ptr(Scene::get_instance()->get_camera()->get_proj()));
 }
 
 void Object::prepare_material() const
@@ -65,9 +65,9 @@ void Object::rotate(const glm::vec3& axis, const float& angle)
 	model_matrix = glm::rotate(model_matrix, angle, axis);
 }
 
-void Object::scale(const glm::vec3& factor)
+void Object::set_scale(const glm::vec3& factor)
 {
-	model_matrix = glm::scale(model_matrix, factor);
+	this->scale = factor;  // glm::scale(model_matrix, factor);
 }
 
 //long Object::n_elements() const
