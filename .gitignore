@@ -38,3 +38,6 @@ x64
 
 *.pdf
 log
+
+resources/model/ringed_gas_giant_planet
+resources/skybox
