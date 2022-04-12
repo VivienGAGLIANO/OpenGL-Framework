@@ -1,9 +1,10 @@
 #include "celestBody.h"
 
-CelestBody::CelestBody(const std::string& name, const float m, const float r)
-	: Object(name), mass(m), radius(r), gradRotated(0.0f)
-{
-}
+CelestBody::CelestBody(const std::string& name, const float& m, const float& r)
+	: CelestBody(name, m, r, glm::vec3(1.0f)) {}
+
+CelestBody::CelestBody(const std::string& name, const float& m, const float& r, const glm::vec3& scale)
+	: Object(name, scale), mass(m), radius(r), gradRotated(0.0f) {}
 
 void CelestBody::update(const double& delta_time)
 {

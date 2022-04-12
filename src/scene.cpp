@@ -51,10 +51,9 @@ void Scene::populate()
 	objects.push_back(sun);
 	nbObjects++;
 	
-	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(10.0f, 0.0f, 0.0f), 1.f);
+	auto planet1 = new Planet("Planet_one", 1, glm::vec3(15.0f, 0.0f, 15.0f), glm::vec3(10.0f, 0.0f, 0.0f), 1.f, glm::vec3(.2f));
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
-	planet1->scale(glm::vec3(.2f, .2f, .2f));
 	objects.push_back(planet1);
 	nbObjects++;
 	
@@ -106,15 +105,15 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 	float forceMag = (G * M1M2) / (dist * dist);
 	glm::vec3 forceVec = forceDir * forceMag;
 
-	if (o1->name == "Sun") {
-		printf("-------------------------------------------------------\n");
-		printf("%s --> %s : \t Force: %f\n", o2->name.c_str(), o1->name.c_str(), forceMag);
-		printf("\tDirection: (%f,%f,%f)\n", forceDir.x, forceDir.y, forceDir.z);
-		printf("\tVecteur force: (%f,%f,%f)\n", forceVec.x, forceVec.y, forceVec.z);
-		printf("\tDistance: %f\n", dist);
-		printf("\tposition 1: (%f,%f,%f)\n", ((Planet*)o1)->getPosition().x, ((Planet*)o1)->getPosition().y, ((Planet*)o1)->getPosition().z);
-		printf("\tposition 2: (%f,%f,%f)\n", ((Planet*)o2)->getPosition().x, ((Planet*)o2)->getPosition().y, ((Planet*)o2)->getPosition().z);
-	}
+	// if (o1->name == "Sun") {
+	// 	printf("-------------------------------------------------------\n");
+	// 	printf("%s --> %s : \t Force: %f\n", o2->name.c_str(), o1->name.c_str(), forceMag);
+	// 	printf("\tDirection: (%f,%f,%f)\n", forceDir.x, forceDir.y, forceDir.z);
+	// 	printf("\tVecteur force: (%f,%f,%f)\n", forceVec.x, forceVec.y, forceVec.z);
+	// 	printf("\tDistance: %f\n", dist);
+	// 	printf("\tposition 1: (%f,%f,%f)\n", ((Planet*)o1)->getPosition().x, ((Planet*)o1)->getPosition().y, ((Planet*)o1)->getPosition().z);
+	// 	printf("\tposition 2: (%f,%f,%f)\n", ((Planet*)o2)->getPosition().x, ((Planet*)o2)->getPosition().y, ((Planet*)o2)->getPosition().z);
+	// }
 
 	return forceVec;
 }

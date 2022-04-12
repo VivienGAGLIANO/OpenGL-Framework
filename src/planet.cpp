@@ -2,7 +2,11 @@
 
 
 Planet::Planet(const std::string& name, const float m, glm::vec3  v, glm::vec3  p, const float r)
-	: CelestBody(name, m, r), velocity(v), position(p), force(glm::vec3(0.0f))
+	: Planet(name, m, v, p, r, glm::vec3(1.0f)) {}
+
+Planet::Planet(const std::string& name, const float& m, const glm::vec3& v, const glm::vec3& p, const float& r,
+	const glm::vec3& scale)
+	: CelestBody(name, m, r, scale), velocity(v), position(p), force(glm::vec3(0.0f))
 {
 	translate(p);
 }
@@ -17,8 +21,8 @@ void Planet::update(const double& delta_time)
 	delta.x = this->position.x - this->prevPosition.x;
 	delta.y = this->position.y - this->prevPosition.y;
 	delta.z = this->position.z - this->prevPosition.z;
-	if (this->name == "Planet_one")
-		printf("\tdPos2 t+1 : (%f,%f,%f)\n", delta.x, delta.y, delta.z);
+	// if (this->name == "Planet_one")
+	// 	printf("\tdPos2 t+1 : (%f,%f,%f)\n", delta.x, delta.y, delta.z);
 
 	translate(delta);
 	this->makeRotation(delta_time);

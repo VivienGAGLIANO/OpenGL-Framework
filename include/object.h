@@ -10,7 +10,8 @@
 class Object
 {
 public:
-	Object(const std::string &name);
+	Object(const std::string &name, const glm::vec3& scale);
+	Object(const std::string& name);
 	virtual ~Object();
 	void set_material(Material* mat);
 	void set_model(Model* model);

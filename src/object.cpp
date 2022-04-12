@@ -7,7 +7,12 @@
 #include "scene.h"
 
 
-Object::Object(const std::string &name) : name(name), model_matrix(glm::mat4(1.0)) {}
+Object::Object(const std::string& name, const glm::vec3& scale) : name(name), model_matrix(glm::mat4(1.0f))
+{
+	this->scale(scale);
+}
+
+Object::Object(const std::string &name) : Object(name, glm::vec3(1.0)) {}
 
 Object::~Object()
 {
