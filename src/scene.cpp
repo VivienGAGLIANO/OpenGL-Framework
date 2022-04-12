@@ -11,11 +11,14 @@ Scene* Scene::instance;
 int nbObjects = 0;
 float G = 1;//0.66741;
 bool print = false;
-ofstream myfile2;
+ofstream myfile1, myfile2, myfile3, myfile4;
 
 Scene::Scene()
 {
-	myfile2.open("OUTPUT.txt");
+	myfile1.open("orbit1.txt");
+	myfile2.open("orbit2.txt");
+	myfile3.open("orbit3.txt");
+	myfile4.open("orbit4.txt");
 	populate();
 }
 
@@ -68,6 +71,18 @@ void Scene::populate()
 	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet2);
 	nbObjects++;
+
+	auto planet3 = new Planet("Planet_three", 1, glm::vec3(-44.8f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 50.0f), 1.f, glm::vec3(0.2f));
+	planet3->set_material(new Material);
+	planet3->set_model(new Model("resources/model/planet/scene.gltf"));
+	objects.push_back(planet3);
+	nbObjects++;
+
+	auto planet4 = new Planet("Planet_four", 10, glm::vec3(28.85f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -120.0f), 1.f, glm::vec3(0.5f));
+	planet4->set_material(new Material);
+	planet4->set_model(new Model("resources/model/planet/scene.gltf"));
+	objects.push_back(planet4);
+	nbObjects++;
 	
 	//auto planet2= new Planet("Planet_two", 1, glm::vec3(0, 0, 0), glm::vec3(10, 0, 0), glm::vec3(0, 0, -5), 1.f);
 	//planet2->set_material(new Material);
@@ -79,7 +94,10 @@ void Scene::populate()
 
 Scene::~Scene()
 {
+	myfile1.close();
 	myfile2.close();
+	myfile3.close();
+	myfile4.close();
 	delete camera;
 	for (Object* obj : objects)
 		delete obj;
@@ -113,8 +131,15 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 	float M1M2 = o1->getMass() * o2->getMass();
 	float forceMag = (G * M1M2) / (dist * dist);
 	glm::vec3 forceVec = forceDir * forceMag;
-	if (o2->name == "Planet_one" && o1->name == "Sun")
-		myfile2 << dist << "\n";
+	if (o1->name == "Sun")
+		if (o2->name == "Planet_one")
+			myfile1 << dist << "\n";
+		else if (o2->name == "Planet_two")
+			myfile2 << dist << "\n";
+		else if (o2->name == "Planet_three")
+			myfile3 << dist << "\n";
+		else if (o2->name == "Planet_four")
+			myfile4 << dist << "\n";
 
 	if (print) {
 		myfile2 << o2->name.c_str() <<  " ----{ " << dist << " }---> " << o1->name.c_str() << " : \t Force : " << forceMag << "\n";
@@ -122,7 +147,6 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 		myfile2 << "\tVecteur force:\t(" << forceVec.x << ", " << forceVec.y << "," << forceVec.z << ")\n";
 		myfile2 << "\t" << o1->name.c_str() << "\t(" << ((Planet*)o1)->getPosition().x << ", " << ((Planet*)o1)->getPosition().y << ", " << ((Planet*)o1)->getPosition().z << ")\n";
 		myfile2 << "\t" << o2->name.c_str() << "\t(" << ((Planet*)o2)->getPosition().x << ", " << ((Planet*)o2)->getPosition().y << ", " << ((Planet*)o2)->getPosition().z << ")\n";
-
 	}
 	return forceVec;
 }
