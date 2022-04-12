@@ -97,7 +97,7 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 	if (dist != magn)
 		printf("MAGNITUDE\n");
 
-	if (dist <= 1) // pour ï¿½viter l'explosion du systeme
+	if (dist <= 1) // pour éviter l'explosion du systeme
 		return glm::vec3(0.0f, 0.0f, 0.0f);
 
 	glm::vec3 forceDir = glm::normalize(o2->getPosition() - o1->getPosition()); // direction
@@ -148,8 +148,12 @@ void Scene::updatePosition(const double& delta_time)
 		if (dynamic_cast<Planet*>(object))
 		{
 			((Planet*)object)->setPosition(delta_time);
+			((Planet*)object)->update(delta_time);
 		}
-		object->update(delta_time);
+		else
+		{
+			object->update(delta_time);
+		}
 	}
 }
 

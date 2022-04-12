@@ -14,18 +14,16 @@ Planet::Planet(const std::string& name, const float& m, const glm::vec3& v, cons
 void Planet::update(const double& delta_time)
 {
 	// This method gets called every frame
-	CelestBody::update(delta_time); // call parent class update to handle graphic pipeline actions
 	// on inverse la rotation pour translate correctement sinon on se retrouve à faire n'importe quoi
 	this->resetRotation();
-	glm::vec3 delta;
-	delta.x = this->position.x - this->prevPosition.x;
-	delta.y = this->position.y - this->prevPosition.y;
-	delta.z = this->position.z - this->prevPosition.z;
-	// if (this->name == "Planet_one")
-	// 	printf("\tdPos2 t+1 : (%f,%f,%f)\n", delta.x, delta.y, delta.z);
+	glm::vec3 delta = this->position - this->prevPosition;
+	if (this->name == "Planet_one")
+		printf("\tdPos2 t+1 : (%f,%f,%f)\n", delta.x, delta.y, delta.z);
 
 	translate(delta);
 	this->makeRotation(delta_time);
+
+	CelestBody::update(delta_time); // call parent class update to handle graphic pipeline actions
 }
 
 // every getter and setter for force, acceleration, velocity and position
