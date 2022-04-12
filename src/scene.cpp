@@ -15,10 +15,10 @@ ofstream myfile1, myfile2, myfile3, myfile4;
 
 Scene::Scene()
 {
-	myfile1.open("orbit1.txt");
-	myfile2.open("orbit2.txt");
-	myfile3.open("orbit3.txt");
-	myfile4.open("orbit4.txt");
+	myfile1.open("log/orbit/orbit1.txt");
+	myfile2.open("log/orbit/orbit2.txt");
+	myfile3.open("log/orbit/orbit3.txt");
+	myfile4.open("log/orbit/orbit4.txt");
 	populate();
 }
 
