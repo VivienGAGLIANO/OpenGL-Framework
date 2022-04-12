@@ -11,7 +11,7 @@ Scene* Scene::instance;
 int nbObjects = 0;
 float G = 1;//0.66741;
 bool print = false;
-ofstream myfile1, myfile2, myfile3, myfile4;
+ofstream myfile1, myfile2, myfile3, myfile4, myfile5;
 
 Scene::Scene()
 {
@@ -19,6 +19,7 @@ Scene::Scene()
 	myfile2.open("log/orbit/orbit2.txt");
 	myfile3.open("log/orbit/orbit3.txt");
 	myfile4.open("log/orbit/orbit4.txt");
+	myfile5.open("log/orbit/orbit5.txt");
 	populate();
 }
 
@@ -37,7 +38,7 @@ void Scene::populate()
 	// horse->set_material(new Material);
 	// horse->set_model(new Model("resources/model/rocking-horse-with-wheels/source/Rocking_horse_with_wheels_SF/Rocking_horse_with_wheels_SF.obj"));
 	// horse->translate(glm::vec3(-3, 0, 0));
-	// horse->scale(glm::vec3(.3, .3, .3));
+	// horse->set_scale(glm::vec3(.3, .3, .3));
 	// objects.push_back(horse);
 
 	// auto suzanne = new Template("suzanne");
@@ -50,11 +51,11 @@ void Scene::populate()
 	//ref->set_material(new Material);
 	//ref->set_model(new Model("resources/model/planet/scene.gltf"));
 	//ref->translate(glm::vec3(2, 0, -2));
-	//ref->scale(glm::vec3(.2, .2, .2));
+	//ref->set_scale(glm::vec3(.2, .2, .2));
 	//objects.push_back(ref);
 	//nbObjects++;
 
-	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f);
+	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(2));
 	sun->set_material(new Material);
 	sun->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(sun);
@@ -66,28 +67,34 @@ void Scene::populate()
 	objects.push_back(planet1);
 	nbObjects++;
 
-	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, -58.0f), glm::vec3(-30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.3f));
+	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, 58.0f), glm::vec3(30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.3f));
 	planet2->set_material(new Material);
 	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet2);
 	nbObjects++;
 
-	auto planet3 = new Planet("Planet_three", 1, glm::vec3(-44.8f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 50.0f), 1.f, glm::vec3(0.2f));
+	auto planet3 = new Planet("Planet_three", 1, glm::vec3(0.0f, 0.0f, 44.8f), glm::vec3(50.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
 	planet3->set_material(new Material);
 	planet3->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet3);
 	nbObjects++;
 
-	auto planet4 = new Planet("Planet_four", 10, glm::vec3(28.85f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -120.0f), 1.f, glm::vec3(0.5f));
+	auto planet4 = new Planet("Planet_four", 100, glm::vec3(0.0f, 0.0f, 31.61f), glm::vec3(100.0f, 0.0f, 0.0f), 1.f);
 	planet4->set_material(new Material);
 	planet4->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet4);
+	nbObjects++;
+
+	auto planet5 = new Planet("Planet_five", 0.001, glm::vec3(0.0f, 0.0f, 38.7f), glm::vec3(102.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.1f));
+	planet5->set_material(new Material);
+	planet5->set_model(new Model("resources/model/planet/scene.gltf"));
+	objects.push_back(planet5);
 	nbObjects++;
 	
 	//auto planet2= new Planet("Planet_two", 1, glm::vec3(0, 0, 0), glm::vec3(10, 0, 0), glm::vec3(0, 0, -5), 1.f);
 	//planet2->set_material(new Material);
 	//planet2->set_model(new Model("resources/model/planet/scene.gltf"));
-	//planet2->scale(glm::vec3(.3, .3, .3));
+	//planet2->set_scale(glm::vec3(.3, .3, .3));
 	//objects.push_back(planet2);
 	//nbObjects++;
 }
@@ -98,6 +105,7 @@ Scene::~Scene()
 	myfile2.close();
 	myfile3.close();
 	myfile4.close();
+	myfile5.close();
 	delete camera;
 	for (Object* obj : objects)
 		delete obj;
@@ -124,7 +132,7 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 	// calculate the gravitational force between object object and object2
 	float dist = glm::length(o2->getPosition() - o1->getPosition());
 
-	if (dist <= 1) // pour éviter l'explosion du systeme
+	if (dist <= 1) // pour ï¿½viter l'explosion du systeme
 		return glm::vec3(0.0f, 0.0f, 0.0f);
 
 	glm::vec3 forceDir = glm::normalize(o2->getPosition() - o1->getPosition()); // direction
@@ -140,13 +148,16 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 			myfile3 << dist << "\n";
 		else if (o2->name == "Planet_four")
 			myfile4 << dist << "\n";
+	
+	if (o1->name == "Planet_four")
+			myfile5 << dist << "\n";
 
-	if (print) {
-		myfile2 << o2->name.c_str() <<  " ----{ " << dist << " }---> " << o1->name.c_str() << " : \t Force : " << forceMag << "\n";
-		myfile2 << "\tDirection:\t(" << forceDir.x << ", " << forceDir.y << ", " << forceDir.z << ")\n";
-		myfile2 << "\tVecteur force:\t(" << forceVec.x << ", " << forceVec.y << "," << forceVec.z << ")\n";
-		myfile2 << "\t" << o1->name.c_str() << "\t(" << ((Planet*)o1)->getPosition().x << ", " << ((Planet*)o1)->getPosition().y << ", " << ((Planet*)o1)->getPosition().z << ")\n";
-		myfile2 << "\t" << o2->name.c_str() << "\t(" << ((Planet*)o2)->getPosition().x << ", " << ((Planet*)o2)->getPosition().y << ", " << ((Planet*)o2)->getPosition().z << ")\n";
+	if (print && o2->name == "Planet_five") {
+		cout << o2->name.c_str() <<  " ----{ " << dist << " }---> " << o1->name.c_str() << " : \t Force : " << forceMag << "\n";
+		cout << "\tDirection:\t(" << forceDir.x << ", " << forceDir.y << ", " << forceDir.z << ")\n";
+		cout << "\tVecteur force:\t(" << forceVec.x << ", " << forceVec.y << "," << forceVec.z << ")\n";
+		cout << "\t" << o1->name.c_str() << "\t(" << ((Planet*)o1)->getPosition().x << ", " << ((Planet*)o1)->getPosition().y << ", " << ((Planet*)o1)->getPosition().z << ")\n";
+		cout << "\t" << o2->name.c_str() << "\t(" << ((Planet*)o2)->getPosition().x << ", " << ((Planet*)o2)->getPosition().y << ", " << ((Planet*)o2)->getPosition().z << ")\n";
 	}
 	return forceVec;
 }
@@ -156,7 +167,7 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 void Scene::updateVelocity(const double& delta_time)
 {
 	if (print)
-		myfile2 << "-------------------------------------------------------\n";
+		cout << "-------------------------------------------------------\n";
 	for (int i = 0; i < nbObjects; i++)
 	{
 		Object* object = objects[i];
