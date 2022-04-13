@@ -51,28 +51,22 @@
     "materials" : [
         {
             "doubleSided" : true,
-            "name" : "Material.001",
+            "name" : "verriere",
             "pbrMetallicRoughness" : {
-                "baseColorFactor" : [
-                    0.18338839709758759,
-                    0.8000000715255737,
-                    0.7150096297264099,
-                    1
-                ],
+                "baseColorTexture" : {
+                    "index" : 0
+                },
                 "metallicFactor" : 0,
                 "roughnessFactor" : 0.5
             }
         },
         {
             "doubleSided" : true,
-            "name" : "Material.002",
+            "name" : "metal",
             "pbrMetallicRoughness" : {
-                "baseColorFactor" : [
-                    0.17572879791259766,
-                    0.16667057573795319,
-                    0.14115458726882935,
-                    1
-                ],
+                "baseColorTexture" : {
+                    "index" : 1
+                },
                 "metallicFactor" : 0,
                 "roughnessFactor" : 0.5
             }
@@ -101,6 +95,28 @@
                     "material" : 1
                 }
             ]
+        }
+    ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        },
+        {
+            "sampler" : 0,
+            "source" : 1
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "verriere Base Color",
+            "uri" : "texture/verriere%20Base%20Color.jpg"
+        },
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "structure",
+            "uri" : "texture/structure.jpg"
         }
     ],
     "accessors" : [
@@ -213,6 +229,12 @@
             "buffer" : 0,
             "byteLength" : 1344,
             "byteOffset" : 24776
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9729,
+            "minFilter" : 9987
         }
     ],
     "buffers" : [
