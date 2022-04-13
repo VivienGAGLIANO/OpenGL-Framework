@@ -54,6 +54,12 @@ void Scene::populate()
 	//ref->set_scale(glm::vec3(.2, .2, .2));
 	//objects.push_back(ref);
 	//nbObjects++;
+	auto vessel = new CelestBody("Spaceship", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(0.5f));
+	vessel->translate(glm::vec3(0.0f, 10.0f, 0.0f)); // comme la position n'est pas encore update elle se retrouve tjr en 0 0 0
+	vessel->set_material(new Material);
+	vessel->set_model(new Model("resources/model/soucoupe/scene.gltf"));
+	objects.push_back(vessel);
+	nbObjects++;
 
 	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.05f));
 	sun->set_material(new Material);
