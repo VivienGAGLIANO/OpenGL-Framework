@@ -1,5 +1,6 @@
 #include "scene.h"
 #include "planet.h"
+#include "interpolation.h"
 #include "Utils.h"
 #include <stdio.h>
 using namespace std;
@@ -11,6 +12,11 @@ Scene* Scene::instance;
 int nbObjects = 0;
 float G = 1;//0.66741;
 bool print = false;
+
+// pour l'iterpolation
+const long t_cycle = 10000; // le temps d'un cycle d'animation (en millisecondes)
+static double t_norm; // le temps normalisé : au debut du cycle =0 et a la fin, = 1.0 - epsilon
+
 ofstream myfile1, myfile2, myfile3, myfile4, myfile5;
 
 Scene::Scene()
@@ -54,7 +60,7 @@ void Scene::populate()
 	//ref->set_scale(glm::vec3(.2, .2, .2));
 	//objects.push_back(ref);
 	//nbObjects++;
-	auto vessel = new CelestBody("Spaceship", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(0.5f));
+	auto vessel = new Interpolation("Spaceship", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(0.02f));
 	vessel->translate(glm::vec3(0.0f, 10.0f, 0.0f)); // comme la position n'est pas encore update elle se retrouve tjr en 0 0 0
 	vessel->set_material(new Material);
 	vessel->set_model(new Model("resources/model/soucoupe/scene.gltf"));
@@ -200,6 +206,12 @@ void Scene::updatePosition(const double& delta_time)
 		if (dynamic_cast<Planet*>(object))
 		{
 			((Planet*)object)->setPosition(delta_time);
+		}
+		else if (dynamic_cast<Interpolation*>(object))
+		{
+			glm::vec3 pos = ((Interpolation*)object)->cat_rom_t(double((int)delta_time % 1) / double(t_cycle));
+			cout << "(" << pos.x << ", " << pos.y << ", " << pos.z << ")\n";
+			((Interpolation*)object)->setPosition(pos);
 		}
 		object->update(delta_time);
 	}

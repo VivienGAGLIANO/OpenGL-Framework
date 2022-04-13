@@ -19,7 +19,7 @@ class CelestBody : public Object
 		void setVelocity(const double& delta_time);
 		void setPosition(const double& delta_time);
 
-private:
+protected:
 	glm::vec3 force;
 	glm::vec3 velocity;
 	glm::vec3 position;
