@@ -1,7 +1,33 @@
 #include "interpolation.h"
 
-Interpolation::Interpolation() // initialiser votre table G(u)
+Interpolation::Interpolation(const std::string& name, const glm::vec3& v, const glm::vec3& p)
+	: CelestBody(name, v, p, glm::vec3(1.0f))
 {
+	createTable();
+}
+
+Interpolation::Interpolation(const std::string& name, const glm::vec3& v, const glm::vec3& p, const glm::vec3& scale)
+	: CelestBody(name, v, p, glm::vec3(1.0f))
+{
+	createTable();
+}
+
+void Interpolation::createTable()
+{
+	// initialiser votre table G(u)- ici avec des points hardcodés
+	//PointsControle.push_back(glm::vec3(0.0f,0.0f,0.0f));
+	//PointsControle.push_back(glm::vec3(1.0f,0.0f,0.0f));
+	PointsControle.push_back(glm::vec3(10.0f, 0.0f, 0.0f));
+	PointsControle.push_back(glm::vec3(10.0f, 3.0f, 10.0f));
+	PointsControle.push_back(glm::vec3(0.0f, 6.0f, 10.0f));
+	PointsControle.push_back(glm::vec3(-10.0f, 4.0f, 10.0f));
+	PointsControle.push_back(glm::vec3(-10.0f, 2.0f, 0.0f));
+	PointsControle.push_back(glm::vec3(-10.0f, -2.0f, -10.0f));
+	PointsControle.push_back(glm::vec3(0.0f, -5.0f, -10.0f));
+	PointsControle.push_back(glm::vec3(10.0f, -2.0f, -10.0f));
+	PointsControle.push_back(glm::vec3(10.0f, 0.0f, 0.0f));
+
+
 	float step = 1.0 / GrandeurTable;
 	table = (float**)malloc(sizeof(float*) * (GrandeurTable * (PointsControle.size() - 1) + 1));
 	table[0] = (float*)malloc(sizeof(float) * 2);
@@ -14,7 +40,7 @@ Interpolation::Interpolation() // initialiser votre table G(u)
 		table[i][0] = step * i;
 
 		if (i % GrandeurTable == 0)
-			table[i][1] = table[i - GrandeurTable][1] + norme(PointsControle[i * step - 1] - PointsControle[i * step]); // TODO : norme a coder dans Util ou glm
+			table[i][1] = table[i - GrandeurTable][1] + glm::length(PointsControle[i * step - 1] - PointsControle[i * step]); // TODO : norme a coder dans Util ou glm
 	}
 
 	for (size_t i = 1; i < GrandeurTable * (PointsControle.size() - 1); i++)
@@ -64,7 +90,7 @@ void Interpolation::inter_lin(float t_norm, glm::vec3& PO, glm::vec3& VN)
 	float du = u - i;
 
 	PO = PointsControle[i] + du * (PointsControle[i + 1] - PointsControle[i]);
-	VN = unitaire(PointsControle[i + 1] - PointsControle[i]); // TODO : unitaire a coder dans Util ou glm
+	VN = glm::normalize(PointsControle[i + 1] - PointsControle[i]); // TODO : unitaire a coder dans Util ou glm
 }
 
 std::vector<float> Interpolation::coefficient_hermite(float u)
@@ -90,22 +116,22 @@ std::pair<glm::vec3, glm::vec3> Interpolation::catmull_rom(float u)
 	if (i == 0)
 	{
 		if (PointsControle[PointsControle.size() - 1] == PointsControle[0]) // Trajet circulaire
-			Pi_prime = (Pip1 - PointsControle[PointsControle.size() - 2]) * .5;
+			Pi_prime = (Pip1 - PointsControle[PointsControle.size() - 2]) * 0.5f;
 		else
-			Pi_prime = (Pip1 - (PointsControle[i + 2] - Pip1) - Pi) * .5;
+			Pi_prime = (Pip1 - (PointsControle[i + 2] - Pip1) - Pi) * 0.5f;
 	}
 	else
-		Pi_prime = (Pip1 - PointsControle[i - 1]) * .5;
+		Pi_prime = (Pip1 - PointsControle[i - 1]) * .5f;
 
 	if (i == PointsControle.size() - 2)
 	{
 		if (PointsControle[PointsControle.size() - 1] == PointsControle[0]) // Trajet circulaire
-			Pip1_prime = (PointsControle[1] - Pi) * .5;
+			Pip1_prime = (PointsControle[1] - Pi) * 0.5f;
 		else
-			Pip1_prime = (Pip1 + (Pi - PointsControle[i - 1]) - Pi) * .5;
+			Pip1_prime = (Pip1 + (Pi - PointsControle[i - 1]) - Pi) * 0.5f;
 	}
 	else
-		Pip1_prime = (PointsControle[i + 2] - Pi) * .5;
+		Pip1_prime = (PointsControle[i + 2] - Pi) * 0.5f;
 
 	glm::vec3 PO = coef[0] * Pi + coef[1] * Pip1 + coef[2] * Pi_prime + coef[3] * Pip1_prime;
 	glm::vec3 VN = (coef[4] * Pi + coef[5] * Pip1 + coef[6] * Pi_prime + coef[7] * Pip1_prime) - glm::vec3(0, 0, 0);
