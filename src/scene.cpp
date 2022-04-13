@@ -15,7 +15,7 @@ bool print = false;
 
 // pour l'iterpolation
 const long t_cycle = 10000; // le temps d'un cycle d'animation (en millisecondes)
-static double t_norm; // le temps normalisé : au debut du cycle =0 et a la fin, = 1.0 - epsilon
+double t = 0;
 
 ofstream myfile1, myfile2, myfile3, myfile4, myfile5;
 
@@ -209,8 +209,10 @@ void Scene::updatePosition(const double& delta_time)
 		}
 		else if (dynamic_cast<Interpolation*>(object))
 		{
-			glm::vec3 pos = ((Interpolation*)object)->cat_rom_t(double((int)delta_time % 1) / double(t_cycle));
-			cout << "(" << pos.x << ", " << pos.y << ", " << pos.z << ")\n";
+			if (t >= 1 * ((Interpolation*)object)->getNbPoints())
+				t = 0.0;
+
+			glm::vec3 pos = ((Interpolation*)object)->cat_rom_t(t/((Interpolation*)object)->getNbPoints());// / double(t_cycle));
 			((Interpolation*)object)->setPosition(pos);
 		}
 		object->update(delta_time);
@@ -219,12 +221,12 @@ void Scene::updatePosition(const double& delta_time)
 
 void Scene::update(const double& delta_time)
 {
+	t += delta_time;
 	camera->update(delta_time);
 
 	resetForces();
 	updateVelocity(delta_time);
 	updatePosition(delta_time);
-	//printf("\n");
 }
 
 void Scene::render(Engine* engine)
