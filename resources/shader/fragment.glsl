@@ -9,7 +9,8 @@ in VTF
 };
 
 layout (binding = 0) uniform sampler2D texture_diffuse1;
-layout (binding = 1) uniform sampler2D texture_specular1;
+layout (binding = 2) uniform sampler2D texture_specular1;
+layout (binding = 1) uniform sampler2D texture_transmission1;
 uniform vec3 light_pos;
 
 layout (location = 0) out vec4 color;
