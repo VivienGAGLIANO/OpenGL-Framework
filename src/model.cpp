@@ -133,8 +133,12 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)
 		std::vector<Texture> normal_maps = load_material_textures(mat, aiTextureType_NORMALS, "texture_normals");
 		textures.insert(textures.end(), normal_maps.cbegin(), normal_maps.cend());
 
-		//if (AI_SUCCESS == mat->Get(AI_MATKEY_SHADER_FRAGMENT, fs))
-		//	std::cout << "kboom\n";
+		auto met = load_material_textures(mat, aiTextureType_BASE_COLOR, "texture_metallic");
+		textures.insert(textures.end(), met.cbegin(), met.cbegin());
+
+		// aiString fs;
+		// if (AI_SUCCESS == mat->Get(AI_MATKEY_SHADER_FRAGMENT, fs))
+		// 	std::cout << "kboom\n";
 	}
 
 	return Mesh(vertices, indices, textures);
@@ -187,7 +191,7 @@ unsigned Model::texture_from_file(const char* path, const std::string& directory
 	}
 	else
 	{
-		std::cout << "Texture failed to load at path: " << path << std::endl;
+		std::cout << "Texture failed to load at path: " << filename << std::endl;
 		stbi_image_free(data);
 	}
 

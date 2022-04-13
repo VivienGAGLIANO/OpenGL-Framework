@@ -1,0 +1,11 @@
+Model Information:
+* title:	Coruscant
+* source:	https://sketchfab.com/3d-models/coruscant-802db255f49e4e1e8d398213ecc371ae
+* author:	Mateusz Woliński (https://sketchfab.com/jeandiz)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Coruscant" (https://sketchfab.com/3d-models/coruscant-802db255f49e4e1e8d398213ecc371ae) by Mateusz Woliński (https://sketchfab.com/jeandiz) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

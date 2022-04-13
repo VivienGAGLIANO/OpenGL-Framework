@@ -1,0 +1,11 @@
+Model Information:
+* title:	Horizon World
+* source:	https://sketchfab.com/3d-models/horizon-world-08963bf00816473f9eaa2a221f41bdad
+* author:	Requinoesis (https://sketchfab.com/Astral-Requin)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Horizon World" (https://sketchfab.com/3d-models/horizon-world-08963bf00816473f9eaa2a221f41bdad) by Requinoesis (https://sketchfab.com/Astral-Requin) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
