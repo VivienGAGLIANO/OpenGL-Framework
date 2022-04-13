@@ -19,15 +19,15 @@ void Interpolation::createTable()
 	// initialiser votre table G(u)- ici avec des points hardcodés
 	//PointsControle.push_back(glm::vec3(0.0f,0.0f,0.0f));
 	//PointsControle.push_back(glm::vec3(1.0f,0.0f,0.0f));
-	PointsControle.push_back(glm::vec3(10.0f, 0.0f, 0.0f));
-	PointsControle.push_back(glm::vec3(10.0f, 3.0f, 10.0f));
-	PointsControle.push_back(glm::vec3(0.0f, 6.0f, 10.0f));
-	PointsControle.push_back(glm::vec3(-10.0f, 4.0f, 10.0f));
-	PointsControle.push_back(glm::vec3(-10.0f, 2.0f, 0.0f));
-	PointsControle.push_back(glm::vec3(-10.0f, -2.0f, -10.0f));
-	PointsControle.push_back(glm::vec3(0.0f, -5.0f, -10.0f));
-	PointsControle.push_back(glm::vec3(10.0f, -2.0f, -10.0f));
-	PointsControle.push_back(glm::vec3(10.0f, 0.0f, 0.0f));
+	PointsControle.push_back(glm::vec3(10.0f, 0.0f, 0.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(20.0f, 3.0f, 10.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(0.0f, 6.0f, 10.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(-10.0f, 10.0f, 10.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(-30.0f, 2.0f, 0.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(-10.0f, -5.0f, -10.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(0.0f, -5.0f, -10.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(10.0f, -2.0f, -10.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(10.0f, 0.0f, 0.0f)); nbPoints++;
 
 
 	float step = 1.0 / GrandeurTable;
@@ -151,4 +151,9 @@ glm::vec3 Interpolation::cat_rom_t(float t_norm) // � compl�ter
 void Interpolation::setPosition(const glm::vec3& pos) {
 	this->prevPosition = this->position;
 	this->position = pos;
+}
+
+int Interpolation::getNbPoints()
+{
+	return this->nbPoints;
 }
