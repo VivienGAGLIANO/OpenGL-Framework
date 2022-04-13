@@ -63,7 +63,7 @@ void Scene::populate()
 	auto vessel = new Interpolation("Spaceship", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(0.02f));
 	vessel->translate(glm::vec3(0.0f, 10.0f, 0.0f)); // comme la position n'est pas encore update elle se retrouve tjr en 0 0 0
 	vessel->set_material(new Material);
-	vessel->set_model(new Model("resources/model/soucoupe/scene.gltf"));
+	vessel->set_model(new Model("resources/model/soucoupe/soucoupe.gltf"));
 	objects.push_back(vessel);
 	nbObjects++;
 
