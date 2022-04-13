@@ -85,7 +85,7 @@ void Scene::populate()
 	objects.push_back(planet4);
 	nbObjects++;
 
-	auto planet5 = new Planet("Planet_five", 0.001, glm::vec3(0.0f, 0.0f, 33.992265f), glm::vec3(107.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.008f));
+	auto planet5 = new Planet("Planet_five", 0.001, glm::vec3(0.0f, 0.0f, 33.992264f), glm::vec3(107.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.008f));
 	planet5->set_material(new Material);
 	planet5->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet5);

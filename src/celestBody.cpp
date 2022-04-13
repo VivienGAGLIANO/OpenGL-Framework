@@ -1,28 +1,43 @@
 #include "celestBody.h"
 
-CelestBody::CelestBody(const std::string& name, const float& m, const float& r)
-	: CelestBody(name, m, r, glm::vec3(1.0f)) {}
+CelestBody::CelestBody(const std::string& name, const glm::vec3& v, const glm::vec3& p)
+	: CelestBody(name, v, p, glm::vec3(0.0f)) {}
 
-CelestBody::CelestBody(const std::string& name, const float& m, const float& r, const glm::vec3& scale)
-	: Object(name, scale), mass(m), radius(r), gradRotated(0.0f) {}
+CelestBody::CelestBody(const std::string& name, const glm::vec3& v, const glm::vec3& p, const glm::vec3& scale)
+	: Object(name, scale), velocity(v), position(p), force(glm::vec3(0.0f)) {}
 
 void CelestBody::update(const double& delta_time)
 {
+	translate(this->position - this->prevPosition);
 	Object::update(delta_time); // call parent class update to handle graphic pipeline actions
 }
 
-void CelestBody::resetRotation()
-{
-	rotate(glm::vec3(0, 1, 0), glm::radians(-this->gradRotated));
+// every getter and setter for force, acceleration, velocity and position
+glm::vec3 CelestBody::getForce() {
+	return this->force;
 }
-
-void CelestBody::makeRotation(const double& delta_time)
-{
-	//rotate(glm::vec3(0, 1, 0), glm::radians(this->gradRotated) + glm::radians(90. * delta_time));
-	this->gradRotated += delta_time * 90;
-	rotate(glm::vec3(0, 1, 0), glm::radians(this->gradRotated));
+glm::vec3 CelestBody::getVelocity() {
+	return this->velocity;
 }
-
-float CelestBody::getMass(){
-	return this->mass;
+glm::vec3 CelestBody::getPosition() {
+	return this->position;
+}
+void CelestBody::resetForce() {
+	this->force = glm::vec3(0.0f, 0.0f, 0.0f);
+}
+void CelestBody::addForce(glm::vec3 f) {
+	this->force.x += f.x;
+	this->force.y += f.y;
+	this->force.z += f.z;
+}
+void CelestBody::setVelocity(const double& delta_time) {
+	this->velocity.x += this->force.x * delta_time;
+	this->velocity.y += this->force.y * delta_time;
+	this->velocity.z += this->force.z * delta_time;
+}
+void CelestBody::setPosition(const double& delta_time) {
+	this->prevPosition = this->position;
+	this->position.x += this->velocity.x * delta_time;
+	this->position.y += this->velocity.y * delta_time;
+	this->position.z += this->velocity.z * delta_time;
 }
