@@ -19,9 +19,6 @@
     <Filter Include="resources\shader">
       <UniqueIdentifier>{b41bffd8-eb4d-4a69-b509-8f66b1d9d39e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="resources\model">
-      <UniqueIdentifier>{f3007730-e237-4b5f-8620-253a212dfcc9}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -142,23 +139,6 @@
     <Image Include="resources\uvtemplate.bmp">
       <Filter>resources</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="resources\model\rocking-horse-with-wheels\source\Rocking_horse_with_wheels_SF\Rocking_horse_with_wheels_SF.obj">
-      <Filter>resources\model</Filter>
-    </Object>
-    <Object Include="resources\model\basic-bottle\source\Small Bottle\Small Bottle\Potion.obj">
-      <Filter>resources\model</Filter>
-    </Object>
-    <Object Include="resources\model\cube.obj">
-      <Filter>resources\model</Filter>
-    </Object>
-    <Object Include="resources\model\suzanne.obj">
-      <Filter>resources\model</Filter>
-    </Object>
-    <Object Include="resources\model\backpack\backpack.obj">
-      <Filter>resources\model</Filter>
-    </Object>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shader\fragment.glsl">
