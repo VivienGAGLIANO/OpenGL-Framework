@@ -3,14 +3,12 @@
 Interpolation::Interpolation(const std::string& name, const glm::vec3& v, const glm::vec3& p)
 	: CelestBody(name, v, p, glm::vec3(1.0f))
 {
-	this->U = 0;
 	createTable();
 }
 
 Interpolation::Interpolation(const std::string& name, const glm::vec3& v, const glm::vec3& p, const glm::vec3& scale)
 	: CelestBody(name, v, p, glm::vec3(1.0f))
 {
-	this->U = 0;
 	createTable();
 }
 
@@ -113,7 +111,7 @@ std::vector<float> Interpolation::coefficient_hermite(float u)
 	return std::vector<float>(coef, coef + 8);
 }
 
-std::pair<glm::vec3, glm::vec3> Interpolation::catmull_rom(float u)
+glm::vec3 Interpolation::catmull_rom(float u)
 {
 	int i = floor(u);
 	float du = u - i;
@@ -144,31 +142,16 @@ std::pair<glm::vec3, glm::vec3> Interpolation::catmull_rom(float u)
 		Pip1_prime = (PointsControle[i + 2] - Pi) * 0.5f;
 
 	glm::vec3 PO = coef[0] * Pi + coef[1] * Pip1 + coef[2] * Pi_prime + coef[3] * Pip1_prime;
-	glm::vec3 VN = (coef[4] * Pi + coef[5] * Pip1 + coef[6] * Pi_prime + coef[7] * Pip1_prime) - glm::vec3(0, 0, 0);
+	// innutile car la caméra n'est pas sur la soucoupe donc peut importe où est le regard
+	//glm::vec3 VN = (coef[4] * Pi + coef[5] * Pip1 + coef[6] * Pi_prime + coef[7] * Pip1_prime) - glm::vec3(0, 0, 0);
 
-	return std::pair<glm::vec3, glm::vec3>(PO, VN);
-}
-
-
-glm::vec3 Interpolation::cat_rom(float t_norm) // � compl�ter
-{
-	float u = t_norm * table[GrandeurTable * (PointsControle.size() - 1)][0];
-	auto p = catmull_rom(u);
-
-	PO = p.first;
-	VN = p.second;
 	return PO;
 }
-
 
 glm::vec3 Interpolation::cat_rom_t(float t_norm) // � compl�ter
 {
 	float u = lire_table(t_norm);
-	auto p = catmull_rom(u);
-
-	PO = p.first;
-	VN = p.second;
-	return PO;
+	return catmull_rom(u);
 }
 
 void Interpolation::setPosition(const glm::vec3& pos) {

@@ -9,8 +9,7 @@ using namespace std;
 #include <fstream>
 
 Scene* Scene::instance;
-float G = 1;//0.66741;
-bool print = false;
+float G = 1; // constante de gravitation
 
 // pour l'iterpolation
 const long t_cycle = 10000; // le temps d'un cycle d'animation (en millisecondes)
@@ -52,15 +51,7 @@ void Scene::populate()
 	// suzanne->translate(glm::vec3(3, 0, 0));
 	// objects.push_back(suzanne);
 
-	//auto ref = new CelestBody("reference", 1, 1.f);
-	//ref->set_material(new Material);
-	//ref->set_model(new Model("resources/model/planet/scene.gltf"));
-	//ref->translate(glm::vec3(2, 0, -2));
-	//ref->set_scale(glm::vec3(.2, .2, .2));
-	//objects.push_back(ref);
-	//nbObjects++;
 	auto vessel = new Interpolation("Spaceship", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(0.02f));
-	vessel->translate(glm::vec3(0.0f, 10.0f, 0.0f)); // comme la position n'est pas encore update elle se retrouve tjr en 0 0 0
 	vessel->set_material(new Material);
 	vessel->set_model(new Model("resources/model/soucoupe/soucoupe.gltf"));
 	objects.push_back(vessel);
@@ -148,14 +139,6 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 	
 	if (o1->name == "Planet_four")
 			myfile5 << dist << "\n";
-
-	if (print && o2->name == "Planet_five") {
-		cout << o2->name.c_str() <<  " ----{ " << dist << " }---> " << o1->name.c_str() << " : \t Force : " << forceMag << "\n";
-		cout << "\tDirection:\t(" << forceDir.x << ", " << forceDir.y << ", " << forceDir.z << ")\n";
-		cout << "\tVecteur force:\t(" << forceVec.x << ", " << forceVec.y << "," << forceVec.z << ")\n";
-		cout << "\t" << o1->name.c_str() << "\t(" << ((Planet*)o1)->getPosition().x << ", " << ((Planet*)o1)->getPosition().y << ", " << ((Planet*)o1)->getPosition().z << ")\n";
-		cout << "\t" << o2->name.c_str() << "\t(" << ((Planet*)o2)->getPosition().x << ", " << ((Planet*)o2)->getPosition().y << ", " << ((Planet*)o2)->getPosition().z << ")\n";
-	}
 	return forceVec;
 }
 
@@ -163,8 +146,6 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 // https://youtu.be/7axImc1sxa0?t=84
 void Scene::updateVelocity(const double& delta_time)
 {
-	if (print)
-		cout << "-------------------------------------------------------\n";
 	for (int i = 0; i < objects.size(); i++)
 	{
 		Object* object = objects[i];
