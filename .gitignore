@@ -39,5 +39,5 @@ x64
 *.pdf
 log
 
-resources/model/planet
-resources/model/basic-bottle
+resources/skybox/a
+resources/skybox/b

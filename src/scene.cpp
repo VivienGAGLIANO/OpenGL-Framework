@@ -219,8 +219,6 @@ void Scene::render(Engine* engine)
 {
 	for (Object *obj : objects)
 	{
-		if (obj->name == "Planet_four")
-			std::cout << "la\n";
 		obj->prepare_material();
 		obj->render();
 	}
