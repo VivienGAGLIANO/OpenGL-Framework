@@ -39,18 +39,20 @@ void Skybox::render()
 
 GLuint Skybox::load_texture(const std::string& path)
 {
+    auto faces = cartoon ? cartoon_skybox_faces : skybox_faces;
+
     GLuint tex;
     glGenTextures(1, &tex);
     glBindTexture(GL_TEXTURE_CUBE_MAP, tex);
 
     int width, height, n_chan;
-    for (int i = 0; i < skybox_faces.size(); ++i)
+    for (int i = 0; i < faces.size(); ++i)
     {
-        unsigned char* data = stbi_load((path + skybox_faces[i]).c_str(), &width, &height, &n_chan, 0);
+        unsigned char* data = stbi_load((path + faces[i]).c_str(), &width, &height, &n_chan, 0);
         if (data)
             glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
         else
-            std::cerr << "Skybox face " << path << skybox_faces[i] << " couldn't be loaded.\n";
+            std::cerr << "Skybox face " << path << faces[i] << " couldn't be loaded.\n";
 
         stbi_image_free(data);
     }

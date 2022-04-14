@@ -9,9 +9,12 @@ using namespace std;
 #include <fstream>
 
 Scene* Scene::instance;
+
+
+
 float G = 1; // constante de gravitation
 
-// pour l'iterpolation
+// pour l'interpolation
 const long t_cycle = 10000; // le temps d'un cycle d'animation (en millisecondes)
 double t = 0;
 
@@ -39,8 +42,10 @@ Scene::Scene()
 		15.f
 	};
 
-	populate();
-	// populateCartoon();
+	if (cartoon)
+		populateCartoon();
+	else
+		populate();
 }
 
 void Scene::populate()

@@ -8,6 +8,9 @@
 #include "object.h"
 
 
+bool cartoon = false;
+
+
 struct Light
 {
 	glm::vec3 position;

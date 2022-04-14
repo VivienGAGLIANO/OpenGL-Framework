@@ -23,6 +23,16 @@ private:
     Pipeline pipeline;
 };
 
+inline std::vector<std::string> cartoon_skybox_faces
+{
+	"right_d.jpg",
+    "left_d.jpg",
+    "top_d.jpg",
+    "bottom_d.jpg",
+    "front_d.jpg",
+    "back_d.jpg"
+};
+
 inline std::vector<std::string> skybox_faces
 {
 	"right_milk.jpg",
