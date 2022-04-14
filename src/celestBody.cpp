@@ -1,10 +1,10 @@
 #include "celestBody.h"
 
 CelestBody::CelestBody(const std::string& name, const glm::vec3& v, const glm::vec3& p)
-	: CelestBody(name, v, p, glm::vec3(0.0f)) {}
+	: CelestBody(name, v, p, glm::vec3(1.0f)) {}
 
 CelestBody::CelestBody(const std::string& name, const glm::vec3& v, const glm::vec3& p, const glm::vec3& scale)
-	: Object(name, scale), velocity(v), position(p), force(glm::vec3(0.0f)) {}
+	: Object(name, scale), velocity(v), position(p), force(glm::vec3(0.0f)), prevPosition(p){}
 
 void CelestBody::update(const double& delta_time)
 {

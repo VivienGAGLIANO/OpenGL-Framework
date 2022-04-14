@@ -1,5 +1,6 @@
 #include "scene.h"
 #include "planet.h"
+#include "interpolation.h"
 #include "Utils.h"
 #include <stdio.h>
 using namespace std;
@@ -10,6 +11,11 @@ using namespace std;
 Scene* Scene::instance;
 float G = 1;//0.66741;
 bool print = false;
+
+// pour l'iterpolation
+const long t_cycle = 10000; // le temps d'un cycle d'animation (en millisecondes)
+double t = 0;
+
 ofstream myfile1, myfile2, myfile3, myfile4, myfile5;
 
 Scene::Scene()
@@ -53,6 +59,12 @@ void Scene::populate()
 	//ref->set_scale(glm::vec3(.2, .2, .2));
 	//objects.push_back(ref);
 	//nbObjects++;
+	auto vessel = new Interpolation("Spaceship", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(0.02f));
+	vessel->translate(glm::vec3(0.0f, 10.0f, 0.0f)); // comme la position n'est pas encore update elle se retrouve tjr en 0 0 0
+	vessel->set_material(new Material);
+	vessel->set_model(new Model("resources/model/soucoupe/soucoupe.gltf"));
+	objects.push_back(vessel);
+	nbObjects++;
 
 	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.05f));
 	sun->set_material(new Material);
@@ -84,12 +96,6 @@ void Scene::populate()
 	planet5->set_model(new Model("resources/model/planet/scene.gltf"));
 	objects.push_back(planet5);
 	
-	//auto planet2= new Planet("Planet_two", 1, glm::vec3(0, 0, 0), glm::vec3(10, 0, 0), glm::vec3(0, 0, -5), 1.f);
-	//planet2->set_material(new Material);
-	//planet2->set_model(new Model("resources/model/planet/scene.gltf"));
-	//planet2->set_scale(glm::vec3(.3, .3, .3));
-	//objects.push_back(planet2);
-	//nbObjects++;
 }
 
 Scene::~Scene()
@@ -188,18 +194,28 @@ void Scene::updatePosition(const double& delta_time)
 		{
 			((Planet*)object)->setPosition(delta_time);
 		}
+		else if (dynamic_cast<Interpolation*>(object))
+		{
+			// les /4 sont pour accélérer le mouvement de la soucoupe par 4, sinon c'est trop lent
+			// en fait 4 fois moins de points donc on va plus vite vu que le temps est normalisé entre 2 pts
+			if (t >= 1 * (int(((Interpolation*)object)->getNbPoints()/4)))
+				t = 0.0;
+
+			glm::vec3 pos = ((Interpolation*)object)->cat_rom_t(t/(int(((Interpolation*)object)->getNbPoints()/4)));// / double(t_cycle));
+			((Interpolation*)object)->setPosition(pos);
+		}
 		object->update(delta_time);
 	}
 }
 
 void Scene::update(const double& delta_time)
 {
+	t += delta_time;
 	camera->update(delta_time);
 
 	resetForces();
 	updateVelocity(delta_time);
 	updatePosition(delta_time);
-	//printf("\n");
 }
 
 void Scene::render(Engine* engine)
