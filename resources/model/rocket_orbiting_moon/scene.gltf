@@ -323,13 +323,13 @@
       "uri": "textures/Ring_normal.png"
     },
     {
-      "uri": "textures/Raket_baseColor.jpeg"
-    },
-    {
       "uri": "textures/Raket_emissive.jpeg"
     },
     {
       "uri": "textures/Raket_normal.png"
+    },
+    {
+      "uri": "textures/Raket_baseColor.jpeg"
     },
     {
       "uri": "textures/Subdivision_Surface.1_emissive.jpeg"
