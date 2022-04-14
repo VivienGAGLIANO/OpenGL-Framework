@@ -209,10 +209,12 @@ void Scene::updatePosition(const double& delta_time)
 		}
 		else if (dynamic_cast<Interpolation*>(object))
 		{
-			if (t >= 1 * ((Interpolation*)object)->getNbPoints())
+			// les /4 sont pour accélérer le mouvement de la soucoupe par 4, sinon c'est trop lent
+			// en fait 4 fois moins de points donc on va plus vite vu que le temps est normalisé entre 2 pts
+			if (t >= 1 * (int(((Interpolation*)object)->getNbPoints()/4)))
 				t = 0.0;
 
-			glm::vec3 pos = ((Interpolation*)object)->cat_rom_t(t/((Interpolation*)object)->getNbPoints());// / double(t_cycle));
+			glm::vec3 pos = ((Interpolation*)object)->cat_rom_t(t/(int(((Interpolation*)object)->getNbPoints()/4)));// / double(t_cycle));
 			((Interpolation*)object)->setPosition(pos);
 		}
 		object->update(delta_time);
