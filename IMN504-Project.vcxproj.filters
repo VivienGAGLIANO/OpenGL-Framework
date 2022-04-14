@@ -173,7 +173,7 @@
     <None Include="resources\shader\skybox_vertex.glsl">
       <Filter>resources\shader</Filter>
     </None>
-    <None Include="resources\shader\fragment_emissive_metallic_roughness.glsl">
+    <None Include="resources\shader\fragment_coruscant.glsl">
       <Filter>resources\shader</Filter>
     </None>
   </ItemGroup>

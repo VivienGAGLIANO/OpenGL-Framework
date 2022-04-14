@@ -38,9 +38,9 @@ void Scene::populate()
 
 		glm::vec3(.5f),
 		glm::vec3(.95f, .75f, .65f),
-		glm::vec3(0),
+		glm::vec3(.5f),
 
-		60.f
+		15.f
 	};
 
 	// Scene objects
@@ -70,16 +70,16 @@ void Scene::populate()
 
 
 	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(1.0f));
-	sun->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_emissive_metallic_roughness.glsl"));
-	sun->set_model(new Model("resources/model/coruscant/scene.gltf"));
+	sun->set_material(new Material);
+	sun->set_model(new Model("resources/model/sun/scene.gltf"));
 	objects.push_back(sun);
-	 
-	/*
+
 	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 71.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.07f));
-	planet1->set_material(new Material);
-	planet1->set_model(new Model("resources/model/little_red_planet/scene.gltf"));
+	planet1->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_coruscant.glsl"));
+	planet1->set_model(new Model("resources/model/coruscant/scene.gltf"));
 	objects.push_back(planet1);
-	 
+
+	/*
 	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, 58.0f), glm::vec3(30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.03f));
 	planet2->set_material(new Material);
 	planet2->set_model(new Model("resources/model/venus/scene.gltf"));

@@ -126,15 +126,18 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)
 	{
 		// TODO : handle all texture types
 		aiMaterial* mat = scene->mMaterials[mesh->mMaterialIndex];
-		std::vector<Texture> diffuse_maps = load_material_textures(mat, aiTextureType_DIFFUSE, "texture_diffuse");
-		textures.insert(textures.end(), diffuse_maps.cbegin(), diffuse_maps.cend());
-		std::vector<Texture> specular_maps = load_material_textures(mat, aiTextureType_SPECULAR, "texture_specular");
-		textures.insert(textures.end(), specular_maps.cbegin(), specular_maps.cend());
-		std::vector<Texture> normal_maps = load_material_textures(mat, aiTextureType_NORMALS, "texture_normals");
-		textures.insert(textures.end(), normal_maps.cbegin(), normal_maps.cend());
 
-		auto emission = load_material_textures(mat, aiTextureType_EMISSIVE, "texture_emission");
-		textures.insert(textures.end(), emission.cbegin(), emission.cend());
+		auto diffuse_maps = load_material_textures(mat, aiTextureType_DIFFUSE, "texture_diffuse");
+		textures.insert(textures.end(), diffuse_maps.cbegin(), diffuse_maps.cend());
+
+		auto specular_maps = load_material_textures(mat, aiTextureType_SPECULAR, "texture_specular");
+		textures.insert(textures.end(), specular_maps.cbegin(), specular_maps.cend());
+
+		auto emission_maps = load_material_textures(mat, aiTextureType_EMISSIVE, "texture_emission");
+		textures.insert(textures.end(), emission_maps.cbegin(), emission_maps.cend());
+
+		auto metallic_maps = load_material_textures(mat, aiTextureType_METALNESS, "texture_metallic");
+		textures.insert(textures.end(), metallic_maps.cbegin(), metallic_maps.cend());
 
 		// aiString fs;
 		// if (AI_SUCCESS == mat->Get(AI_MATKEY_SHADER_FRAGMENT, fs))
