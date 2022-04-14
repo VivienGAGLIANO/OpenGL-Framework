@@ -64,18 +64,18 @@ void Scene::populate()
 
 	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 71.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.07f));
 	planet1->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_rocket_moon.glsl"));
-	planet1->set_model(new Model("resources/model/rocket_orbiting_moon/scene.gltf"));
+	planet1->set_model(new Model("resources/model/venus/scene.gltf"));
 	objects.push_back(planet1);
 
 	
 	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, 58.0f), glm::vec3(30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.03f));
 	planet2->set_material(new Material);
-	planet2->set_model(new Model("resources/model/venus/scene.gltf"));
+	planet2->set_model(new Model("resources/model/coruscant/scene.gltf"));
 	objects.push_back(planet2);
 	 
 	auto planet3 = new Planet("Planet_three", 1, glm::vec3(0.0f, 0.0f, 44.75f), glm::vec3(50.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.04f));
 	planet3->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_horizon.glsl"));
-	planet3->set_model(new Model("resources/model/horizon_world/scene.gltf"));
+	planet3->set_model(new Model("resources/model/rocket_orbiting_moon/scene.gltf"));
 	objects.push_back(planet3);
 	 
 	auto planet4 = new Planet("Planet_four", 100, glm::vec3(0.0f, 0.0f, -31.61f), glm::vec3(-80.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.05f));
@@ -85,24 +85,39 @@ void Scene::populate()
 	 
 	auto planet5 = new Planet("Planet_five", 1, glm::vec3(0.0f, 0.0f, -35.0f), glm::vec3(-50.0f, 20.0f, 0.0f), 1.f, glm::vec3(4.0f));
 	planet5->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_coruscant.glsl"));
-	planet5->set_model(new Model("resources/model/coruscant/scene.gltf"));
+	planet5->set_model(new Model("resources/model/horizon_world/scene.gltf"));
 	objects.push_back(planet5);
 	
 }
 
 void Scene::populateCartoon()
 {
-	G = 5;
+	G = 10;
 
-	auto p1 = new Planet("p1", 10000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.3f));
+	auto p0 = new Planet("p0", 10000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
+	p0->set_material(new Material);
+	p0->set_model(new Model("resources/model/cartoon/bear_planet/scene.gltf"));
+	objects.push_back(p0);
+
+	auto p11 = new Planet("p11", 1, glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(5.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
+	p11->set_material(new Material);
+	p11->set_model(new Model("resources/model/cartoon/sun_lowpoly/scene.gltf"));
+	objects.push_back(p11);
+
+	auto p1 = new Planet("p1", 10, glm::vec3(0.0f, 0.0f, -70.0f), glm::vec3(-10.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
 	p1->set_material(new Material);
-	p1->set_model(new Model("resources/model/lowilds_planet/scene.gltf"));
+	p1->set_model(new Model("resources/model/cartoon/lowilds_planet/scene.gltf"));
 	objects.push_back(p1);
 
-	auto p2 = new Planet("p2", 10000, glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.5f));
+	auto p2 = new Planet("p2", 10, glm::vec3(0.0f, 0.0f, 20.0f), glm::vec3(15.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.4f));
 	p2->set_material(new Material);
-	p2->set_model(new Model("resources/model/penguin_planet/scene.gltf"));
+	p2->set_model(new Model("resources/model/cartoon/penguin_planet/scene.gltf"));
 	objects.push_back(p2);
+
+	auto p3 = new Planet("p3", 10, glm::vec3(20.0f, 0.0f, 0.0f), glm::vec3(0.0f, 20.0f, 0.0f), 1.f, glm::vec3(0.6f));
+	p3->set_material(new Material);
+	p3->set_model(new Model("resources/model/cartoon/clutter/scene.gltf"));
+	objects.push_back(p3);
 }
 
 Scene::~Scene()
