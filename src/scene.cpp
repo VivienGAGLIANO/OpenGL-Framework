@@ -99,25 +99,25 @@ void Scene::populateCartoon()
 	p0->set_model(new Model("resources/model/cartoon/bear_planet/scene.gltf"));
 	objects.push_back(p0);
 
-	auto p11 = new Planet("p11", 1, glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(5.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
-	p11->set_material(new Material);
-	p11->set_model(new Model("resources/model/cartoon/sun_lowpoly/scene.gltf"));
-	objects.push_back(p11);
-
-	auto p1 = new Planet("p1", 10, glm::vec3(0.0f, 0.0f, -70.0f), glm::vec3(-10.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
+	auto p1 = new Planet("p1", 1, glm::vec3(0.0f, 0.0f, 20.0f), glm::vec3(10.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
 	p1->set_material(new Material);
-	p1->set_model(new Model("resources/model/cartoon/lowilds_planet/scene.gltf"));
+	p1->set_model(new Model("resources/model/cartoon/sun_lowpoly/scene.gltf"));
 	objects.push_back(p1);
 
-	auto p2 = new Planet("p2", 10, glm::vec3(0.0f, 0.0f, 20.0f), glm::vec3(15.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.4f));
+	auto p2 = new Planet("p2", 10, glm::vec3(0.0f, 0.0f, -70.0f), glm::vec3(-10.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
 	p2->set_material(new Material);
-	p2->set_model(new Model("resources/model/cartoon/penguin_planet/scene.gltf"));
+	p2->set_model(new Model("resources/model/cartoon/lowilds_planet/scene.gltf"));
 	objects.push_back(p2);
 
-	auto p3 = new Planet("p3", 10, glm::vec3(20.0f, 0.0f, 0.0f), glm::vec3(0.0f, 20.0f, 0.0f), 1.f, glm::vec3(0.6f));
+	auto p3 = new Planet("p3", 10, glm::vec3(0.0f, 0.0f, 30.0f), glm::vec3(15.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.4f));
 	p3->set_material(new Material);
-	p3->set_model(new Model("resources/model/cartoon/clutter/scene.gltf"));
+	p3->set_model(new Model("resources/model/cartoon/penguin_planet/scene.gltf"));
 	objects.push_back(p3);
+
+	auto p4 = new Planet("p4", 10, glm::vec3(20.0f, 0.0f, 0.0f), glm::vec3(0.0f, 20.0f, 0.0f), 1.f, glm::vec3(0.6f));
+	p4->set_material(new Material);
+	p4->set_model(new Model("resources/model/cartoon/clutter/scene.gltf"));
+	objects.push_back(p4);
 }
 
 Scene::~Scene()
