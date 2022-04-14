@@ -71,17 +71,17 @@ void Scene::populate()
 	planet2->set_model(new Model("resources/model/venus/scene.gltf"));
 	objects.push_back(planet2);
 	 
-	auto planet3 = new Planet("Planet_three", 1, glm::vec3(0.0f, 0.0f, 44.8f), glm::vec3(50.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.04f));
+	auto planet3 = new Planet("Planet_three", 1, glm::vec3(0.0f, 0.0f, 44.75f), glm::vec3(50.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.04f));
 	planet3->set_material(new Material);
 	planet3->set_model(new Model("resources/model/horizon_world/scene.gltf"));
 	objects.push_back(planet3);
 	 
-	auto planet4 = new Planet("Planet_four", 100, glm::vec3(0.0f, 0.0f, 31.61f), glm::vec3(100.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.05f));
+	auto planet4 = new Planet("Planet_four", 100, glm::vec3(0.0f, 0.0f, -31.61f), glm::vec3(-80.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.05f));
 	planet4->set_material(new Material);
 	planet4->set_model(new Model("resources/model/rocket_orbiting_moon/scene.gltf"));
 	objects.push_back(planet4);
 	 
-	auto planet5 = new Planet("Planet_five", 0.001, glm::vec3(0.0f, 0.0f, 33.992264f), glm::vec3(107.0f, 0.0f, 0.0f), 1.f, glm::vec3(2.0f));
+	auto planet5 = new Planet("Planet_five", 1, glm::vec3(0.0f, 0.0f, -35.0f), glm::vec3(-50.0f, 20.0f, 0.0f), 1.f, glm::vec3(4.0f));
 	planet5->set_material(new Material);
 	planet5->set_model(new Model("resources/model/generic_planet/scene.gltf"));
 	objects.push_back(planet5);
@@ -136,9 +136,9 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 			myfile3 << dist << "\n";
 		else if (o2->name == "Planet_four")
 			myfile4 << dist << "\n";
-	
-	if (o1->name == "Planet_four")
+		else
 			myfile5 << dist << "\n";
+	
 	return forceVec;
 }
 
