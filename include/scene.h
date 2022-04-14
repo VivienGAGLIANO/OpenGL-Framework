@@ -27,6 +27,7 @@ public:
 private:
 	Scene();
 	void populate();
+	void populateCartoon();
 
 	static Scene *instance;
 	// Light light;
