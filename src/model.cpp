@@ -139,9 +139,8 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)
 		auto metallic_maps = load_material_textures(mat, aiTextureType_METALNESS, "texture_metallic");
 		textures.insert(textures.end(), metallic_maps.cbegin(), metallic_maps.cend());
 
-		// aiString fs;
-		// if (AI_SUCCESS == mat->Get(AI_MATKEY_SHADER_FRAGMENT, fs))
-		// 	std::cout << "kboom\n";
+		auto normal_maps = load_material_textures(mat, aiTextureType_NORMALS, "texture_normal");
+		textures.insert(textures.end(), normal_maps.cbegin(), normal_maps.cend());
 	}
 
 	return Mesh(vertices, indices, textures);

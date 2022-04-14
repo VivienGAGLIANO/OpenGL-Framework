@@ -8,10 +8,11 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned> indices, std::vec
 
 void Mesh::prepare_for_render(Pipeline pipeline)
 {
-    unsigned int diffuseNr = 1;
-    unsigned int specularNr = 1;
-    unsigned int emissionNr = 1;
-    unsigned int metallicNr = 1;
+    unsigned int diffuseNr = 0;
+    unsigned int specularNr = 0;
+    unsigned int emissionNr = 0;
+    unsigned int metallicNr = 0;
+    unsigned int normalNr = 0;
     for (unsigned int i = 0; i < textures.size(); i++)
     {
         glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
@@ -19,13 +20,15 @@ void Mesh::prepare_for_render(Pipeline pipeline)
         std::string number;
         std::string name = textures[i].type;
         if (name == "texture_diffuse")
-            number = std::to_string(diffuseNr++);
+            number = std::to_string(++diffuseNr);
         else if (name == "texture_specular")
-            number = std::to_string(specularNr++);
+            number = std::to_string(++specularNr);
         else if (name == "texture_emission")
-            number = std::to_string(emissionNr++);
+            number = std::to_string(++emissionNr);
         else if (name == "texture_metallic")
-            number = std::to_string(metallicNr++);
+            number = std::to_string(++metallicNr);
+        else if (name == "texture_normal")
+            number = std::to_string(++normalNr);
 
         pipeline.set_uniform_float(pipeline.get_fragment_id(), (name + number).c_str(), i);
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
