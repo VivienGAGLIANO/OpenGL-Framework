@@ -24,13 +24,9 @@ Scene::Scene()
 	myfile3.open("log/orbit3.txt");
 	myfile4.open("log/orbit4.txt");
 	myfile5.open("log/orbit5.txt");
-	populate();
-}
 
-void Scene::populate()
-{
 	// Perspective or orthogonal camera are available
-	camera = new PerspectiveCamera(glm::radians(60.f), float(800) / float(600), .1f, 100.f);
+	camera = new PerspectiveCamera(glm::radians(60.f), float(1800) / float(1600), .1f, 100.f);
 
 	light =
 	{
@@ -43,8 +39,12 @@ void Scene::populate()
 		15.f
 	};
 
+	//populate();
+	populateCartoon();
+}
 
-	
+void Scene::populate()
+{
 	auto vessel = new Interpolation("Spaceship", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(0.02f));
 	vessel->set_material(new Material);
 	vessel->set_model(new Model("resources/model/soucoupe/soucoupe.gltf"));
@@ -83,6 +83,21 @@ void Scene::populate()
 	planet5->set_model(new Model("resources/model/coruscant/scene.gltf"));
 	objects.push_back(planet5);
 	
+}
+
+void Scene::populateCartoon()
+{
+	G = 5;
+
+	auto p1 = new Planet("p1", 10000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.3f));
+	p1->set_material(new Material);
+	p1->set_model(new Model("resources/model/lowilds_planet/scene.gltf"));
+	objects.push_back(p1);
+
+	auto p2 = new Planet("p2", 10000, glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.5f));
+	p2->set_material(new Material);
+	p2->set_model(new Model("resources/model/penguin_planet/scene.gltf"));
+	objects.push_back(p2);
 }
 
 Scene::~Scene()
