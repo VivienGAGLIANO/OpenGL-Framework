@@ -64,7 +64,6 @@ void Scene::populate()
 	vessel->set_material(new Material);
 	vessel->set_model(new Model("resources/model/soucoupe/soucoupe.gltf"));
 	objects.push_back(vessel);
-	nbObjects++;
 
 	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.05f));
 	sun->set_material(new Material);
