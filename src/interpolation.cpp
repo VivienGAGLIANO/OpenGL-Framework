@@ -19,15 +19,38 @@ void Interpolation::createTable()
 	// initialiser votre table G(u)- ici avec des points hardcodés
 	//PointsControle.push_back(glm::vec3(0.0f,0.0f,0.0f));
 	//PointsControle.push_back(glm::vec3(1.0f,0.0f,0.0f));
-	PointsControle.push_back(glm::vec3(10.0f, 0.0f, 0.0f)); nbPoints++;
-	PointsControle.push_back(glm::vec3(20.0f, 3.0f, 10.0f)); nbPoints++;
-	PointsControle.push_back(glm::vec3(0.0f, 6.0f, 10.0f)); nbPoints++;
-	PointsControle.push_back(glm::vec3(-10.0f, 10.0f, 10.0f)); nbPoints++;
-	PointsControle.push_back(glm::vec3(-30.0f, 2.0f, 0.0f)); nbPoints++;
-	PointsControle.push_back(glm::vec3(-10.0f, -5.0f, -10.0f)); nbPoints++;
-	PointsControle.push_back(glm::vec3(0.0f, -5.0f, -10.0f)); nbPoints++;
-	PointsControle.push_back(glm::vec3(10.0f, -2.0f, -10.0f)); nbPoints++;
-	PointsControle.push_back(glm::vec3(10.0f, 0.0f, 0.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(33.0f, 0.0f, 0.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(22.0f, 3.0f, 5.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(16.0f, 9.0f, 10.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(6.0f, 15.0f, 18.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(0.0f, 25.0f, 2.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(-5.0f, 22.0f, -9.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(4.0f, 10.0f, -25.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(13.0f, 7.0f, -40.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(15.0f, 5.0f, -60.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(3.0f, -6.0f, -68.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(-15.0f, -15.0f, -35.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(-33.0f, -14.0f, -17.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(-70.0f, -7.0f, -3.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(-72.0f, -3.0f, 25.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(-50.0f, 4.0f, 40.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(-20.0f, 10.0f, 75.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(-12.0f, 16.0f, 82.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(-7.0f, 24.0f, 57.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(26.0f, 41.0f, 25.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(45.0f, 50.0f, 7.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(55.0f, 36.0f, -7.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(42.0f, 31.0f, -32.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(33.0f, 12.0f, -55.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(51.0f, 7.0f, -78.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(58.0f, 4.0f, -85.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(76.0f, 0.0f, -78.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(87.0f, -6.0f, -66.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(87.0f, -13.0f, -46.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(74.0f, -10.0f, -21.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(74.0f, -10.0f, -21.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(49.0f, -5.0f, -12.0f)); nbPoints++;
+	PointsControle.push_back(glm::vec3(33.0f, 0.0f, 0.0f)); nbPoints++;
 
 
 	float step = 1.0 / GrandeurTable;
