@@ -65,36 +65,35 @@ void Scene::populate()
 	vessel->set_model(new Model("resources/model/soucoupe/soucoupe.gltf"));
 	objects.push_back(vessel);
 
-	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.05f));
+	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(1.0f));
 	sun->set_material(new Material);
-	sun->set_model(new Model("resources/model/planet/scene.gltf"));
+	sun->set_model(new Model("resources/model/sun/scene.gltf"));
 	objects.push_back(sun);
-	
-	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 71.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.01f));
+	 
+	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 71.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.07f));
 	planet1->set_material(new Material);
-	planet1->set_model(new Model("resources/model/planet/scene.gltf"));
+	planet1->set_model(new Model("resources/model/little_red_planet/scene.gltf"));
 	objects.push_back(planet1);
-
-	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, 58.0f), glm::vec3(30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.005f));
+	 
+	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, 58.0f), glm::vec3(30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.03f));
 	planet2->set_material(new Material);
-	planet2->set_model(new Model("resources/model/planet/scene.gltf"));
+	planet2->set_model(new Model("resources/model/venus/scene.gltf"));
 	objects.push_back(planet2);
-
-	auto planet3 = new Planet("Planet_three", 1, glm::vec3(0.0f, 0.0f, 44.8f), glm::vec3(50.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.008f));
+	 
+	auto planet3 = new Planet("Planet_three", 1, glm::vec3(0.0f, 0.0f, 44.8f), glm::vec3(50.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.04f));
 	planet3->set_material(new Material);
-	planet3->set_model(new Model("resources/model/planet/scene.gltf"));
+	planet3->set_model(new Model("resources/model/horizon_world/scene.gltf"));
 	objects.push_back(planet3);
-
-	auto planet4 = new Planet("Planet_four", 100, glm::vec3(0.0f, 0.0f, 31.61f), glm::vec3(100.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.02f));
+	 
+	auto planet4 = new Planet("Planet_four", 100, glm::vec3(0.0f, 0.0f, 31.61f), glm::vec3(100.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.05f));
 	planet4->set_material(new Material);
-	planet4->set_model(new Model("resources/model/planet/scene.gltf"));
+	planet4->set_model(new Model("resources/model/rocket_orbiting_moon/scene.gltf"));
 	objects.push_back(planet4);
-
-	auto planet5 = new Planet("Planet_five", 0.001, glm::vec3(0.0f, 0.0f, 33.992264f), glm::vec3(107.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.008f));
+	 
+	auto planet5 = new Planet("Planet_five", 0.001, glm::vec3(0.0f, 0.0f, 33.992264f), glm::vec3(107.0f, 0.0f, 0.0f), 1.f, glm::vec3(2.0f));
 	planet5->set_material(new Material);
-	planet5->set_model(new Model("resources/model/planet/scene.gltf"));
+	planet5->set_model(new Model("resources/model/generic_planet/scene.gltf"));
 	objects.push_back(planet5);
-	
 }
 
 Scene::~Scene()

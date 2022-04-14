@@ -10,6 +10,7 @@ void Mesh::prepare_for_render(Pipeline pipeline)
 {
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;
+    unsigned int transmissionNr = 1;
     for (unsigned int i = 0; i < textures.size(); i++)
     {
         glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
@@ -20,6 +21,8 @@ void Mesh::prepare_for_render(Pipeline pipeline)
             number = std::to_string(diffuseNr++);
         else if (name == "texture_specular")
             number = std::to_string(specularNr++);
+        else if (name == "texture_transmission")
+            number = std::to_string(transmissionNr++);
 
         pipeline.set_uniform_float(pipeline.get_fragment_id(), (name + number).c_str(), i);
         glBindTexture(GL_TEXTURE_2D, textures[i].id);

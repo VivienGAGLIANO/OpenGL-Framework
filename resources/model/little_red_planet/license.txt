@@ -1,0 +1,11 @@
+Model Information:
+* title:	Little Red Planet
+* source:	https://sketchfab.com/3d-models/little-red-planet-50f132f92786408b9728cc6948abde58
+* author:	Michinata (https://sketchfab.com/Michinata)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Little Red Planet" (https://sketchfab.com/3d-models/little-red-planet-50f132f92786408b9728cc6948abde58) by Michinata (https://sketchfab.com/Michinata) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
