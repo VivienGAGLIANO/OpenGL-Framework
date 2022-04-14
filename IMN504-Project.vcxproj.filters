@@ -179,6 +179,9 @@
     <None Include="resources\shader\fragment_horizon.glsl">
       <Filter>resources\shader</Filter>
     </None>
+    <None Include="resources\shader\fragment_rocket_moon.glsl">
+      <Filter>resources\shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="notes.txt" />

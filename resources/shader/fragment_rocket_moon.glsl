@@ -8,7 +8,7 @@ in VTF
 	vec3 world_pos;
 };
 
-layout (binding = 0) uniform sampler2D texture_diffuse1;
+layout (binding = 0) uniform sampler2D texture_emission1;
 layout (binding = 1) uniform sampler2D texture_normal1;
 
 struct Light
@@ -51,8 +51,8 @@ void main()
 	L = normalize(light.position - world_pos);
 	V = normalize(cam_pos - world_pos);
 
-	vec3 ambiant = light.ambiant * texture(texture_diffuse1, v_coord).rgb;
-	vec3 diffuse = compute_diffuse() * light.diffuse * texture(texture_diffuse1, v_coord).rgb;
-	
+	vec3 ambiant = light.ambiant * texture(texture_emission1, v_coord).rgb;
+	vec3 diffuse = compute_diffuse() * light.diffuse * texture(texture_emission1, v_coord).rgb;
+
 	color = vec4(ambiant + diffuse, 1.0);
 }

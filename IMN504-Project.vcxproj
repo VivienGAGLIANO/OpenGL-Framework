@@ -221,6 +221,7 @@
     <None Include="resources\shader\fragment.glsl" />
     <None Include="resources\shader\fragment_coruscant.glsl" />
     <None Include="resources\shader\fragment_horizon.glsl" />
+    <None Include="resources\shader\fragment_rocket_moon.glsl" />
     <None Include="resources\shader\skybox_fragment.glsl" />
     <None Include="resources\shader\skybox_vertex.glsl" />
     <None Include="resources\shader\vertex.glsl" />
