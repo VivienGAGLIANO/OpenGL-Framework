@@ -260,23 +260,23 @@
     "images" : [
         {
             "mimeType" : "image/png",
-            "name" : "textures/01_-_Default_normal",
-            "uri" : "01_-_Default_normal.png"
+            "name" : "01_-_Default_normal",
+            "uri" : "textures/01_-_Default_normal.png"
         },
         {
             "mimeType" : "image/png",
-            "name" : "textures/01_-_Default_baseColor",
-            "uri" : "01_-_Default_baseColor.png"
+            "name" : "01_-_Default_baseColor",
+            "uri" : "textures/01_-_Default_baseColor.png"
         },
         {
             "mimeType" : "image/png",
-            "name" : "textures/02_-_Default_baseColor",
-            "uri" : "02_-_Default_baseColor.png"
+            "name" : "02_-_Default_baseColor",
+            "uri" : "textures/02_-_Default_baseColor.png"
         },
         {
             "mimeType" : "image/png",
-            "name" : "textures/03_-_Default_baseColor",
-            "uri" : "03_-_Default_baseColor.png"
+            "name" : "03_-_Default_baseColor",
+            "uri" : "textures/03_-_Default_baseColor.png"
         }
     ],
     "accessors" : [
