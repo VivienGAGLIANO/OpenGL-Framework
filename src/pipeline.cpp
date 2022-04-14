@@ -1,9 +1,11 @@
-#include <iostream>
-#include "pipeline.h"
-
 #include <fstream>
+#include <gtc/type_ptr.hpp>
+#include <iostream>
 #include <sstream>
 #include <vector>
+
+#include "pipeline.h"
+#include "scene.h"
 
 
 Pipeline::Pipeline(const std::string &vertex_path, const std::string &fragment_path)
@@ -45,7 +47,18 @@ void Pipeline::set_uniform_matrix(GLuint program, const GLchar* name, const GLfl
 
 void Pipeline::set_uniform_vec3(GLuint program, const GLchar* name, const GLfloat* val)
 {
-	glProgramUniform3fv(program, glGetUniformLocation(program, name), 3, val);
+	glProgramUniform3fv(program, glGetUniformLocation(program, name), 1, val);
+}
+
+void Pipeline::set_uniform_light(GLuint program, const Light& light)
+{
+	set_uniform_vec3(program, "light.position",glm::value_ptr(light.position));
+	
+	set_uniform_vec3(program, "light.ambiant",glm::value_ptr(light.ambiant));
+	set_uniform_vec3(program, "light.diffuse",glm::value_ptr(light.diffuse));
+	set_uniform_vec3(program, "light.specular",glm::value_ptr(light.specular));
+
+	set_uniform_float(program, "light.shininess", light.shininess);
 }
 
 GLuint Pipeline::get_vertex_id() const

@@ -173,6 +173,9 @@
     <None Include="resources\shader\skybox_vertex.glsl">
       <Filter>resources\shader</Filter>
     </None>
+    <None Include="resources\shader\fragment_emissive_metallic_roughness.glsl">
+      <Filter>resources\shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="notes.txt" />

@@ -7,8 +7,18 @@
 #include "engine.h"
 #include "object.h"
 
-struct Light{};
-// struct Camera{};
+
+struct Light
+{
+	glm::vec3 position;
+
+	glm::vec3 ambiant;
+	glm::vec3 diffuse;
+	glm::vec3 specular;
+
+	float shininess;
+};
+
 
 class Engine;
 
@@ -17,6 +27,7 @@ class Scene
 public:
 	~Scene();
 	Camera* get_camera() const;
+	Light get_light() const;
 	void update(const double& delta_time);
 	void updateVelocity(const double& delta_time);
 	void updatePosition(const double& delta_time);
@@ -29,8 +40,8 @@ private:
 	void populate();
 
 	static Scene *instance;
-	// Light light;
 	Camera* camera;
+	Light light;
 	std::vector<Object*> objects;
 };
 

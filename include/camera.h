@@ -10,6 +10,7 @@ public:
 	void update(const double& delta_time) override;
 	void process_keyboard(int key, int action);
 	void process_mouse(double xpos, double ypos);
+	glm::vec3 get_position() const;
 	glm::mat4 get_view() const;
 	glm::mat4 get_proj() const;
 

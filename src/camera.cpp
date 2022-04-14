@@ -74,6 +74,11 @@ void Camera::process_mouse(double xpos, double ypos)
 	should_rotate = true;
 }
 
+glm::vec3 Camera::get_position() const
+{
+	return position;
+}
+
 glm::mat4 Camera::get_view() const
 {
 	return glm::lookAt(position, position + front, up);

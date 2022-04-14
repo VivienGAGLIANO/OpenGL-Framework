@@ -219,6 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shader\fragment.glsl" />
+    <None Include="resources\shader\fragment_emissive_metallic_roughness.glsl" />
     <None Include="resources\shader\skybox_fragment.glsl" />
     <None Include="resources\shader\skybox_vertex.glsl" />
     <None Include="resources\shader\vertex.glsl" />

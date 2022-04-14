@@ -32,6 +32,17 @@ void Scene::populate()
 	// Perspective or orthogonal camera are available
 	camera = new PerspectiveCamera(glm::radians(60.f), float(800) / float(600), .1f, 100.f);
 
+	light =
+	{
+		glm::vec3(0),
+
+		glm::vec3(.5f),
+		glm::vec3(.95f, .75f, .65f),
+		glm::vec3(0),
+
+		60.f
+	};
+
 	// Scene objects
 	// auto backpack = new Template("backpack");
 	// backpack->set_material(new Material);
@@ -51,16 +62,19 @@ void Scene::populate()
 	// suzanne->translate(glm::vec3(3, 0, 0));
 	// objects.push_back(suzanne);
 
+
 	auto vessel = new Interpolation("Spaceship", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(0.02f));
 	vessel->set_material(new Material);
 	vessel->set_model(new Model("resources/model/soucoupe/soucoupe.gltf"));
 	objects.push_back(vessel);
 
+
 	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(1.0f));
-	sun->set_material(new Material);
-	sun->set_model(new Model("resources/model/sun/scene.gltf"));
+	sun->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_emissive_metallic_roughness.glsl"));
+	sun->set_model(new Model("resources/model/coruscant/scene.gltf"));
 	objects.push_back(sun);
 	 
+	/*
 	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 71.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.07f));
 	planet1->set_material(new Material);
 	planet1->set_model(new Model("resources/model/little_red_planet/scene.gltf"));
@@ -85,6 +99,7 @@ void Scene::populate()
 	planet5->set_material(new Material);
 	planet5->set_model(new Model("resources/model/generic_planet/scene.gltf"));
 	objects.push_back(planet5);
+	*/
 }
 
 Scene::~Scene()
@@ -102,6 +117,11 @@ Scene::~Scene()
 Camera* Scene::get_camera() const
 {
 	return camera;
+}
+
+Light Scene::get_light() const
+{
+	return light;
 }
 
 void Scene::resetForces()

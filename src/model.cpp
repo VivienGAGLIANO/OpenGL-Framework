@@ -133,8 +133,8 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)
 		std::vector<Texture> normal_maps = load_material_textures(mat, aiTextureType_NORMALS, "texture_normals");
 		textures.insert(textures.end(), normal_maps.cbegin(), normal_maps.cend());
 
-		auto met = load_material_textures(mat, aiTextureType_TRANSMISSION, "texture_transmission");
-		textures.insert(textures.end(), met.cbegin(), met.cend());
+		auto emission = load_material_textures(mat, aiTextureType_EMISSIVE, "texture_emission");
+		textures.insert(textures.end(), emission.cbegin(), emission.cend());
 
 		// aiString fs;
 		// if (AI_SUCCESS == mat->Get(AI_MATKEY_SHADER_FRAGMENT, fs))
