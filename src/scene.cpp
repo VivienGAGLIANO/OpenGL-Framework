@@ -39,8 +39,8 @@ Scene::Scene()
 		15.f
 	};
 
-	//populate();
-	populateCartoon();
+	populate();
+	// populateCartoon();
 }
 
 void Scene::populate()
@@ -219,6 +219,8 @@ void Scene::render(Engine* engine)
 {
 	for (Object *obj : objects)
 	{
+		if (obj->name == "Planet_four")
+			std::cout << "la\n";
 		obj->prepare_material();
 		obj->render();
 	}
