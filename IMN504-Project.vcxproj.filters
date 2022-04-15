@@ -80,9 +80,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\data.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\pipeline.h">
       <Filter>include</Filter>
     </ClInclude>

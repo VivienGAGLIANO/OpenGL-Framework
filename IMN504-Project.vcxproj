@@ -176,7 +176,6 @@
     <ClInclude Include="include\application.h" />
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\celestBody.h" />
-    <ClInclude Include="include\data.h" />
     <ClInclude Include="include\interpolation.h" />
     <ClInclude Include="include\sun.h" />
     <ClInclude Include="include\Utils.h" />

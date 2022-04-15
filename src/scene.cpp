@@ -137,7 +137,7 @@ void Scene::resetForces()
 
 glm::vec3 attraction(Planet* o1, Planet* o2)
 {
-	// calculate the gravitational force between object object and object2
+	// computes the gravitational force between object object and object2
 	float dist = glm::length(o2->getPosition() - o1->getPosition());
 
 	if (dist <= 1) // pour �viter l'explosion du systeme
@@ -151,7 +151,7 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 	return forceVec;
 }
 
-// It is said on the web that actualise the velocity and the position not at the same time increase the stability of the system
+// It is said on the web that actualising the velocity and the position not at the same time increases the stability of the system
 // https://youtu.be/7axImc1sxa0?t=84
 void Scene::updateVelocity(const double& delta_time)
 {

@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-Application::Application() /*: engine(new Engine), scene(new Scene)*/
+Application::Application()
 {
 	engine = new Engine();
 	engine->init();

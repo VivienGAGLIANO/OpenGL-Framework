@@ -57,8 +57,6 @@ bool Engine::should_render() const
 
 void Engine::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-    // this->width = width;
-    // this->height = height;
     glViewport(0, 0, width, height);
 }
 

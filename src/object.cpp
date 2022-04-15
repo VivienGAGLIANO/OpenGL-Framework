@@ -70,11 +70,5 @@ void Object::rotate(const glm::vec3& axis, const float& angle)
 
 void Object::set_scale(const glm::vec3& factor)
 {
-	this->scale = factor;  // glm::scale(model_matrix, factor);
+	this->scale = factor;
 }
-
-//long Object::n_elements() const
-//{
-//	// return model.n_elements();
-//	return 0;
-//}

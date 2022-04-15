@@ -18,7 +18,6 @@ public:
 	void prepare() const;
 
 
-
 private:
 	Pipeline pipeline;
 	TextureOld *texture = nullptr;

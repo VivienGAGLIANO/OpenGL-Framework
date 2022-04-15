@@ -15,9 +15,6 @@ public:
 	explicit Model(const char *path);
 	std::vector<Mesh> get_meshes() const;
 
-	// long n_elements() const;
-	// void prepare() const;
-
 
 private:
 	std::vector<Texture> load_material_textures(aiMaterial* mat, aiTextureType type, const char* type_name);
@@ -29,13 +26,6 @@ private:
 	inline static std::vector<Texture> loaded_textures = std::vector<Texture>();
 	std::string directory;
 	std::vector<Mesh> meshes;
-
-
-	// void set_buffer_objects();
-
-	// std::vector<glm::uvec3> indices;
-	// std::vector<Vertex> vertices;
-	// GLuint vao, ibo, vbo, ubo, nbo;
 };
 
 #endif

@@ -53,16 +53,6 @@ std::vector<Texture> Model::load_material_textures(aiMaterial* mat, aiTextureTyp
 	return textures;
 }
 
-//long Model::n_elements() const
-//{
-//	return 3 * indices.size();
-//}
-
-//void Model::prepare() const
-//{
-//	glBindVertexArray(vao);
-//}
-
 void Model::load_model(const std::string &path)
 {
 	Assimp::Importer importer;

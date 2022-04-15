@@ -7,7 +7,7 @@
 #include "engine.h"
 #include "object.h"
 
-inline bool cartoon = false;
+inline bool cartoon = true ;
 
 
 struct Light
