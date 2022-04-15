@@ -19,20 +19,20 @@ private:
 	void rotate_camera(const double& delta_time);
 
 	glm::mat4 proj_matrix;
-	bool should_move = false, should_rotate = false;
+	bool should_move = false, should_rotate = true;
 	bool move_forw = false, 
 		 move_back = false, 
 		 move_right = false, 
 		 move_left = false, 
 		 move_up = false, 
 		 move_down = false;
-	float camera_speed = 25.0f;
-	glm::vec3 position = glm::vec3(0,0,0), 
+	float camera_speed = 100.0f;
+	glm::vec3 position = glm::vec3(30,7,10), 
 			  front = glm::vec3(0,0,-1), 
 			  up = glm::vec3(0,1,0), 
 			  right = glm::vec3(1,0,0);
 	double o_xpos, o_ypos;
-	float pitch = 0, yaw = -90;
+	float pitch = -20.f, yaw = 200;
 	float sensitivity = .5f;
 	bool first_frame = true;
 

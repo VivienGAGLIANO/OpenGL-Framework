@@ -95,7 +95,7 @@ void Camera::move_camera(const double& delta_time)
 
 	glm::vec3 dir(0);
 	if (move_forw)
-		dir += 10.0f*front;
+		dir += front;
 
 	if (move_back)
 		dir -= front;
