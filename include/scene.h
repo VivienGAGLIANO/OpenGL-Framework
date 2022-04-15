@@ -20,6 +20,8 @@ struct Light
 	glm::vec3 specular;
 
 	float shininess;
+
+	inline void set_position(const glm::vec3& p) { position = p; }
 };
 
 
@@ -30,7 +32,7 @@ class Scene
 public:
 	~Scene();
 	Camera* get_camera() const;
-	Light get_light() const;
+	Light* get_light() const;
 	void update(const double& delta_time);
 	void updateVelocity(const double& delta_time);
 	void updatePosition(const double& delta_time);
@@ -45,7 +47,7 @@ private:
 
 	static Scene *instance;
 	Camera* camera;
-	Light light;
+	Light* light;
 	std::vector<Object*> objects;
 };
 

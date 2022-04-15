@@ -1,12 +1,12 @@
-#include "scene.h"
-#include "planet.h"
-#include "interpolation.h"
-#include "Utils.h"
-#include <stdio.h>
-using namespace std;
-
-#include <iostream>
 #include <fstream>
+#include <iostream>
+
+#include "interpolation.h"
+#include "planet.h"
+#include "scene.h"
+#include "sun.h"
+
+
 
 Scene* Scene::instance;
 
@@ -18,7 +18,7 @@ float G = 1; // constante de gravitation
 const long t_cycle = 10000; // le temps d'un cycle d'animation (en millisecondes)
 double t = 0;
 
-ofstream myfile1, myfile2, myfile3, myfile4, myfile5;
+std::ofstream myfile1, myfile2, myfile3, myfile4, myfile5;
 
 Scene::Scene()
 {
@@ -31,7 +31,7 @@ Scene::Scene()
 	// Perspective or orthogonal camera are available
 	camera = new PerspectiveCamera(glm::radians(60.f), float(1800) / float(1600), .1f, 100.f);
 
-	light =
+	light = new Light
 	{
 		glm::vec3(0),
 
@@ -56,7 +56,7 @@ void Scene::populate()
 	objects.push_back(vessel); 
 
 	
-	auto sun = new Planet("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(1.0f));
+	auto sun = new Sun("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(1.0f));
 	sun->set_material(new Material);
 	sun->set_model(new Model("resources/model/sun/scene.gltf"));
 	objects.push_back(sun);
@@ -96,11 +96,11 @@ void Scene::populateCartoon()
 
 	
 	auto p0 = new Planet("p0", 10000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
-	p0->set_material(new Material);
+	p0->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_lowpoly_sun.glsl"));
 	p0->set_model(new Model("resources/model/cartoon/bear_planet/scene.gltf"));
 	objects.push_back(p0);
 
-	auto p1 = new Planet("p1", 1, glm::vec3(0.0f, 0.0f, 20.0f), glm::vec3(10.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
+	auto p1 = new Sun("p1", 1, glm::vec3(0.0f, 0.0f, 20.0f), glm::vec3(10.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
 	p1->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_lowpoly_sun.glsl"));
 	p1->set_model(new Model("resources/model/cartoon/sun_lowpoly/scene.gltf"));
 	objects.push_back(p1);
@@ -109,7 +109,6 @@ void Scene::populateCartoon()
 	p2->set_material(new Material);
 	p2->set_model(new Model("resources/model/cartoon/lowilds_planet/scene.gltf"));
 	objects.push_back(p2);
-	*/
 
 	auto p3 = new Planet("p3", 10, glm::vec3(0.0f, 0.0f, 30.0f), glm::vec3(15.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.4f));
 	p3->set_material(new Material);
@@ -139,7 +138,7 @@ Camera* Scene::get_camera() const
 	return camera;
 }
 
-Light Scene::get_light() const
+Light* Scene::get_light() const
 {
 	return light;
 }

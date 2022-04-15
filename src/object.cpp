@@ -39,7 +39,7 @@ void Object::update(const double& delta_time)
 	pip.set_uniform_matrix(pip.get_vertex_id(), "v", glm::value_ptr(Scene::get_instance()->get_camera()->get_view()));
  	pip.set_uniform_matrix(pip.get_vertex_id(), "p", glm::value_ptr(Scene::get_instance()->get_camera()->get_proj()));
 
-	pip.set_uniform_light(pip.get_fragment_id(), Scene::get_instance()->get_light());
+	pip.set_uniform_light(pip.get_fragment_id(), *Scene::get_instance()->get_light());
 	pip.set_uniform_vec3(pip.get_fragment_id(), "cam_pos", glm::value_ptr(Scene::get_instance()->get_camera()->get_position()));
 }
 
