@@ -86,7 +86,7 @@ void Scene::populateCartoon()
 	p0->set_model(new Model("resources/model/cartoon/bear_planet/scene.gltf"));
 	objects.push_back(p0);
 
-	auto p1 = new Sun("p1", 1, glm::vec3(0.0f, 0.0f, 20.0f), glm::vec3(10.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
+	auto p1 = new Sun("p1", 1, glm::vec3(0.0f, 0.0f, 25.0f), glm::vec3(10.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
 	p1->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_lowpoly_sun.glsl"));
 	p1->set_model(new Model("resources/model/cartoon/sun_lowpoly/scene.gltf"));
 	objects.push_back(p1);
@@ -101,7 +101,7 @@ void Scene::populateCartoon()
 	p3->set_model(new Model("resources/model/cartoon/penguin_planet/scene.gltf"));
 	objects.push_back(p3);
 
-	auto p4 = new Planet("p4", 10, glm::vec3(20.0f, 0.0f, 0.0f), glm::vec3(0.0f, 20.0f, 0.0f), 1.f, glm::vec3(0.6f));
+	auto p4 = new Planet("p4", 10, glm::vec3(30.0f, 0.0f, 0.0f), glm::vec3(0.0f, 15.0f, 0.0f), 1.f, glm::vec3(0.6f));
 	p4->set_material(new Material);
 	p4->set_model(new Model("resources/model/cartoon/clutter/scene.gltf"));
 	objects.push_back(p4);
