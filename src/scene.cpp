@@ -6,37 +6,24 @@
 #include "scene.h"
 #include "sun.h"
 
-
-
 Scene* Scene::instance;
 
-
-
 float G = 1; // constante de gravitation
-
 // pour l'interpolation
 const long t_cycle = 10000; // le temps d'un cycle d'animation (en millisecondes)
 double t = 0;
 
-std::ofstream myfile1, myfile2, myfile3, myfile4, myfile5;
-
 Scene::Scene()
 {
-	myfile1.open("log/orbit1.txt");
-	myfile2.open("log/orbit2.txt");
-	myfile3.open("log/orbit3.txt");
-	myfile4.open("log/orbit4.txt");
-	myfile5.open("log/orbit5.txt");
-
 	// Perspective or orthogonal camera are available
 	camera = new PerspectiveCamera(glm::radians(60.f), float(1800) / float(1600), .1f, 100.f);
 
 	light = new Light
 	{
-		glm::vec3(0),
+		glm::vec3(0.78f, 0.71f, 0.48f), // ambiant
 
-		glm::vec3(.5f),
-		glm::vec3(.95f, .75f, .65f),
+		glm::vec3(0.65f, 0.71f, 0.55f), // diffuse
+		glm::vec3(0.91f, 0.84f, 0.57f), // specular
 		glm::vec3(.5f),
 
 		15.f
@@ -52,40 +39,40 @@ void Scene::populate()
 {
 	auto vessel = new Interpolation("Spaceship", glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(0.02f));
 	vessel->set_material(new Material);
-	vessel->set_model(new Model("resources/model/soucoupe/soucoupe.gltf"));
+	vessel->set_model(new Model("resources/model/realiste/soucoupe/soucoupe.gltf"));
 	objects.push_back(vessel); 
 
 	
 	auto sun = new Sun("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(1.0f));
 	sun->set_material(new Material);
-	sun->set_model(new Model("resources/model/sun/scene.gltf"));
+	sun->set_model(new Model("resources/model/realiste/sun/scene.gltf"));
 	objects.push_back(sun);
 	
 
-	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, 71.0f), glm::vec3(20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.07f));
+	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, -71.0f), glm::vec3(-20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.05f));
 	planet1->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_rocket_moon.glsl"));
-	planet1->set_model(new Model("resources/model/venus/scene.gltf"));
+	planet1->set_model(new Model("resources/model/realiste/venus/scene.gltf"));
 	objects.push_back(planet1);
 
 	
 	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, 58.0f), glm::vec3(30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.03f));
 	planet2->set_material(new Material);
-	planet2->set_model(new Model("resources/model/coruscant/scene.gltf"));
+	planet2->set_model(new Model("resources/model/realiste/coruscant/scene.gltf"));
 	objects.push_back(planet2);
 	 
 	auto planet3 = new Planet("Planet_three", 1, glm::vec3(0.0f, 0.0f, 44.75f), glm::vec3(50.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.04f));
 	planet3->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_horizon.glsl"));
-	planet3->set_model(new Model("resources/model/rocket_orbiting_moon/scene.gltf"));
+	planet3->set_model(new Model("resources/model/realiste/rocket_orbiting_moon/scene.gltf"));
 	objects.push_back(planet3);
 	 
 	auto planet4 = new Planet("Planet_four", 100, glm::vec3(0.0f, 0.0f, -31.61f), glm::vec3(-80.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.05f));
 	planet4->set_material(new Material);
-	planet4->set_model(new Model("resources/model/saturn/scene.gltf"));
+	planet4->set_model(new Model("resources/model/realiste/saturn/scene.gltf"));
 	objects.push_back(planet4);
 	 
 	auto planet5 = new Planet("Planet_five", 1, glm::vec3(0.0f, 0.0f, -35.0f), glm::vec3(-50.0f, 20.0f, 0.0f), 1.f, glm::vec3(4.0f));
 	planet5->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_coruscant.glsl"));
-	planet5->set_model(new Model("resources/model/horizon_world/scene.gltf"));
+	planet5->set_model(new Model("resources/model/realiste/horizon_world/scene.gltf"));
 	objects.push_back(planet5);
 	
 }
@@ -94,7 +81,6 @@ void Scene::populateCartoon()
 {
 	G = 10;
 
-	
 	auto p0 = new Planet("p0", 10000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
 	p0->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_bear.glsl"));
 	p0->set_model(new Model("resources/model/cartoon/bear_planet/scene.gltf"));
@@ -123,11 +109,6 @@ void Scene::populateCartoon()
 
 Scene::~Scene()
 {
-	myfile1.close();
-	myfile2.close();
-	myfile3.close();
-	myfile4.close();
-	myfile5.close();
 	delete camera;
 	for (Object* obj : objects)
 		delete obj;
@@ -166,17 +147,6 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 	float M1M2 = o1->getMass() * o2->getMass();
 	float forceMag = (G * M1M2) / (dist * dist);
 	glm::vec3 forceVec = forceDir * forceMag;
-	if (o1->name == "Sun")
-		if (o2->name == "Planet_one")
-			myfile1 << dist << "\n";
-		else if (o2->name == "Planet_two")
-			myfile2 << dist << "\n";
-		else if (o2->name == "Planet_three")
-			myfile3 << dist << "\n";
-		else if (o2->name == "Planet_four")
-			myfile4 << dist << "\n";
-		else
-			myfile5 << dist << "\n";
 	
 	return forceVec;
 }
