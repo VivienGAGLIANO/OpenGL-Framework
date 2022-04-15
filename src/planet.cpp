@@ -1,13 +1,13 @@
 #include "planet.h"
 
-Planet::Planet(const std::string& name, const float& m, const glm::vec3& v, const glm::vec3& p, const float& r)
-	: CelestBody(name, v, p, glm::vec3(1.0f)), mass(m), radius(r), gradRotated(0.0f) 
+Planet::Planet(const std::string& name, const float& m, const glm::vec3& v, const glm::vec3& p)
+	: CelestBody(name, v, p, glm::vec3(1.0f)), mass(m), gradRotated(0.0f) 
 {
 	translate(p);
 }
 
-Planet::Planet(const std::string& name, const float& m, const glm::vec3& v, const glm::vec3& p, const float& r, const glm::vec3& scale)
-	: CelestBody(name, v, p, scale), mass(m), radius(r), gradRotated(0.0f)
+Planet::Planet(const std::string& name, const float& m, const glm::vec3& v, const glm::vec3& p, const glm::vec3& scale)
+	: CelestBody(name, v, p, scale), mass(m), gradRotated(0.0f)
 {
 	translate(p);
 }
@@ -18,7 +18,7 @@ void Planet::update(const double& delta_time)
 	// on inverse la rotation pour translate correctement sinon on se retrouve à faire n'importe quoi
 	this->resetRotation();
 	translate(this->position - this->prevPosition);
-	this->makeRotation(delta_time*2);
+	this->makeRotation(delta_time*2); //*2 to spin faster
 	Object::update(delta_time); // call parent class update to handle graphic pipeline actions
 }
 

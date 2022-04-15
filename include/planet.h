@@ -9,8 +9,8 @@
 class Planet : public CelestBody
 {
 	public:
-		Planet(const std::string& name, const float& m, const glm::vec3& v, const glm::vec3& p, const float& r);
-		Planet(const std::string& name, const float& m, const glm::vec3& v, const glm::vec3& p, const float& r, const glm::vec3& scale);
+		Planet(const std::string& name, const float& m, const glm::vec3& v, const glm::vec3& p);
+		Planet(const std::string& name, const float& m, const glm::vec3& v, const glm::vec3& p, const glm::vec3& scale);
 		virtual void update(const double& delta_time) override;
 
 		virtual void resetRotation();
@@ -20,7 +20,6 @@ class Planet : public CelestBody
 
 	protected:
 		float mass;
-		float radius;
 		double gradRotated;
 };
 

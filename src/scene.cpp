@@ -41,36 +41,33 @@ void Scene::populate()
 	vessel->set_material(new Material);
 	vessel->set_model(new Model("resources/model/realiste/soucoupe/soucoupe.gltf"));
 	objects.push_back(vessel); 
-
 	
-	auto sun = new Sun("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(1.0f));
+	auto sun = new Sun("Sun", 100000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f));
 	sun->set_material(new Material);
 	sun->set_model(new Model("resources/model/realiste/sun/scene.gltf"));
 	objects.push_back(sun);
-	
 
-	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, -71.0f), glm::vec3(-20.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.05f));
+	auto planet1 = new Planet("Planet_one", 1, glm::vec3(0.0f, 0.0f, -71.0f), glm::vec3(-20.0f, 0.0f, 0.0f), glm::vec3(0.05f));
 	planet1->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_rocket_moon.glsl"));
 	planet1->set_model(new Model("resources/model/realiste/venus/scene.gltf"));
 	objects.push_back(planet1);
-
 	
-	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, 58.0f), glm::vec3(30.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.03f));
+	auto planet2 = new Planet("Planet_two", 1, glm::vec3(0.0f, 0.0f, 58.0f), glm::vec3(30.0f, 0.0f, 0.0f), glm::vec3(0.03f));
 	planet2->set_material(new Material);
 	planet2->set_model(new Model("resources/model/realiste/coruscant/scene.gltf"));
 	objects.push_back(planet2);
 	 
-	auto planet3 = new Planet("Planet_three", 1, glm::vec3(0.0f, 0.0f, 44.75f), glm::vec3(50.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.04f));
+	auto planet3 = new Planet("Planet_three", 1, glm::vec3(0.0f, 0.0f, 44.75f), glm::vec3(50.0f, 0.0f, 0.0f), glm::vec3(0.04f));
 	planet3->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_horizon.glsl"));
 	planet3->set_model(new Model("resources/model/realiste/rocket_orbiting_moon/scene.gltf"));
 	objects.push_back(planet3);
 	 
-	auto planet4 = new Planet("Planet_four", 100, glm::vec3(0.0f, 0.0f, -31.61f), glm::vec3(-80.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.05f));
+	auto planet4 = new Planet("Planet_four", 100, glm::vec3(0.0f, 0.0f, -31.61f), glm::vec3(-80.0f, 0.0f, 0.0f), glm::vec3(0.05f));
 	planet4->set_material(new Material);
 	planet4->set_model(new Model("resources/model/realiste/saturn/scene.gltf"));
 	objects.push_back(planet4);
 	 
-	auto planet5 = new Planet("Planet_five", 1, glm::vec3(0.0f, 0.0f, -35.0f), glm::vec3(-50.0f, 20.0f, 0.0f), 1.f, glm::vec3(4.0f));
+	auto planet5 = new Planet("Planet_five", 1, glm::vec3(0.0f, 0.0f, -35.0f), glm::vec3(-50.0f, 20.0f, 0.0f), glm::vec3(4.0f));
 	planet5->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_coruscant.glsl"));
 	planet5->set_model(new Model("resources/model/realiste/horizon_world/scene.gltf"));
 	objects.push_back(planet5);
@@ -79,29 +76,30 @@ void Scene::populate()
 
 void Scene::populateCartoon()
 {
+	// to get a more dynamic scene
 	G = 10;
 
-	auto p0 = new Planet("p0", 10000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
+	auto p0 = new Planet("p0", 10000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.2f));
 	p0->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_bear.glsl"));
 	p0->set_model(new Model("resources/model/cartoon/bear_planet/scene.gltf"));
 	objects.push_back(p0);
 
-	auto p1 = new Sun("p1", 1, glm::vec3(0.0f, 0.0f, 25.0f), glm::vec3(10.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
+	auto p1 = new Sun("p1", 1, glm::vec3(0.0f, 0.0f, 25.0f), glm::vec3(10.0f, 0.0f, 0.0f), glm::vec3(0.2f));
 	p1->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_lowpoly_sun.glsl"));
 	p1->set_model(new Model("resources/model/cartoon/sun_lowpoly/scene.gltf"));
 	objects.push_back(p1);
 
-	auto p2 = new Planet("p2", 10, glm::vec3(0.0f, 0.0f, -70.0f), glm::vec3(-10.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
+	auto p2 = new Planet("p2", 10, glm::vec3(0.0f, 0.0f, -70.0f), glm::vec3(-10.0f, 0.0f, 0.0f), glm::vec3(0.2f));
 	p2->set_material(new Material);
 	p2->set_model(new Model("resources/model/cartoon/lowilds_planet/scene.gltf"));
 	objects.push_back(p2);
 
-	auto p3 = new Planet("p3", 10, glm::vec3(0.0f, 0.0f, 30.0f), glm::vec3(15.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.4f));
+	auto p3 = new Planet("p3", 10, glm::vec3(0.0f, 0.0f, 30.0f), glm::vec3(15.0f, 0.0f, 0.0f), glm::vec3(0.4f));
 	p3->set_material(new Material);
 	p3->set_model(new Model("resources/model/cartoon/penguin_planet/scene.gltf"));
 	objects.push_back(p3);
 
-	auto p4 = new Planet("p4", 10, glm::vec3(30.0f, 0.0f, 0.0f), glm::vec3(0.0f, 15.0f, 0.0f), 1.f, glm::vec3(0.6f));
+	auto p4 = new Planet("p4", 10, glm::vec3(30.0f, 0.0f, 0.0f), glm::vec3(0.0f, 15.0f, 0.0f), glm::vec3(0.6f));
 	p4->set_material(new Material);
 	p4->set_model(new Model("resources/model/cartoon/clutter/scene.gltf"));
 	objects.push_back(p4);
@@ -140,7 +138,7 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 	// computes the gravitational force between object object and object2
 	float dist = glm::length(o2->getPosition() - o1->getPosition());
 
-	if (dist <= 1) // pour �viter l'explosion du systeme
+	if (dist <= 1) // to avoid the system's explosion, 1 is arbitry, we could have put 0.1
 		return glm::vec3(0.0f, 0.0f, 0.0f);
 
 	glm::vec3 forceDir = glm::normalize(o2->getPosition() - o1->getPosition()); // direction
@@ -152,7 +150,6 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 }
 
 // It is said on the web that actualising the velocity and the position not at the same time increases the stability of the system
-// https://youtu.be/7axImc1sxa0?t=84
 void Scene::updateVelocity(const double& delta_time)
 {
 	for (int i = 0; i < objects.size(); i++)
