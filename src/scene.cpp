@@ -96,7 +96,7 @@ void Scene::populateCartoon()
 
 	
 	auto p0 = new Planet("p0", 10000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
-	p0->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_lowpoly_sun.glsl"));
+	p0->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_bear.glsl"));
 	p0->set_model(new Model("resources/model/cartoon/bear_planet/scene.gltf"));
 	objects.push_back(p0);
 

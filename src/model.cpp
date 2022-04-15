@@ -144,9 +144,9 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)
 		auto normal_maps = load_material_textures(mat, aiTextureType_NORMALS, "texture_normal");
 		textures.insert(textures.end(), normal_maps.cbegin(), normal_maps.cend());
 
-		aiColor3D col(0.f, 0.f, 0.f);
-		mat->Get(AI_MATKEY_COLOR_DIFFUSE, col);
-		color = glm::vec3(col.r, col.g, col.b);
+		aiColor3D diffuse(0.f);
+		mat->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse);
+		color = glm::vec3(diffuse.r, diffuse.g, diffuse.b);
 	}
 
 	return Mesh(vertices, indices, textures, color);
