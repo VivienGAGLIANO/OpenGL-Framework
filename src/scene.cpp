@@ -13,16 +13,8 @@ float G = 1; // constante de gravitation
 const long t_cycle = 10000; // le temps d'un cycle d'animation (en millisecondes)
 double t = 0;
 
-std::ofstream myfile1, myfile2, myfile3, myfile4, myfile5;
-
 Scene::Scene()
 {
-	myfile1.open("log/orbit1.txt");
-	myfile2.open("log/orbit2.txt");
-	myfile3.open("log/orbit3.txt");
-	myfile4.open("log/orbit4.txt");
-	myfile5.open("log/orbit5.txt");
-
 	// Perspective or orthogonal camera are available
 	camera = new PerspectiveCamera(glm::radians(60.f), float(1800) / float(1600), .1f, 100.f);
 
@@ -89,7 +81,6 @@ void Scene::populateCartoon()
 {
 	G = 10;
 
-	
 	auto p0 = new Planet("p0", 10000, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), 1.f, glm::vec3(0.2f));
 	p0->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_bear.glsl"));
 	p0->set_model(new Model("resources/model/cartoon/bear_planet/scene.gltf"));
@@ -118,11 +109,6 @@ void Scene::populateCartoon()
 
 Scene::~Scene()
 {
-	myfile1.close();
-	myfile2.close();
-	myfile3.close();
-	myfile4.close();
-	myfile5.close();
 	delete camera;
 	for (Object* obj : objects)
 		delete obj;
@@ -161,17 +147,6 @@ glm::vec3 attraction(Planet* o1, Planet* o2)
 	float M1M2 = o1->getMass() * o2->getMass();
 	float forceMag = (G * M1M2) / (dist * dist);
 	glm::vec3 forceVec = forceDir * forceMag;
-	if (o1->name == "Sun")
-		if (o2->name == "Planet_one")
-			myfile1 << dist << "\n";
-		else if (o2->name == "Planet_two")
-			myfile2 << dist << "\n";
-		else if (o2->name == "Planet_three")
-			myfile3 << dist << "\n";
-		else if (o2->name == "Planet_four")
-			myfile4 << dist << "\n";
-		else
-			myfile5 << dist << "\n";
 	
 	return forceVec;
 }
