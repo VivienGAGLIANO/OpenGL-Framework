@@ -20,11 +20,11 @@ Scene::Scene()
 
 	light = new Light
 	{
-		glm::vec3(0.78f, 0.71f, 0.48f), // ambiant
+		glm::vec3(0), // pos
 
-		glm::vec3(0.65f, 0.71f, 0.55f), // diffuse
-		glm::vec3(0.91f, 0.84f, 0.57f), // specular
-		glm::vec3(.5f),
+		glm::vec3(0.65f, 0.71f, 0.55f), // ambiant
+		glm::vec3(0.91f, 0.84f, 0.57f), // diffuse
+		glm::vec3(.4f),// specular
 
 		15.f
 	};
