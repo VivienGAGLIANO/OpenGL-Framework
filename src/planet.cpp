@@ -17,9 +17,9 @@ void Planet::update(const double& delta_time)
 	// This method gets called every frame
 	// on inverse la rotation pour translate correctement sinon on se retrouve à faire n'importe quoi
 	this->resetRotation();
-	CelestBody::update(delta_time); // call parent class update to handle graphic pipeline actions
-	this->makeRotation(delta_time);
-
+	translate(this->position - this->prevPosition);
+	this->makeRotation(delta_time*2);
+	Object::update(delta_time); // call parent class update to handle graphic pipeline actions
 }
 
 void Planet::resetRotation()
