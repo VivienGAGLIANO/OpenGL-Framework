@@ -1,7 +1,9 @@
 #include "mesh.h"
 
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned> indices, std::vector<Texture> textures) :
-	vertices(vertices), indices(indices), textures(textures)
+#include <gtc/type_ptr.hpp>
+
+Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned> indices, std::vector<Texture> textures, const glm::vec3& mesh_color) :
+	vertices(vertices), indices(indices), textures(textures), mesh_color(mesh_color)
 {
 	set_buffer_objects();
 }
@@ -36,6 +38,8 @@ void Mesh::prepare_for_render(Pipeline pipeline)
     glActiveTexture(GL_TEXTURE0);
 
     glBindVertexArray(vao);
+
+    pipeline.set_uniform_vec3(pipeline.get_fragment_id(), "mesh_color", glm::value_ptr(mesh_color));
 }
 
 void Mesh::set_buffer_objects()

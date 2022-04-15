@@ -8,7 +8,7 @@
 #include "object.h"
 
 
-bool cartoon = false;
+inline bool cartoon = true;
 
 
 struct Light

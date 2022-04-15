@@ -27,7 +27,7 @@ struct Texture
 class Mesh
 {
 public:
-	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures, const glm::vec3& mesh_color = glm::vec3(0));
 	void prepare_for_render(Pipeline pipeline);
 
 	std::vector<Vertex> vertices;
@@ -39,6 +39,8 @@ private:
 	void set_buffer_objects();
 
 	GLuint vao, vbo, ebo;
+
+	glm::vec3 mesh_color;
 };
 
 #endif

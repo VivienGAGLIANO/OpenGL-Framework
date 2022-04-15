@@ -110,7 +110,8 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)
 			v.uv = vec;
 		}
 		else
-			v.uv = glm::vec2(0.0f, 0.0f);
+			v.uv = glm::vec2(0.0f, 0.0f);	
+		
 
 		vertices.push_back(v);
 	}
@@ -122,6 +123,7 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)
 			indices.push_back(face.mIndices[j]);
 	}
 
+	glm::vec3 color = glm::vec3(0);
 	if (mesh->mMaterialIndex >= 0) // > 0 ??
 	{
 		// TODO : handle all texture types
@@ -141,9 +143,13 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)
 
 		auto normal_maps = load_material_textures(mat, aiTextureType_NORMALS, "texture_normal");
 		textures.insert(textures.end(), normal_maps.cbegin(), normal_maps.cend());
+
+		aiColor3D col(0.f, 0.f, 0.f);
+		mat->Get(AI_MATKEY_COLOR_DIFFUSE, col);
+		color = glm::vec3(col.r, col.g, col.b);
 	}
 
-	return Mesh(vertices, indices, textures);
+	return Mesh(vertices, indices, textures, color);
 }
 
 void Model::process_node(aiNode* node, const aiScene* scene)
