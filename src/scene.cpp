@@ -67,7 +67,7 @@ void Scene::populate()
 	planet4->set_model(new Model("resources/model/realiste/saturn/scene.gltf"));
 	objects.push_back(planet4);
 	 
-	auto planet5 = new Planet("Planet_five", 1, glm::vec3(0.0f, 0.0f, -35.0f), glm::vec3(-50.0f, 20.0f, 0.0f), glm::vec3(4.0f));
+	auto planet5 = new Planet("Planet_five", 1, glm::vec3(0.0f, 0.0f, -35.0f), glm::vec3(-50.0f, 20.0f, 0.0f), glm::vec3(.3f));
 	planet5->set_material(new Material("resources/shader/vertex.glsl", "resources/shader/fragment_coruscant.glsl"));
 	planet5->set_model(new Model("resources/model/realiste/horizon_world/scene.gltf"));
 	objects.push_back(planet5);
