@@ -36,7 +36,6 @@
 # Build files
 x64
 
-*.pdf
 log
 
 resources/skybox/a
