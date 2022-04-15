@@ -26,7 +26,7 @@ private:
 		 move_left = false, 
 		 move_up = false, 
 		 move_down = false;
-	float camera_speed = 100.0f;
+	float camera_speed = 300.0f;
 	glm::vec3 position = glm::vec3(30,7,10), 
 			  front = glm::vec3(0,0,-1), 
 			  up = glm::vec3(0,1,0), 
