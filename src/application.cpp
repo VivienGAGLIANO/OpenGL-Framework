@@ -20,7 +20,7 @@ void Application::start()
 {
 	std::cout << "Starting application\n";
 
-	double time = glfwGetTime();
+	double time = glfwGetTime(); // Using khronos time for more robust and precise results
 	while (engine->should_render()) // TODO move this to engine class perhaps ?
 	{
 		glfwPollEvents();
