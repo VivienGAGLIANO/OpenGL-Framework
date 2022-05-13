@@ -7,8 +7,6 @@
 #include "engine.h"
 #include "object.h"
 
-inline bool cartoon = false ;
-
 
 struct Light
 {
@@ -33,16 +31,12 @@ public:
 	Camera* get_camera() const;
 	Light* get_light() const;
 	void update(const double& delta_time);
-	void updateVelocity(const double& delta_time);
-	void updatePosition(const double& delta_time);
-	void resetForces();
 	void render(Engine* engine);
 	static Scene* get_instance();
 
 private:
 	Scene();
 	void populate();
-	void populateCartoon();
 
 	static Scene *instance;
 	Camera* camera;

@@ -60,22 +60,10 @@
     <ClCompile Include="src\camera.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\planet.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\celestBody.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Utils.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\skybox.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\interpolation.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\sun.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,22 +107,10 @@
     <ClInclude Include="include\camera.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\planet.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\celestBody.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\Utils.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\skybox.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\interpolation.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\sun.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

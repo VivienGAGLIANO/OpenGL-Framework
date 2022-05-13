@@ -39,7 +39,7 @@ void Skybox::render()
 
 GLuint Skybox::load_texture(const std::string& path)
 {
-    auto faces = cartoon ? cartoon_skybox_faces : skybox_faces;
+    auto faces = /*cartoon ? cartoon_skybox_faces :*/ skybox_faces;
 
     GLuint tex;
     glGenTextures(1, &tex);
