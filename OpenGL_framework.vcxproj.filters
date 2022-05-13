@@ -132,20 +132,5 @@
     <None Include="resources\shader\skybox_vertex.glsl">
       <Filter>resources\shader</Filter>
     </None>
-    <None Include="resources\shader\fragment_coruscant.glsl">
-      <Filter>resources\shader</Filter>
-    </None>
-    <None Include="resources\shader\fragment_horizon.glsl">
-      <Filter>resources\shader</Filter>
-    </None>
-    <None Include="resources\shader\fragment_rocket_moon.glsl">
-      <Filter>resources\shader</Filter>
-    </None>
-    <None Include="resources\shader\fragment_lowpoly_sun.glsl">
-      <Filter>resources\shader</Filter>
-    </None>
-    <None Include="resources\shader\fragment_bear.glsl">
-      <Filter>resources\shader</Filter>
-    </None>
   </ItemGroup>
 </Project>

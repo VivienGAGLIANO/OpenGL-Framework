@@ -9,7 +9,7 @@ Scene* Scene::instance;
 Scene::Scene()
 {
 	// Perspective or orthogonal camera are available
-	camera = new PerspectiveCamera(glm::radians(60.f), float(1800) / float(1600), .1f, 100.f);
+	camera = new PerspectiveCamera(glm::radians(60.f), float(1800) / float(1600), .1f, 1000.f);
 
 	light = new Light
 	{
