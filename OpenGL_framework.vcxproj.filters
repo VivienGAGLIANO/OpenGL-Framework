@@ -60,19 +60,16 @@
     <ClCompile Include="src\camera.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\planet.cpp">
+    <ClCompile Include="src\skybox.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\celestBody.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Utils.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\skybox.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\interpolation.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\planet.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\sun.cpp">
@@ -119,19 +116,22 @@
     <ClInclude Include="include\camera.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\planet.h">
+    <ClInclude Include="include\skybox.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\data.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\template.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\celestBody.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utils.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\skybox.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\interpolation.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\planet.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\sun.h">
@@ -154,21 +154,6 @@
       <Filter>resources\shader</Filter>
     </None>
     <None Include="resources\shader\skybox_vertex.glsl">
-      <Filter>resources\shader</Filter>
-    </None>
-    <None Include="resources\shader\fragment_coruscant.glsl">
-      <Filter>resources\shader</Filter>
-    </None>
-    <None Include="resources\shader\fragment_horizon.glsl">
-      <Filter>resources\shader</Filter>
-    </None>
-    <None Include="resources\shader\fragment_rocket_moon.glsl">
-      <Filter>resources\shader</Filter>
-    </None>
-    <None Include="resources\shader\fragment_lowpoly_sun.glsl">
-      <Filter>resources\shader</Filter>
-    </None>
-    <None Include="resources\shader\fragment_bear.glsl">
       <Filter>resources\shader</Filter>
     </None>
   </ItemGroup>
