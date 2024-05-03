@@ -14,7 +14,7 @@ public:
 	explicit Material(const TextureOld* texture, const char* vertex_path = "resources/shader/vertex.glsl",
 	                  const char* fragment_path = "resources/shader/fragment.glsl");
 	~Material();
-	Pipeline get_pipeline();
+	Pipeline get_pipeline() const;
 	void prepare() const;
 
 

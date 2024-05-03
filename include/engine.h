@@ -15,6 +15,7 @@ public:
 	void init();
 	void render_skybox();
 	bool should_render() const;
+	bool should_render_ui() const;
 
 	int width, height;
 	GLFWwindow *window;
@@ -25,6 +26,7 @@ private:
 	static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 
 	Skybox* skybox;
+	static bool ui_active;
 };
 
 #endif

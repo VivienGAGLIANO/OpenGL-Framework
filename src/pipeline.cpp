@@ -32,6 +32,7 @@ Pipeline::Pipeline(const std::string &vertex_path, const std::string &fragment_p
 
 void Pipeline::use_pipeline() const
 {
+	glUseProgram(0);
 	glBindProgramPipeline(pipeline);
 }
 

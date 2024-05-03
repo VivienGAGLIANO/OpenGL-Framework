@@ -25,7 +25,7 @@ Material::~Material()
 	delete texture;
 }
 
-Pipeline Material::get_pipeline()
+Pipeline Material::get_pipeline() const
 {
 	return pipeline;
 }

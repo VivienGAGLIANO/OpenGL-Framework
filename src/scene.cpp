@@ -55,7 +55,10 @@ void Scene::update(const double& delta_time)
 	camera->update(delta_time);
 
 	for (auto obj : objects)
+	{
+		obj->prepare_material();
 		obj->update(delta_time);
+	}
 }
 
 void Scene::render(Engine* engine)
@@ -66,7 +69,7 @@ void Scene::render(Engine* engine)
 		obj->render();
 	}
 
-	engine->render_skybox();
+	//engine->render_skybox();
 }
 
 Scene* Scene::get_instance()
