@@ -69,7 +69,7 @@ void Scene::render(Engine* engine)
 		obj->render();
 	}
 
-	//engine->render_skybox();
+	engine->render_skybox();
 }
 
 Scene* Scene::get_instance()
