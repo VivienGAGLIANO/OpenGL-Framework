@@ -15,6 +15,9 @@ public:
 	void init();
 	void render_skybox();
 	bool should_render() const;
+
+	void draw_ui();
+	void render_ui();
 	bool should_render_ui() const;
 
 	int width, height;

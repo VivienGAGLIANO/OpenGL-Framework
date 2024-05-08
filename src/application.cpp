@@ -35,16 +35,8 @@ void Application::start()
 	{
 		glfwPollEvents();
 
-		// Initialize ImGui frame
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplGlfw_NewFrame();
-		ImGui::NewFrame();
-
-		// Draw UI
-		if (engine->should_render_ui())
-		{
-			ImGui::ShowDemoWindow();
-		}
+		// Initialize and draw UI
+		engine->draw_ui();
 
 		// Reset buffers and window
 		glViewport(0, 0, (GLsizei)io.DisplaySize.x, (GLsizei)io.DisplaySize.y);
@@ -57,8 +49,7 @@ void Application::start()
 		scene->render(engine);
 
 		// Render UI
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		engine->render_ui();
 
 		glfwSwapBuffers(engine->window);
 	}
