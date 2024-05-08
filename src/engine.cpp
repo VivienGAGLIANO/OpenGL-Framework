@@ -2,10 +2,11 @@
 #include <iostream>
 
 #include "engine.h"
-#include "stb_image.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include "performance.h"
+#include "stb_image.h"
 
 
 bool Engine::ui_active = true;
@@ -116,8 +117,17 @@ void Engine::draw_ui()
         if (ImGui::Begin("Metrics", &ui_active, window_flags))
         {
             //IMGUI_DEMO_MARKER("Examples/Simple Overlay");
-            ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-            ImGui::Text("%d vertices, %d indices (%d triangles)", io.MetricsRenderVertices, io.MetricsRenderIndices, io.MetricsRenderIndices / 3);
+            static double count = 0.0f;
+            static double framerate = 0.0f;
+            count += io.DeltaTime;
+            if (count > .1f)
+            {
+                count = 0.0f;
+                framerate = io.Framerate;
+            }
+            ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / framerate, framerate);
+            //ImGui::Text("%d vertices, %d indices (%d triangles)", io.MetricsRenderVertices, io.MetricsRenderIndices, io.MetricsRenderIndices / 3);
+            ImGui::Text("%d vertices, %d indices (%d triangles)", Performance::get_vertex_count(), Performance::get_index_count(), Performance::get_index_count() / 3);
             ImGui::Text("%d visible windows, %d active allocations", io.MetricsRenderWindows, io.MetricsActiveAllocations);
             ImGui::Separator();
             if (ImGui::IsMousePosValid())

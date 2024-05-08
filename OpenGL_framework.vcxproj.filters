@@ -30,9 +30,6 @@
     <ClCompile Include="src\pipeline.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\TextureOld.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\application.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -60,9 +57,6 @@
     <ClCompile Include="src\camera.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Utils.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\skybox.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -87,12 +81,12 @@
     <ClCompile Include="third_party\imgui\imgui_impl_opengl3.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\performance.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\pipeline.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TextureOld.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\obj_loader.h">
@@ -128,9 +122,6 @@
     <ClInclude Include="include\camera.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utils.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\skybox.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -159,6 +150,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="third_party\imgui\imgui_impl_opengl3_loader.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\performance.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

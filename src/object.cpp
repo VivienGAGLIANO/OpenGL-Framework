@@ -1,9 +1,9 @@
-#include "object.h"
-
 #include <glfw3.h>
 #include <iostream>
 #include <glm/ext.hpp>
 
+#include "object.h"
+#include "performance.h"
 #include "scene.h"
 
 
@@ -56,6 +56,9 @@ void Object::render()
 		mesh.prepare_for_render(material->get_pipeline());
 
 		glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
+
+		Performance::increment_index_count(mesh.indices.size());
+		Performance::increment_vertex_count(mesh.vertices.size());
 	}
 }
 

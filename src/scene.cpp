@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 
+#include "performance.h"
 #include "scene.h"
 
 
@@ -63,6 +64,9 @@ void Scene::update(const double& delta_time)
 
 void Scene::render(Engine* engine)
 {
+	Performance::reset_vertex_count();
+	Performance::reset_index_count();
+
 	for (Object *obj : objects)
 	{
 		obj->prepare_material();
