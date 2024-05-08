@@ -1,12 +1,12 @@
-#include "application.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
-#include "performance.h"
-
 #include <glm/ext.hpp>
 #include <iostream>
 #include <thread>
 #include <windows.h>
+
+#include "application.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+#include "performance.h"
 
 
 Application::Application()

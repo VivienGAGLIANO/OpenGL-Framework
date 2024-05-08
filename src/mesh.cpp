@@ -1,6 +1,6 @@
-#include "mesh.h"
-
 #include <gtc/type_ptr.hpp>
+
+#include "mesh.h"
 
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned> indices, std::vector<Texture> textures, const glm::vec3& mesh_color) :
 	vertices(vertices), indices(indices), textures(textures), mesh_color(mesh_color)

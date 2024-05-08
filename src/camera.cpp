@@ -1,8 +1,8 @@
-#include "camera.h"
-
+#include <ext.hpp>
 #include <glfw3.h>
 #include <iostream>
-#include <ext.hpp>
+
+#include "camera.h"
 
 /*********************************** Camera ***********************************/
 

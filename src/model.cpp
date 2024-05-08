@@ -1,11 +1,10 @@
-#include "model.h"
-
-#include <iostream>
 #include <assimp/DefaultLogger.hpp>
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
+#include <iostream>
 #include <stb_image.h>
 
+#include "model.h"
 
 
 std::string file_name(const std::string& path)

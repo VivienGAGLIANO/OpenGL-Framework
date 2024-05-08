@@ -2,7 +2,6 @@
 #define PERFORMANCE_H
 
 
-
 class Performance
 {
 public:

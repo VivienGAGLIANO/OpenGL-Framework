@@ -1,9 +1,8 @@
 #include <gtc/type_ptr.hpp>
 #include <iostream>
 
-#include "skybox.h"
-
 #include "scene.h"
+#include "skybox.h"
 #include "stb_image.h"
 
 

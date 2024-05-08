@@ -1,6 +1,6 @@
 #include <glfw3.h>
-#include <iostream>
 #include <glm/ext.hpp>
+#include <iostream>
 
 #include "object.h"
 #include "performance.h"

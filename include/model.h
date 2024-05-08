@@ -1,10 +1,10 @@
 #ifndef MODEL_H
 #define MODEL_H
 
+#include <assimp/scene.h>
 #include <glad/glad.h>
 #include <glm.hpp>
 #include <vector>
-#include <assimp/scene.h>
 
 #include "mesh.h"
 

@@ -1,10 +1,10 @@
 #ifndef MESH_H
 #define MESH_H
 
+#include <glad/glad.h>
 #include <glm.hpp>
 #include <string>
 #include <vector>
-#include <glad/glad.h>
 
 #include "pipeline.h"
 

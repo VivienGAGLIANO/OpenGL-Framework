@@ -2,8 +2,8 @@
 #define SKYBOX_H
 
 #include <glad/glad.h>
-#include <string>
 #include <glm.hpp>
+#include <string>
 #include <vector>
 
 #include "pipeline.h"
