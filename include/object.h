@@ -13,8 +13,8 @@ public:
 	Object(const std::string &name, const glm::vec3& scale);
 	Object(const std::string& name);
 	virtual ~Object();
-	void set_material(Material* mat);
-	void set_model(Model* model);
+	void set_material(std::shared_ptr<Material> mat);
+	void set_model(std::shared_ptr<Model> model);
 	virtual void update(const double& delta_time);
 	void prepare_material() const;
 	void render();
@@ -27,8 +27,8 @@ public:
 protected:
 	glm::vec3 scale;
 	glm::mat4 model_matrix;
-	Material *material = nullptr;
-	Model *model = nullptr;
+	std::shared_ptr<Material> material;
+	std::shared_ptr<Model> model;
 };
 
 #endif

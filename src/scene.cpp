@@ -5,61 +5,45 @@
 #include "scene.h"
 
 
-Scene* Scene::instance;
+std::shared_ptr<Scene> Scene::active_scene;
 
 Scene::Scene()
 {
 	// Perspective or orthogonal camera are available
-	camera = new PerspectiveCamera(glm::radians(60.f), float(1800) / float(1600), .1f, 1000.f);
+	camera = std::make_shared<Camera>(PerspectiveCamera(glm::radians(60.f), float(1800) / float(1600), .1f, 1000.f));
 
-	light = new Light
+	light = std::make_shared<Light>(Light
 	{
-		glm::vec3(0), // position
+	glm::vec3(0), // position
 
-		glm::vec3(0.65f, 0.71f, 0.55f), // ambiant
-		glm::vec3(0.91f, 0.84f, 0.57f), // diffuse
-		glm::vec3(.4f),// specular
+	glm::vec3(0.65f, 0.71f, 0.55f), // ambiant
+	glm::vec3(0.91f, 0.84f, 0.57f), // diffuse
+	glm::vec3(.4f),// specular
 
-		15.f // shininess
-	};
+	15.f // shininess
+	});
 
 	populate();
 }
 
 void Scene::populate()
 {
-	auto planet = new Object("Planet", glm::vec3(1.0));
-	planet->set_material(new Material);
-	planet->set_model(new Model("resources/model/cartoon/lowilds_planet/scene.gltf"));
+	auto planet = std::make_shared<Object>("Planet", glm::vec3(1.0));
+	planet->set_material(std::make_shared<Material>());
+	planet->set_model(std::make_shared<Model>("resources/model/cartoon/lowilds_planet/scene.gltf"));
 	objects.push_back(planet);
 }
 
-Scene::~Scene()
-{
-	delete camera;
-	for (Object* obj : objects)
-		delete obj;
-}
+Scene::~Scene() {}
 
-Camera* Scene::get_camera() const
+std::shared_ptr<Camera> Scene::get_camera() const
 {
 	return camera;
 }
 
-Light* Scene::get_light() const
+std::shared_ptr<Light> Scene::get_light() const
 {
 	return light;
-}
-
-void Scene::update(const double& delta_time)
-{
-	camera->update(delta_time);
-
-	for (auto obj : objects)
-	{
-		obj->prepare_material();
-		obj->update(delta_time);
-	}
 }
 
 void Scene::render(Engine* engine)
@@ -67,7 +51,7 @@ void Scene::render(Engine* engine)
 	Performance::reset_vertex_count();
 	Performance::reset_index_count();
 
-	for (Object *obj : objects)
+	for (auto obj : objects)
 	{
 		obj->prepare_material();
 		obj->render();
@@ -76,11 +60,12 @@ void Scene::render(Engine* engine)
 	engine->render_skybox();
 }
 
-Scene* Scene::get_instance()
+void Scene::update(const double& delta_time)
 {
-	if (!instance)
+	camera->update(delta_time);
+
+	for (auto obj : objects)
 	{
-		instance = new Scene();
+		obj->update(delta_time);
 	}
-	return instance;
 }

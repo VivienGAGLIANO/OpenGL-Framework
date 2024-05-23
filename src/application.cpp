@@ -1,7 +1,6 @@
 #include <glm/ext.hpp>
 #include <iostream>
 #include <thread>
-#include <windows.h>
 
 #include "application.h"
 #include "imgui_impl_glfw.h"
@@ -11,17 +10,15 @@
 
 Application::Application()
 {
-	engine = new Engine();
-	engine->init();
-	scene = Scene::get_instance();
+	engine = std::make_unique<Engine>();
+	scene = std::make_shared<Scene>();
+	Scene::active_scene = scene;
 	Performance::initialize();
 }
 
 Application::~Application()
 {
 	Performance::deinitialize();
-	delete engine;
-	delete scene;
 }
 
 void Application::start()
@@ -46,7 +43,7 @@ void Application::start()
 		scene->update(io.DeltaTime);
 
 		// Render scene
-		scene->render(engine);
+		scene->render(engine.get());
 
 		// Render UI
 		engine->render_ui();
@@ -58,7 +55,7 @@ void Application::start()
 	terminate();
 }
 
-void Application::init()
+void Application::initialize()
 {
 	// TODO move OpenGL init stuff in here, not in engine class
 }

@@ -11,11 +11,12 @@
 
 bool Engine::ui_active = true;
 
-Engine::Engine(const int width, const int height) : width(width), height(height)
+Engine::~Engine()
 {
+    glfwDestroyWindow(window); // normally not needed as glfwTerminate() automatically destroys remaining windows
 }
 
-void Engine::init()
+Engine::Engine(const int width, const int height) : width(width), height(height)
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -49,7 +50,7 @@ void Engine::init()
 
     // Initialize ImGui context
     IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
+    ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
@@ -60,8 +61,7 @@ void Engine::init()
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 460 core");
 
-    skybox = new Skybox("resources/skybox/");
-    skybox->init();
+    skybox = std::make_unique<Skybox>("resources/skybox/");
 }
 
 void Engine::render_skybox()
@@ -179,11 +179,13 @@ void Engine::key_callback(GLFWwindow* window, int key, int scancode, int action,
 
     std::vector move = { GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_D, GLFW_KEY_A, GLFW_KEY_SPACE, GLFW_KEY_LEFT_CONTROL };
     if (std::find(move.cbegin(), move.cend(), key) != move.cend())
-        Scene::get_instance()->get_camera()->process_keyboard(key, action);
+    {
+        Scene::active_scene->get_camera()->process_keyboard(key, action);
+    }
 }
 
 void Engine::mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
-    Scene::get_instance()->get_camera()->process_mouse(xpos, ypos);
+    Scene::active_scene->get_camera()->process_mouse(xpos, ypos);
 }
 

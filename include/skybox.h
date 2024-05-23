@@ -13,7 +13,6 @@ class Skybox
 {
 public:
 	explicit Skybox(const std::string& path);
-	void init();
 	void render();
 
 private:

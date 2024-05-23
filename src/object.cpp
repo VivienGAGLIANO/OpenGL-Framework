@@ -14,18 +14,14 @@ Object::Object(const std::string& name, const glm::vec3& scale) : name(name), mo
 
 Object::Object(const std::string &name) : Object(name, glm::vec3(1.0)) {}
 
-Object::~Object()
-{
-	delete material;
-	delete model;
-}
+Object::~Object() {}
 
-void Object::set_material(Material* mat)
+void Object::set_material(std::shared_ptr<Material> mat)
 {
 	this->material = mat;
 }
 
-void Object::set_model(Model* model)
+void Object::set_model(std::shared_ptr<Model> model)
 {
 	this->model = model;
 }
@@ -36,11 +32,11 @@ void Object::update(const double& delta_time)
 	auto pip = material->get_pipeline();
 
 	pip.set_uniform_matrix(pip.get_vertex_id(), "m", glm::value_ptr(glm::scale(model_matrix, scale)));
-	pip.set_uniform_matrix(pip.get_vertex_id(), "v", glm::value_ptr(Scene::get_instance()->get_camera()->get_view()));
- 	pip.set_uniform_matrix(pip.get_vertex_id(), "p", glm::value_ptr(Scene::get_instance()->get_camera()->get_proj()));
+	pip.set_uniform_matrix(pip.get_vertex_id(), "v", glm::value_ptr(Scene::active_scene->get_camera()->get_view()));
+ 	pip.set_uniform_matrix(pip.get_vertex_id(), "p", glm::value_ptr(Scene::active_scene->get_camera()->get_proj()));
 
-	pip.set_uniform_light(pip.get_fragment_id(), *Scene::get_instance()->get_light());
-	pip.set_uniform_vec3(pip.get_fragment_id(), "cam_pos", glm::value_ptr(Scene::get_instance()->get_camera()->get_position()));
+	pip.set_uniform_light(pip.get_fragment_id(), *Scene::active_scene->get_light());
+	pip.set_uniform_vec3(pip.get_fragment_id(), "cam_pos", glm::value_ptr(Scene::active_scene->get_camera()->get_position()));
 }
 
 void Object::prepare_material() const

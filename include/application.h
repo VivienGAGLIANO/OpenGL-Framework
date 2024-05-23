@@ -1,6 +1,8 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include <memory>
+
 #include "scene.h"
 
 
@@ -12,12 +14,12 @@ public:
 	void start();
 
 private:
-	void init();
+	void initialize();
 	void terminate();
 	void update_camera(Camera &camera);
 
-	Engine* engine;
-	Scene* scene;
+	std::unique_ptr<Engine> engine;
+	std::shared_ptr<Scene> scene;
 };
 
 #endif

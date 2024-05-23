@@ -1,8 +1,9 @@
 #include "application.h"
 
+
 int main()
 {
-    Application *app = new Application();
+    auto app = std::make_unique<Application>();
     app->start();
 
     return 0;

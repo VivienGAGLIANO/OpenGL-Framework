@@ -6,9 +6,7 @@
 #include "stb_image.h"
 
 
-Skybox::Skybox(const std::string& path) : texture(load_texture(path)), pipeline("resources/shader/skybox_vertex.glsl", "resources/shader/skybox_fragment.glsl") {}
-
-void Skybox::init()
+Skybox::Skybox(const std::string& path) : texture(load_texture(path)), pipeline("resources/shader/skybox_vertex.glsl", "resources/shader/skybox_fragment.glsl") 
 {
     glCreateVertexArrays(1, &vao);
 
@@ -26,7 +24,7 @@ void Skybox::render()
     glDepthMask(GL_FALSE);
     pipeline.use_pipeline();
 
-    auto cam = Scene::get_instance()->get_camera();
+    auto cam = Scene::active_scene->get_camera();
     pipeline.set_uniform_matrix(pipeline.get_vertex_id(), "v", glm::value_ptr(glm::mat4(glm::mat3(cam->get_view()))));
     pipeline.set_uniform_matrix(pipeline.get_vertex_id(), "p", glm::value_ptr(cam->get_proj()));
 
