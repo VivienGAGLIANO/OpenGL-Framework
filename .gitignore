@@ -19,6 +19,9 @@
 *.mod
 *.smod
 
+# ImGui files
+imgui.ini
+
 # Compiled Static libraries
 *.lai
 *.la
@@ -41,5 +44,4 @@ log
 resources/skybox/a
 resources/skybox/b
 
-performance.txt
 todo.txt
