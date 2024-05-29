@@ -25,7 +25,7 @@ Pipeline::Pipeline(const std::string &vertex_path, const std::string &fragment_p
 	auto err = glGetError();
 
 	if (err != GL_NO_ERROR) {
-		std::cerr << "OpenGL error" << std::endl;
+		std::cerr << "OpenGL error " << err << std::endl;
 		pipeline = NULL;
 	}
 }

@@ -10,6 +10,8 @@
 
 Application::Application()
 {
+	std::cout << "Starting application\n\n";
+
 	engine = std::make_unique<Engine>();
 	scene = std::make_shared<Scene>();
 	Scene::active_scene = scene;
@@ -23,9 +25,6 @@ Application::~Application()
 
 void Application::start()
 {
-	std::cout << "Starting application\n\n";
-
-
 	ImGuiIO& io = ImGui::GetIO();
 
 	while (engine->should_render())
@@ -57,7 +56,7 @@ void Application::start()
 
 void Application::initialize()
 {
-	// TODO move OpenGL init stuff in here, not in engine class
+	// TODO move OpenGL init stuff in here, not in engine class. Be careful to handle scene and engine initialization after basic GL stuff
 }
 
 void Application::terminate()

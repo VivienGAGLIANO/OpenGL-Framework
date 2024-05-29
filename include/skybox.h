@@ -16,9 +16,9 @@ public:
 	void render();
 
 private:
-	GLuint load_texture(const std::string& path);
+	GLuint load_cubemap_texture(const std::string& path);
 
-	GLuint texture=0, vao, vbo;
+	GLuint texture, vao, vbo;
     Pipeline pipeline;
 };
 
@@ -34,12 +34,12 @@ inline std::vector<std::string> cartoon_skybox_faces
 
 inline std::vector<std::string> skybox_faces
 {
-	"right_milk.jpg",
-	"left_milk.jpg",
-	"top_milk.jpg",
-	"bottom_milk.jpg",
-	"front_milk.jpg",
-	"back_milk.jpg"
+	"test_right_milk.jpg",
+	"test_left_milk.jpg",
+	"test_top_milk.jpg",
+	"test_bottom_milk.jpg",
+	"test_front_milk.jpg",
+	"test_back_milk.jpg"
 };
 
 inline std::vector<glm::vec3> skybox_vertices
