@@ -13,9 +13,10 @@ Skybox::Skybox(const std::string& path) : texture(load_cubemap_texture(path)), p
     glCreateBuffers(1, &vbo);
     glNamedBufferData(vbo, skybox_vertices.size() * sizeof(glm::vec3), glm::value_ptr(skybox_vertices.front()), GL_STATIC_DRAW);
 
+    glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(glm::vec3));
+
     glEnableVertexArrayAttrib(vao, 0);
     glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, GL_FALSE, 0);
-    glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(glm::vec3));
     glVertexArrayAttribBinding(vao, 0, 0);
 }
 

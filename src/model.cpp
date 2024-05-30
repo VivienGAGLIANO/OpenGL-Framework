@@ -79,23 +79,29 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene)
 	{
 		Vertex v;
 
-		glm::vec3 vector; // temp var because Assimp data don't convert well to glm
-
-		vector.x = mesh->mVertices[i].x;
-		vector.y = mesh->mVertices[i].y;
-		vector.z = mesh->mVertices[i].z;
+		glm::vec3 vector = // temp var because Assimp data don't convert well to glm
+		{
+			mesh->mVertices[i].x,
+			mesh->mVertices[i].y,
+			mesh->mVertices[i].z
+		};
 		v.position = vector;
 
-		vector.x = mesh->mNormals[i].x;
-		vector.y = mesh->mNormals[i].y;
-		vector.z = mesh->mNormals[i].z;
+		vector =
+		{
+			mesh->mNormals[i].x,
+			mesh->mNormals[i].y,
+			mesh->mNormals[i].z
+		};
 		v.normal = vector;
 
 		if (mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
 		{
-			glm::vec2 vec;
-			vec.x = mesh->mTextureCoords[0][i].x;
-			vec.y = mesh->mTextureCoords[0][i].y;
+			glm::vec2 vec =
+			{
+				mesh->mTextureCoords[0][i].x,
+				mesh->mTextureCoords[0][i].y
+			};
 			v.uv = vec;
 		}
 		else

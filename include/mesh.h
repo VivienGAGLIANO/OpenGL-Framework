@@ -38,7 +38,7 @@ public:
 private:
 	void set_buffer_objects();
 
-	GLuint vao, vbo, ebo;
+	GLuint vao, vbo, ibo;
 
 	glm::vec3 mesh_color;
 };

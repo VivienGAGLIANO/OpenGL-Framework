@@ -2,10 +2,10 @@
 
 in VTF
 {
-	vec3 v_color;
-	vec3 v_normal;
-	vec2 v_coord;
-	vec3 world_pos;
+	layout(location = 0) vec3 v_color;
+	layout(location = 1) vec3 v_normal;
+	layout(location = 2) vec2 v_coord;
+	layout(location = 3) vec3 world_pos;
 };
 
 layout (binding = 0) uniform sampler2D texture_diffuse1;

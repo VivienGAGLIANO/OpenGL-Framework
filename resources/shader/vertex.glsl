@@ -1,18 +1,18 @@
 #version 460 core
 
 layout (location = 0) in vec3 position;
-layout (location = 1) in vec3 color;
-layout (location = 2) in vec3 normal;
-layout (location = 3) in vec2 uv_coord;
+layout (location = 1) in vec3 normal;
+layout (location = 2) in vec2 uv_coord;
+layout (location = 3) in vec3 color;
 
 uniform mat4 m, v, p;
 
 out VTF
 {
-	vec3 v_color;
-	vec3 v_normal;
-	vec2 v_coord;
-	vec3 world_pos;
+	layout(location = 0) vec3 v_color;
+	layout(location = 1) vec3 v_normal;
+	layout(location = 2) vec2 v_coord;
+	layout(location = 3) vec3 world_pos;
 };
 
 out gl_PerVertex

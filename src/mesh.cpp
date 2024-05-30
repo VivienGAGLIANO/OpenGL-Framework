@@ -40,6 +40,9 @@ void Mesh::prepare_for_render(Pipeline pipeline)
     pipeline.set_uniform_vec3(pipeline.get_fragment_id(), "mesh_color", glm::value_ptr(mesh_color));
 }
 
+/// <summary>
+/// Create vertex array object with 3 attributes, position normal and uv, packed in the same buffer
+/// </summary>
 void Mesh::set_buffer_objects()
 {
     glCreateVertexArrays(1, &vao);
@@ -47,26 +50,49 @@ void Mesh::set_buffer_objects()
     glCreateBuffers(1, &vbo);
     glNamedBufferData(vbo, vertices.size() * sizeof(Vertex), &vertices.front(), GL_STATIC_DRAW);
 
-    // Position
+    glCreateBuffers(1, &ibo);
+    glNamedBufferData(ibo, indices.size() * sizeof(unsigned int), &indices.front(), GL_STATIC_DRAW);
+    glVertexArrayElementBuffer(vao, ibo);
+    
     glEnableVertexArrayAttrib(vao, 0);
-    glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, GL_FALSE, 0);
-    glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(Vertex));
-    glVertexArrayAttribBinding(vao, 0, 0);
-
-    // Normal
+    glEnableVertexArrayAttrib(vao, 1);
     glEnableVertexArrayAttrib(vao, 2);
-    glVertexArrayAttribFormat(vao, 2, 3, GL_FLOAT, GL_FALSE, 0);
-    glVertexArrayVertexBuffer(vao, 2, vbo, offsetof(Vertex, normal), sizeof(Vertex));
+    
+    glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, GL_FALSE, 0);
+    glVertexArrayAttribFormat(vao, 1, 3, GL_FLOAT, GL_FALSE, 0);
+    glVertexArrayAttribFormat(vao, 2, 2, GL_FLOAT, GL_FALSE, 0);
+    
+    glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(Vertex));
+    glVertexArrayVertexBuffer(vao, 1, vbo, offsetof(Vertex, normal), sizeof(Vertex));
+    glVertexArrayVertexBuffer(vao, 2, vbo, offsetof(Vertex, uv), sizeof(Vertex));
+    
+    glVertexArrayAttribBinding(vao, 0, 0);
+    glVertexArrayAttribBinding(vao, 1, 1);
     glVertexArrayAttribBinding(vao, 2, 2);
 
-    // UV coord
-    glEnableVertexArrayAttrib(vao, 3);
-    glVertexArrayAttribFormat(vao, 3, 2, GL_FLOAT, GL_FALSE, 0);
-    glVertexArrayVertexBuffer(vao, 3, vbo, offsetof(Vertex, uv), sizeof(Vertex));
-    glVertexArrayAttribBinding(vao, 3, 3);
+    
+    // Binding vbo only once to vao is slower for an unknown reason.
+    // TODO figure this out, and which approach is more efficient
+    //glCreateBuffers(1, &vbo);
+    //glNamedBufferData(vbo, sizeof(Vertex) * vertices.size(), &vertices.front(), GL_STATIC_DRAW);
 
-    glCreateBuffers(1, &ebo);
-    glNamedBufferData(ebo, indices.size() * sizeof(unsigned int), &indices.front(), GL_STATIC_DRAW);
-    glBindVertexArray(vao);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    //glCreateBuffers(1, &ibo);
+    //glNamedBufferData(ibo, sizeof(unsigned int) * indices.size(), &indices.front(), GL_STATIC_DRAW);
+
+    //glCreateVertexArrays(1, &vao);
+
+    //glVertexArrayVertexBuffer(vao, 0, vbo, 0, sizeof(Vertex));
+    //glVertexArrayElementBuffer(vao, ibo);
+
+    //glEnableVertexArrayAttrib(vao, 0);
+    //glEnableVertexArrayAttrib(vao, 1);
+    //glEnableVertexArrayAttrib(vao, 2);
+
+    //glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, GL_FALSE, offsetof(Vertex, position));
+    //glVertexArrayAttribFormat(vao, 1, 3, GL_FLOAT, GL_FALSE, offsetof(Vertex, normal));
+    //glVertexArrayAttribFormat(vao, 2, 2, GL_FLOAT, GL_FALSE, offsetof(Vertex, uv));
+
+    //glVertexArrayAttribBinding(vao, 0, 0);
+    //glVertexArrayAttribBinding(vao, 1, 0);
+    //glVertexArrayAttribBinding(vao, 2, 0);
 }
