@@ -14,6 +14,7 @@ public:
 
 	void use_pipeline() const;
 	void set_uniform_float(GLuint program, const GLchar* name, const float &val);
+	void set_uniform_unsigned_int(GLuint program, const GLchar* name, const unsigned int& val);
 	void set_uniform_matrix(GLuint program, const GLchar *name, const GLfloat *val);
 	void set_uniform_vec3(GLuint program, const GLchar* name, const GLfloat* val);
 	void set_uniform_light(GLuint program, const Light& light);

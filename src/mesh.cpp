@@ -31,7 +31,7 @@ void Mesh::prepare_for_render(Pipeline pipeline)
         else if (name == "texture_normal")
             number = std::to_string(++normalNr);
 
-        pipeline.set_uniform_float(pipeline.get_fragment_id(), (name + number).c_str(), i);
+        //pipeline.set_uniform_unsigned_int(pipeline.get_fragment_id(), (name + number).c_str(), i); // no need for this as texture bindings are declared in shader
         glBindTextureUnit(i, textures[i].id);
     }
 

@@ -41,6 +41,11 @@ void Pipeline::set_uniform_float(GLuint program, const GLchar *name, const float
 	glProgramUniform1f(program, glGetUniformLocation(program, name), val);
 }
 
+void Pipeline::set_uniform_unsigned_int(GLuint program, const GLchar* name, const unsigned int& val)
+{
+	glProgramUniform1ui(program, glGetUniformLocation(program, name), val);
+}
+
 void Pipeline::set_uniform_matrix(GLuint program, const GLchar* name, const GLfloat *val)
 {
 	glProgramUniformMatrix4fv(program, glGetUniformLocation(program, name), 1, GL_FALSE, val);
