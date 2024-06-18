@@ -84,6 +84,12 @@
     <ClCompile Include="src\performance.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\shader_program.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sampler.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\pipeline.h">
@@ -153,6 +159,15 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\performance.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\shader_program.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\light.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sampler.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

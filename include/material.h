@@ -1,21 +1,26 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
 
+#include <memory>
+
 #include "pipeline.h"
+#include "sampler.h"
+#include "shader_program.h"
 
 
 class Material
 {
 public:
-	explicit Material(const Pipeline& pipeline);
-	explicit Material(const char *vertex_path = "resources/shader/vertex.glsl", const char* fragment_path = "resources/shader/fragment.glsl");
+	explicit Material(const std::string &vertex_path, const std::string& fragment_path, std::shared_ptr<Sampler> sampler);
 	~Material();
-	Pipeline get_pipeline() const;
+	
+	Program get_program() const;
 	void prepare() const;
 
+	std::shared_ptr<Sampler> sampler;
 
 private:
-	Pipeline pipeline;
+	Program render_program;
 };
 
 #endif

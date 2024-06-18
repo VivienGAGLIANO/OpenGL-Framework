@@ -22,7 +22,7 @@ Pipeline::Pipeline(const std::string &vertex_path, const std::string &fragment_p
 	glValidateProgramPipeline(pipeline);
 	print_pipeline_error(pipeline);
 
-	auto err = glGetError();
+	auto err = glGetError(); // this should be removed as we are now using glDebugMessage()
 
 	if (err != GL_NO_ERROR) {
 		std::cerr << "OpenGL error " << err << std::endl;

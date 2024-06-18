@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "performance.h"
+#include "sampler.h"
 #include "scene.h"
 
 
@@ -29,7 +30,7 @@ Scene::Scene()
 void Scene::populate()
 {
 	auto planet = std::make_shared<Object>("Planet", glm::vec3(1.0));
-	planet->set_material(std::make_shared<Material>());
+	planet->set_material(std::make_shared<Material>("resources/shader/vertex.glsl", "resources/shader/fragment.glsl", std::make_shared<DefaultSampler>()));
 	planet->set_model(std::make_shared<Model>("resources/model/cartoon/lowilds_planet/scene.gltf"));
 	objects.push_back(planet);
 }

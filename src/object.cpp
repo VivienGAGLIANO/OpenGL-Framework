@@ -29,14 +29,14 @@ void Object::set_model(std::shared_ptr<Model> model)
 void Object::update(const double& delta_time)
 {
 	// Pass MVP matrices to shader
-	auto pip = material->get_pipeline();
+	auto program = material->get_program();
 
-	pip.set_uniform_matrix(pip.get_vertex_id(), "m", glm::value_ptr(glm::scale(model_matrix, scale)));
-	pip.set_uniform_matrix(pip.get_vertex_id(), "v", glm::value_ptr(Scene::active_scene->get_camera()->get_view()));
- 	pip.set_uniform_matrix(pip.get_vertex_id(), "p", glm::value_ptr(Scene::active_scene->get_camera()->get_proj()));
+	program.set_uniform_matrix("m", glm::value_ptr(glm::scale(model_matrix, scale)));
+	program.set_uniform_matrix("v", glm::value_ptr(Scene::active_scene->get_camera()->get_view()));
+ 	program.set_uniform_matrix("p", glm::value_ptr(Scene::active_scene->get_camera()->get_proj()));
 
-	pip.set_uniform_light(pip.get_fragment_id(), *Scene::active_scene->get_light());
-	pip.set_uniform_vec3(pip.get_fragment_id(), "cam_pos", glm::value_ptr(Scene::active_scene->get_camera()->get_position()));
+	program.set_uniform_light(*Scene::active_scene->get_light());
+	program.set_uniform_vec3("cam_pos", glm::value_ptr(Scene::active_scene->get_camera()->get_position()));
 }
 
 void Object::prepare_material() const
@@ -49,7 +49,7 @@ void Object::render()
 	// Render object
 	for (auto mesh : model->get_meshes())
 	{
-		mesh.prepare_for_render(material->get_pipeline());
+		mesh.prepare_for_render(*material.get());
 
 		glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
 

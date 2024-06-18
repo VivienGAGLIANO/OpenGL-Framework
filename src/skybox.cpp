@@ -6,7 +6,9 @@
 #include "stb_image.h"
 
 
-Skybox::Skybox(const std::string& path) : texture(load_cubemap_texture(path)), pipeline("resources/shader/skybox_vertex.glsl", "resources/shader/skybox_fragment.glsl") 
+Skybox::Skybox(const std::string& path) :
+    texture(load_cubemap_texture(path)),
+    skybox_material(Material("resources/shader/skybox_vertex.glsl", "resources/shader/skybox_fragment.glsl", nullptr))
 {
     glCreateVertexArrays(1, &vao);
 
@@ -18,19 +20,29 @@ Skybox::Skybox(const std::string& path) : texture(load_cubemap_texture(path)), p
     glEnableVertexArrayAttrib(vao, 0);
     glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, GL_FALSE, 0);
     glVertexArrayAttribBinding(vao, 0, 0);
+
+    Sampler samp("Skybox sampler");
+    glSamplerParameteri(samp.get_id(), GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glSamplerParameteri(samp.get_id(), GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glSamplerParameteri(samp.get_id(), GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glSamplerParameteri(samp.get_id(), GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glSamplerParameteri(samp.get_id(), GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    skybox_material.sampler = std::make_shared<Sampler>(samp);
 }
 
 void Skybox::render()
 {
     glDepthMask(GL_FALSE);
-    pipeline.use_pipeline();
+    skybox_material.prepare();
 
     auto cam = Scene::active_scene->get_camera();
-    pipeline.set_uniform_matrix(pipeline.get_vertex_id(), "v", glm::value_ptr(glm::mat4(glm::mat3(cam->get_view()))));
-    pipeline.set_uniform_matrix(pipeline.get_vertex_id(), "p", glm::value_ptr(cam->get_proj()));
+    skybox_material.get_program().set_uniform_matrix("v", glm::value_ptr(glm::mat4(glm::mat3(cam->get_view()))));
+    skybox_material.get_program().set_uniform_matrix("p", glm::value_ptr(cam->get_proj()));
 
     glBindVertexArray(vao);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
+    glBindTextureUnit(0, texture);
+    glBindSampler(0, skybox_material.sampler->get_id());
     glDrawArrays(GL_TRIANGLES, 0, skybox_vertices.size());
     glDepthMask(GL_TRUE);
 }
@@ -47,12 +59,6 @@ GLuint Skybox::load_cubemap_texture(const std::string& path)
     GLuint textureID;
 
     glCreateTextures(GL_TEXTURE_CUBE_MAP, 1, &textureID);
-
-    glTextureParameteri(textureID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTextureParameteri(textureID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTextureParameteri(textureID, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTextureParameteri(textureID, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTextureParameteri(textureID, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
     
     int width, height, n_chan;
     unsigned char* data = stbi_load((path + cubemap_faces[0]).c_str(), &width, &height, &n_chan, 0);

@@ -19,7 +19,7 @@ private:
 	GLuint load_cubemap_texture(const std::string& path);
 
 	GLuint texture, vao, vbo;
-    Pipeline pipeline;
+    Material skybox_material;
 };
 
 inline std::vector<std::string> cartoon_skybox_faces

@@ -6,7 +6,7 @@ in VTF
 	vec3 v_coord;
 };
 
-uniform samplerCube skybox;
+layout (binding = 0) uniform samplerCube skybox;
 
 layout (location = 0) out vec4 color;
 

@@ -6,21 +6,8 @@
 
 #include "camera.h"
 #include "engine.h"
+#include "light.h"
 #include "object.h"
-
-
-struct Light
-{
-	glm::vec3 position;
-
-	glm::vec3 ambiant;
-	glm::vec3 diffuse;
-	glm::vec3 specular;
-
-	float shininess;
-
-	inline void set_position(const glm::vec3& p) { position = p; }
-};
 
 
 class Engine;

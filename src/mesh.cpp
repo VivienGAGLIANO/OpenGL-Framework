@@ -8,7 +8,7 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned> indices, std::vec
 	set_buffer_objects();
 }
 
-void Mesh::prepare_for_render(Pipeline pipeline)
+void Mesh::prepare_for_render(const Material& material)
 {
     unsigned int diffuseNr = 0;
     unsigned int specularNr = 0;
@@ -32,12 +32,14 @@ void Mesh::prepare_for_render(Pipeline pipeline)
             number = std::to_string(++normalNr);
 
         //pipeline.set_uniform_unsigned_int(pipeline.get_fragment_id(), (name + number).c_str(), i); // no need for this as texture bindings are declared in shader
+        
+        glBindSampler(i, material.sampler->get_id());
         glBindTextureUnit(i, textures[i].id);
     }
 
     glBindVertexArray(vao);
 
-    pipeline.set_uniform_vec3(pipeline.get_fragment_id(), "mesh_color", glm::value_ptr(mesh_color));
+    material.get_program().set_uniform_vec3("mesh_color", glm::value_ptr(mesh_color));
 }
 
 /// <summary>

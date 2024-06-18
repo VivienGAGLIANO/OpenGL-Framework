@@ -185,6 +185,11 @@ unsigned Model::texture_from_file(const char* path, const std::string& directory
 			format = GL_RED;
 			sized_format = GL_R8;
 		}
+		if (nb_component == 2)
+		{
+			format = GL_RG;
+			sized_format = GL_RG8;
+		}
 		else if (nb_component == 3)
 		{
 			format = GL_RGB;
@@ -206,11 +211,6 @@ unsigned Model::texture_from_file(const char* path, const std::string& directory
 
 		// Find maximum mipmap level
 		int level = std::log2<int>(std::fmin<int>(width, height));
-
-		glTextureParameteri(textureID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTextureParameteri(textureID, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTextureParameteri(textureID, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glTextureParameteri(textureID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		glTextureStorage2D(textureID, level, sized_format, width, height);
 		glTextureSubImage2D(textureID, 0, 0, 0, width, height, format, GL_UNSIGNED_BYTE, data);

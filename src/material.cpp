@@ -1,25 +1,25 @@
 #include "material.h"
+#include "scene.h"
 
 
-Material::Material(const Pipeline& pipeline) : pipeline(pipeline)
+Material::Material(const std::string& vertex_path, const std::string& fragment_path, std::shared_ptr<Sampler> sampler) :
+	render_program(Program(
+		ShaderObject(vertex_path, GL_VERTEX_SHADER), 
+		ShaderObject(fragment_path, GL_FRAGMENT_SHADER))),
+	sampler(sampler)
 {
 }
-
-Material::Material(const char* vertex_path, const char* fragment_path) : pipeline(Pipeline(vertex_path, fragment_path))
-{
-}
-
 
 Material::~Material()
 {
 }
 
-Pipeline Material::get_pipeline() const
+Program Material::get_program() const
 {
-	return pipeline;
+	return render_program;
 }
 
 void Material::prepare() const
 {
-	pipeline.use_pipeline();
+	render_program.use_program();
 }
