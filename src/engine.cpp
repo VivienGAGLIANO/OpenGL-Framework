@@ -119,9 +119,23 @@ Engine::Engine(const int width, const int height) : width(width), height(height)
     skybox = std::make_unique<Skybox>("resources/skybox/");
 }
 
-void Engine::render_skybox()
+void Engine::render_skybox() const
 {
     skybox->render();
+}
+
+void Engine::render(const Scene& scene) const
+{
+    Performance::reset_vertex_count();
+    Performance::reset_index_count();
+
+    for (auto obj : scene.objects)
+    {
+        obj->prepare_material();
+        obj->render();
+    }
+
+    render_skybox();
 }
 
 bool Engine::should_render() const

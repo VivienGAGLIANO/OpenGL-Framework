@@ -13,7 +13,7 @@ class Skybox
 {
 public:
 	explicit Skybox(const std::string& path);
-	void render();
+	void render() const;
 
 private:
 	GLuint load_cubemap_texture(const std::string& path);

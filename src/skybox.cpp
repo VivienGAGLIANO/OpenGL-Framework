@@ -31,7 +31,7 @@ Skybox::Skybox(const std::string& path) :
     skybox_material.sampler = std::make_shared<Sampler>(samp);
 }
 
-void Skybox::render()
+void Skybox::render() const
 {
     glDepthMask(GL_FALSE);
     skybox_material.prepare();

@@ -42,7 +42,7 @@ void Application::start()
 		scene->update(io.DeltaTime);
 
 		// Render scene
-		scene->render(engine.get());
+		engine->render(*scene);
 
 		// Render UI
 		engine->render_ui();

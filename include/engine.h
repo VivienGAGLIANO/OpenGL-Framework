@@ -13,7 +13,9 @@ class Engine
 public:
 	~Engine();
 	Engine(const int width = 800, const int height = 600);
-	void render_skybox();
+	void render_skybox() const;
+
+	void render(const Scene& scene) const;
 	bool should_render() const;
 
 	void draw_ui();

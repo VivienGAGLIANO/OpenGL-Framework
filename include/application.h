@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "engine.h"
 #include "scene.h"
 
 
