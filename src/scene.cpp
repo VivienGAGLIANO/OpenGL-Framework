@@ -24,6 +24,8 @@ Scene::Scene()
 	15.f // shininess
 	});
 
+	skybox = std::make_unique<Skybox>("resources/skybox/");
+
 	populate();
 }
 
@@ -47,19 +49,18 @@ std::shared_ptr<Light> Scene::get_light() const
 	return light;
 }
 
-void Scene::render(Engine* engine)
-{
-	Performance::reset_vertex_count();
-	Performance::reset_index_count();
-
-	for (auto obj : objects)
-	{
-		obj->prepare_material();
-		obj->render();
-	}
-
-	engine->render_skybox();
-}
+//Sampler Scene::get_sampler(const std::string& name) const
+//{
+//	auto it = std::find_if(samplers.begin(), samplers.end(), [&name](const Sampler& sampler) { return sampler.name == name; });
+//
+//	if (it != samplers.end())
+//		return *it;
+//	else
+//	{
+//		std::cout << "Sampler " + name + " not found, using default sampler instead." << std::endl;
+//		return samplers.front();
+//	}
+//}
 
 void Scene::update(const double& delta_time)
 {

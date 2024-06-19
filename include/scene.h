@@ -7,6 +7,7 @@
 #include "camera.h"
 #include "light.h"
 #include "object.h"
+#include "skybox.h"
 
 
 class Scene
@@ -20,6 +21,7 @@ public:
 
 	static std::shared_ptr<Scene> active_scene;
 	std::vector<std::shared_ptr<Object>> objects;
+	std::unique_ptr<Skybox> skybox;
 
 private:
 	void populate();

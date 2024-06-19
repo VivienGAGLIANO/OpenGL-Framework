@@ -68,7 +68,7 @@ Engine::Engine(const int width, const int height) : width(width), height(height)
         GLuint id,
         GLenum severity,
         GLsizei length,
-        const GLchar * message,
+        const GLchar* message,
         const void* user_param)
     {
         auto const src_str = [src]() {
@@ -115,19 +115,25 @@ Engine::Engine(const int width, const int height) : width(width), height(height)
     glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS); // fire messages synchronously to guarantee function call order
     glDebugMessageCallback(message_callback, nullptr);
     glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, nullptr, GL_FALSE); // filter debug callback messages
-
-    skybox = std::make_unique<Skybox>("resources/skybox/");
 }
 
-void Engine::render_skybox() const
+/// <summary>
+/// Prepare and render given skybox
+/// </summary>
+/// <param name="skybox">Skybox to render</param>
+void Engine::render_skybox(const Skybox& skybox) const
 {
-    int nb_vertices = skybox->prepare_for_render();
+    int nb_vertices = skybox.prepare_for_render();
 
     glDrawArrays(GL_TRIANGLES, 0, nb_vertices);
 
-    skybox->restore();
+    skybox.restore();
 }
 
+/// <summary>
+/// Prepare and render given scene. All scene objects, as well as scene skybox, are being rendered
+/// </summary>
+/// <param name="scene">Scene to render</param>
 void Engine::render(const Scene& scene) const
 {
     Performance::reset_vertex_count();
@@ -148,7 +154,7 @@ void Engine::render(const Scene& scene) const
         }
     }
 
-    render_skybox();
+    render_skybox(*scene.skybox);
 }
 
 bool Engine::should_render() const
