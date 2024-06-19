@@ -121,7 +121,11 @@ Engine::Engine(const int width, const int height) : width(width), height(height)
 
 void Engine::render_skybox() const
 {
-    skybox->render();
+    int nb_vertices = skybox->prepare_for_render();
+
+    glDrawArrays(GL_TRIANGLES, 0, nb_vertices);
+
+    skybox->restore();
 }
 
 void Engine::render(const Scene& scene) const

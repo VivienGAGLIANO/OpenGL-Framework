@@ -31,7 +31,16 @@ Skybox::Skybox(const std::string& path) :
     skybox_material.sampler = std::make_shared<Sampler>(samp);
 }
 
-void Skybox::render() const
+Material Skybox::get_material() const
+{
+    return skybox_material;
+}
+
+/// <summary>
+/// Prepare skybox for draw call. Binds texture units, samplers and vao
+/// </summary>
+/// <returns>Number of vertices to draw</returns>
+int Skybox::prepare_for_render() const
 {
     glDepthMask(GL_FALSE);
     skybox_material.prepare();
@@ -43,7 +52,15 @@ void Skybox::render() const
     glBindVertexArray(vao);
     glBindTextureUnit(0, texture);
     glBindSampler(0, skybox_material.sampler->get_id());
-    glDrawArrays(GL_TRIANGLES, 0, skybox_vertices.size());
+
+    return skybox_vertices.size();
+}
+
+/// <summary>
+/// Reverse render parameters used specifically when rendering skybox
+/// </summary>
+void Skybox::restore() const
+{
     glDepthMask(GL_TRUE);
 }
 
