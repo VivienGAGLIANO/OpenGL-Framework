@@ -8,7 +8,12 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned> indices, std::vec
 	set_buffer_objects();
 }
 
-void Mesh::prepare_for_render(const Material& material)
+/// <summary>
+/// Prepare mesh for draw call. Binds texture units, samplers, vao and sets mesh color
+/// </summary>
+/// <param name="material">Material to use for rendering. Uniforms are set for the programs of given material</param>
+/// <returns>Number of indices in mesh</returns>
+int Mesh::prepare_for_render(const Material& material) const
 {
     unsigned int diffuseNr = 0;
     unsigned int specularNr = 0;
@@ -40,6 +45,8 @@ void Mesh::prepare_for_render(const Material& material)
     glBindVertexArray(vao);
 
     material.get_program().set_uniform_vec3("mesh_color", glm::value_ptr(mesh_color));
+
+    return indices.size();
 }
 
 /// <summary>

@@ -16,13 +16,25 @@ Object::Object(const std::string &name) : Object(name, glm::vec3(1.0)) {}
 
 Object::~Object() {}
 
+std::shared_ptr<Material> Object::get_material() const
+{
+	return material;
+}
+
 void Object::set_material(std::shared_ptr<Material> mat)
 {
+	// TODO check validity before setting material
 	this->material = mat;
+}
+
+std::shared_ptr<Model> Object::get_model() const
+{
+	return model;
 }
 
 void Object::set_model(std::shared_ptr<Model> model)
 {
+	// TODO check validity before setting model
 	this->model = model;
 }
 
@@ -42,20 +54,6 @@ void Object::update(const double& delta_time)
 void Object::prepare_material() const
 {
 	material->prepare();
-}
-
-void Object::render()
-{
-	// Render object
-	for (auto mesh : model->get_meshes())
-	{
-		mesh.prepare_for_render(*material.get());
-
-		glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
-
-		Performance::increment_index_count(mesh.indices.size());
-		Performance::increment_vertex_count(mesh.vertices.size());
-	}
 }
 
 void Object::translate(const glm::vec3& t)

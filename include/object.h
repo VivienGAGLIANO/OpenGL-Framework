@@ -14,12 +14,13 @@ public:
 	Object(const std::string& name);
 	virtual ~Object();
 
+	std::shared_ptr<Material> get_material() const;
 	void set_material(std::shared_ptr<Material> mat);
+	std::shared_ptr<Model> get_model() const;
 	void set_model(std::shared_ptr<Model> model);
 	
 	void prepare_material() const;
 	virtual void update(const double& delta_time);
-	void render();
 	
 	void translate(const glm::vec3& v);
 	void rotate(const glm::vec3& axis, const float& angle);

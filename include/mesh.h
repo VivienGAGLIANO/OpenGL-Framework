@@ -29,7 +29,7 @@ class Mesh
 {
 public:
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures, const glm::vec3& mesh_color = glm::vec3(0));
-	void prepare_for_render(const Material& material);
+	int prepare_for_render(const Material& material) const;
 
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;

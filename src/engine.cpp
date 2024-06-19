@@ -132,7 +132,16 @@ void Engine::render(const Scene& scene) const
     for (auto obj : scene.objects)
     {
         obj->prepare_material();
-        obj->render();
+
+        for (const auto mesh : obj->get_model()->get_meshes())
+        {
+            int nb_indices = mesh.prepare_for_render(*obj->get_material());
+
+            glDrawElements(GL_TRIANGLES, nb_indices, GL_UNSIGNED_INT, 0);
+
+            Performance::increment_index_count(mesh.indices.size());
+            Performance::increment_vertex_count(mesh.vertices.size());
+        }
     }
 
     render_skybox();
