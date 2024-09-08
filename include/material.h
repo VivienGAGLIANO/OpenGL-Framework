@@ -14,7 +14,7 @@ public:
 	explicit Material(const std::string &vertex_path, const std::string& fragment_path, std::shared_ptr<Sampler> sampler);
 	~Material();
 	
-	Program get_program() const;
+	Program& get_program();
 	void prepare() const;
 
 	std::shared_ptr<Sampler> sampler;

@@ -14,7 +14,7 @@ Material::~Material()
 {
 }
 
-Program Material::get_program() const
+Program& Material::get_program()
 {
 	return render_program;
 }

@@ -19,7 +19,7 @@ Engine::Engine()
 /// Prepare and render given skybox
 /// </summary>
 /// <param name="skybox">Skybox to render</param>
-void Engine::render_skybox(const Skybox& skybox) const
+void Engine::render_skybox(Skybox& skybox) const
 {
     int nb_vertices = skybox.prepare_for_render();
 

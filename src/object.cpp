@@ -16,7 +16,7 @@ Object::Object(const std::string &name) : Object(name, glm::vec3(1.0)) {}
 
 Object::~Object() {}
 
-std::shared_ptr<Material> Object::get_material() const
+std::shared_ptr<Material> Object::get_material()
 {
 	return material;
 }
@@ -41,7 +41,7 @@ void Object::set_model(std::shared_ptr<Model> model)
 void Object::update(const double& delta_time)
 {
 	// Pass MVP matrices to shader
-	auto program = material->get_program();
+	Program &program = material->get_program();
 
 	program.set_uniform_matrix("m", glm::value_ptr(glm::scale(model_matrix, scale)));
 	program.set_uniform_matrix("v", glm::value_ptr(Scene::active_scene->get_camera()->get_view()));

@@ -13,7 +13,7 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned> indices, std::vec
 /// </summary>
 /// <param name="material">Material to use for rendering. Uniforms are set for the programs of given material</param>
 /// <returns>Number of indices in mesh</returns>
-int Mesh::prepare_for_render(const Material& material) const
+int Mesh::prepare_for_render(Material& material) const
 {
     unsigned int diffuseNr = 0;
     unsigned int specularNr = 0;
@@ -44,7 +44,7 @@ int Mesh::prepare_for_render(const Material& material) const
 
     glBindVertexArray(vao);
 
-    material.get_program().set_uniform_vec3("mesh_color", glm::value_ptr(mesh_color));
+    material.get_program().set_uniform_vec3("mesh_color", glm::value_ptr(mesh_color)); // this often (always?) returns (1, 1, 1). Our meshes seem to have no mesh color. Keeping this until we refactor mesh loader.
 
     return indices.size();
 }

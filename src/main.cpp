@@ -10,8 +10,11 @@
 
 int main()
 {
-    auto app = std::make_unique<Application>();
-    app->start();
+    //auto app = std::make_unique<Application>();
+    //app->start();
+
+    Application app;
+    app.start();
 
     return 0;
 }

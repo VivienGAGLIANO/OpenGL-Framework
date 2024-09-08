@@ -14,7 +14,7 @@ public:
 	Object(const std::string& name);
 	virtual ~Object();
 
-	std::shared_ptr<Material> get_material() const;
+	std::shared_ptr<Material> get_material();
 	void set_material(std::shared_ptr<Material> mat);
 	std::shared_ptr<Model> get_model() const;
 	void set_model(std::shared_ptr<Model> model);

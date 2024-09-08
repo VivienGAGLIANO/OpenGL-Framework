@@ -14,9 +14,9 @@ class Skybox
 public:
 	explicit Skybox(const std::string& path);
 
-    Material get_material() const;
+    Material get_material();
 
-    int prepare_for_render() const;
+    int prepare_for_render();
     void restore() const;
 
 private:

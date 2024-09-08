@@ -31,7 +31,7 @@ Skybox::Skybox(const std::string& path) :
     skybox_material.sampler = std::make_shared<Sampler>(samp);
 }
 
-Material Skybox::get_material() const
+Material Skybox::get_material()
 {
     return skybox_material;
 }
@@ -40,7 +40,7 @@ Material Skybox::get_material() const
 /// Prepare skybox for draw call. Binds texture units, samplers and vao
 /// </summary>
 /// <returns>Number of vertices to draw</returns>
-int Skybox::prepare_for_render() const
+int Skybox::prepare_for_render()
 {
     glDepthMask(GL_FALSE);
     skybox_material.prepare();

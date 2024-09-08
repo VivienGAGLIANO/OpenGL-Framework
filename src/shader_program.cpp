@@ -126,24 +126,41 @@ void Program::use_program() const
 	glUseProgram(id);
 }
 
-void Program::set_uniform_float(const GLchar* name, const float& val)
+GLint Program::find_uniform_location(const std::string& name)
 {
-	glProgramUniform1f(id, glGetUniformLocation(id, name), val);
+	GLint loc;
+	auto it = uniform_location_map.find(name);
+	if (it != uniform_location_map.end())
+	{
+		loc = it->second;
+	}
+	else
+	{
+		loc = glGetUniformLocation(id, name.c_str());
+		uniform_location_map.emplace(name, loc);
+	}
+
+	return loc;
 }
 
-void Program::set_uniform_unsigned_int(const GLchar* name, const unsigned int& val)
+void Program::set_uniform_float(const std::string& name, const float& val)
 {
-	glProgramUniform1ui(id, glGetUniformLocation(id, name), val);
+	glProgramUniform1f(id, find_uniform_location(name), val);
 }
 
-void Program::set_uniform_matrix(const GLchar* name, const GLfloat* val)
+void Program::set_uniform_unsigned_int(const std::string& name, const unsigned int& val)
 {
-	glProgramUniformMatrix4fv(id, glGetUniformLocation(id, name), 1, GL_FALSE, val);
+	glProgramUniform1ui(id, find_uniform_location(name), val);
 }
 
-void Program::set_uniform_vec3(const GLchar* name, const GLfloat* val)
+void Program::set_uniform_matrix(const std::string& name, const GLfloat* val)
 {
-	glProgramUniform3fv(id, glGetUniformLocation(id, name), 1, val);
+	glProgramUniformMatrix4fv(id, find_uniform_location(name), 1, GL_FALSE, val);
+}
+
+void Program::set_uniform_vec3(const std::string& name, const GLfloat* val)
+{
+	glProgramUniform3fv(id, find_uniform_location(name), 1, val);
 }
 
 void Program::set_uniform_light(const Light& light)
